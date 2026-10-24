@@ -1,0 +1,201 @@
+{
+  "generated_at": "2026-10-24T17:40:28+08:00",
+  "tolerance_in": 0.02,
+  "summary": {
+    "deck_count": 6,
+    "slide_count": 62,
+    "violation_count": 4,
+    "by_side": {
+      "left": 0,
+      "right": 1,
+      "top": 2,
+      "bottom": 2
+    },
+    "by_severity": {
+      "low": 2,
+      "medium": 1,
+      "high": 1
+    },
+    "by_type": {
+      "PLACEHOLDER": 1,
+      "TEXT_BOX": 1,
+      "AUTO_SHAPE": 2
+    }
+  },
+  "violations": [
+    {
+      "file": "AddAgendaSlide_TestA.pptx",
+      "slide": 3,
+      "shape_id": 13,
+      "name": "Content Placeholder 2",
+      "shape_type": "PLACEHOLDER",
+      "parent_group_id": null,
+      "directions": [
+        {
+          "side": "bottom",
+          "distance_emu": 528878,
+          "distance_pt": 41.64,
+          "distance_in": 0.5784
+        }
+      ],
+      "max_overflow_pt": 41.64,
+      "max_overflow_in": 0.5784,
+      "severity": "high",
+      "geometry_in": {
+        "left_emu": 936389.0,
+        "top_emu": 1976317.0,
+        "width_emu": 10313733.0,
+        "height_emu": 5410561.0,
+        "right_emu": 11250122.0,
+        "bottom_emu": 7386878.0,
+        "left_in": 1.024,
+        "top_in": 2.1613,
+        "width_in": 11.2792,
+        "height_in": 5.9171,
+        "right_in": 12.3033,
+        "bottom_in": 8.0784
+      },
+      "bbox_in": {
+        "left_in": 1.024,
+        "top_in": 2.1613,
+        "width_in": 11.2792,
+        "height_in": 5.9171,
+        "right_in": 12.3033,
+        "bottom_in": 8.0784,
+        "rotation_applied": false
+      }
+    },
+    {
+      "file": "CalibriToTimesTestA.pptx",
+      "slide": 14,
+      "shape_id": 4,
+      "name": "TextBox 3",
+      "shape_type": "TEXT_BOX",
+      "parent_group_id": null,
+      "directions": [
+        {
+          "side": "right",
+          "distance_emu": 92241,
+          "distance_pt": 7.26,
+          "distance_in": 0.1009
+        },
+        {
+          "side": "bottom",
+          "distance_emu": 391926,
+          "distance_pt": 30.86,
+          "distance_in": 0.4286
+        }
+      ],
+      "max_overflow_pt": 30.86,
+      "max_overflow_in": 0.4286,
+      "severity": "medium",
+      "geometry_in": {
+        "left_emu": 226242.0,
+        "top_emu": 6295819.0,
+        "width_emu": 12057999.0,
+        "height_emu": 954107.0,
+        "right_emu": 12284241.0,
+        "bottom_emu": 7249926.0,
+        "left_in": 0.2474,
+        "top_in": 6.8852,
+        "width_in": 13.1868,
+        "height_in": 1.0434,
+        "right_in": 13.4342,
+        "bottom_in": 7.9286
+      },
+      "bbox_in": {
+        "left_in": 0.2474,
+        "top_in": 6.8852,
+        "width_in": 13.1868,
+        "height_in": 1.0434,
+        "right_in": 13.4342,
+        "bottom_in": 7.9286,
+        "rotation_applied": false
+      }
+    },
+    {
+      "file": "CenterAlignTitles_TestA.pptx",
+      "slide": 4,
+      "shape_id": 4,
+      "name": "AutoShape 2",
+      "shape_type": "AUTO_SHAPE",
+      "parent_group_id": null,
+      "directions": [
+        {
+          "side": "top",
+          "distance_emu": 72223,
+          "distance_pt": 5.69,
+          "distance_in": 0.079
+        }
+      ],
+      "max_overflow_pt": 5.69,
+      "max_overflow_in": 0.079,
+      "severity": "low",
+      "geometry_in": {
+        "left_emu": 1630086.0,
+        "top_emu": -72223.0,
+        "width_emu": 152382.0,
+        "height_emu": 152383.0,
+        "right_emu": 1782468.0,
+        "bottom_emu": 80160.0,
+        "left_in": 1.7827,
+        "top_in": -0.079,
+        "width_in": 0.1666,
+        "height_in": 0.1666,
+        "right_in": 1.9493,
+        "bottom_in": 0.0877
+      },
+      "bbox_in": {
+        "left_in": 1.7827,
+        "top_in": -0.079,
+        "width_in": 0.1666,
+        "height_in": 0.1666,
+        "right_in": 1.9493,
+        "bottom_in": 0.0877,
+        "rotation_applied": false
+      }
+    },
+    {
+      "file": "CenterAlignTitles_TestA.pptx",
+      "slide": 5,
+      "shape_id": 4,
+      "name": "AutoShape 2",
+      "shape_type": "AUTO_SHAPE",
+      "parent_group_id": null,
+      "directions": [
+        {
+          "side": "top",
+          "distance_emu": 72223,
+          "distance_pt": 5.69,
+          "distance_in": 0.079
+        }
+      ],
+      "max_overflow_pt": 5.69,
+      "max_overflow_in": 0.079,
+      "severity": "low",
+      "geometry_in": {
+        "left_emu": 1630086.0,
+        "top_emu": -72223.0,
+        "width_emu": 152382.0,
+        "height_emu": 152383.0,
+        "right_emu": 1782468.0,
+        "bottom_emu": 80160.0,
+        "left_in": 1.7827,
+        "top_in": -0.079,
+        "width_in": 0.1666,
+        "height_in": 0.1666,
+        "right_in": 1.9493,
+        "bottom_in": 0.0877
+      },
+      "bbox_in": {
+        "left_in": 1.7827,
+        "top_in": -0.079,
+        "width_in": 0.1666,
+        "height_in": 0.1666,
+        "right_in": 1.9493,
+        "bottom_in": 0.0877,
+        "rotation_applied": false
+      }
+    }
+  ]
+}

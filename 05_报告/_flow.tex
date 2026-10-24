@@ -1,0 +1,53 @@
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={draw=black!45, rounded corners=2pt, fill=black!4, align=center,
+              font=\footnotesize, inner sep=3.5pt, minimum height=7mm, minimum width=20mm},
+  leaf/.style={draw=black!45, rounded corners=2pt, fill=black!4, align=center,
+              font=\scriptsize, inner sep=3pt, minimum height=6.5mm, minimum width=16mm},
+  ar/.style={-{Latex[length=1.5mm,width=1.2mm]}, draw=black!55, line width=0.45pt}
+]
+\node[box] (pptx)   at (5.0,  0.00) {PPTX};
+\node[box] (parse)  at (2.35, -1.35) {结构解析};
+\node[box] (render) at (7.65, -1.35) {页面渲染};
+\node[box] (elem)   at (2.35, -2.60) {元素表};
+\node[box] (png)    at (7.65, -2.60) {逐页 PNG};
+\node[box] (feat)   at (5.00, -3.75) {特征表};
+
+\node[leaf] (l1) at (1.90, -5.05) {L1 规则};
+\node[leaf] (l2) at (5.00, -5.05) {L2 视觉};
+\node[leaf] (l3) at (8.10, -5.05) {L3 风格};
+
+\node[box] (claim)   at (5.0, -6.30) {判决 Claim};
+\node[box] (l4)      at (5.0, -7.35) {L4 语义（按需）};
+\node[box] (fuse)    at (5.0, -8.40) {融合与按需复核};
+\node[box] (finding) at (5.0, -9.45) {结论 Finding};
+\node[box] (report)  at (5.0, -10.50) {审查报告};
+
+\draw[ar] (pptx.south) -- (parse.north);
+\draw[ar] (pptx.south) -- (render.north);
+\draw[ar] (parse) -- (elem);
+\draw[ar] (render) -- (png);
+\draw[ar] (elem.south) -- (feat.north);
+\draw[ar] (png.south) -- (feat.north);
+
+\coordinate (bus)  at (5.0, -4.15);
+\coordinate (bus2) at (5.0, -5.70);
+\draw[ar] (feat.south) -- (bus);
+\draw[ar] (bus) -- (l2.north);
+\draw[ar] (bus) -| (l1.north);
+\draw[ar] (bus) -| (l3.north);
+
+\draw[ar] (l2.south) -- (bus2);
+\draw[ar] (l1.south) |- (bus2);
+\draw[ar] (l3.south) |- (bus2);
+\draw[ar] (bus2) -- (claim.north);
+
+\draw[ar] (claim) -- (l4);
+\draw[ar] (l4) -- (fuse);
+\draw[ar] (fuse) -- (finding);
+\draw[ar] (finding) -- (report);
+
+\node[font=\scriptsize, text=black!55, anchor=west] (need) at (7.30, -7.35) {仅按需调用};
+\draw[dotted, draw=black!40, line width=0.4pt] (l4.east) -- (need.west);
+\end{tikzpicture}
+\end{center}

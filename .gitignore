@@ -1,0 +1,43 @@
+# Local assistant state and editor settings
+.workbuddy/
+.codex/
+.idea/
+.vscode/
+
+# Credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.pem
+*.key
+
+# Python environments and caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Operating-system and Office temporary files
+.DS_Store
+Thumbs.db
+desktop.ini
+__MACOSX/
+~$*
+
+# LaTeX temporary files; keep report sources and final PDF
+*.aux
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+/05_报告/*.log
+
+# Nested upstream Git metadata is local; its checked-out data is archived
+**/.git/

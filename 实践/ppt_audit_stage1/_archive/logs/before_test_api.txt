@@ -1,0 +1,47 @@
+{
+  "test": "openai_compatible_client_local_stub",
+  "real_model": false,
+  "note": "本地 HTTP 桩返回固定 JSON；只验证客户端管线，不是真实多模态复核",
+  "model": "stub-vision",
+  "http_status": 200,
+  "latency_ms": 40,
+  "usage": {
+    "prompt_tokens": 1200,
+    "completion_tokens": 80,
+    "total_tokens": 1280
+  },
+  "cost": {
+    "amount": 0.000608,
+    "currency": "USD",
+    "note": "按环境变量单价估算，非服务商账单"
+  },
+  "response": {
+    "page_assessment": "本地桩：正文被红色块覆盖。",
+    "objects": [
+      {
+        "shape_id": 3,
+        "verdict": "visible_occlusion",
+        "confidence": "high",
+        "observations": [
+          "本地桩固定观察：红色块覆盖正文中部，x≈655-1160px。"
+        ],
+        "evidence_refs": [
+          "红色块 x≈655-1160px, y≈382-662px"
+        ],
+        "uncertainty": null
+      }
+    ],
+    "suggestion": "本地桩建议：调整叠放次序。"
+  },
+  "checks": {
+    "http_200": true,
+    "verdict_parsed": true,
+    "usage_recorded": true,
+    "cost_computed": true,
+    "single_http_call": true,
+    "api_review_count": true,
+    "key_not_in_record": true,
+    "payload_has_image": true
+  },
+  "passed": true
+}

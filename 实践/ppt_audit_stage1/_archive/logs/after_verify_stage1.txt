@@ -1,0 +1,30 @@
+[OK] 读取 6 份 / 62 页 / 338 个对象
+[OK] 越界记录 4 条 -> D:\Codex_Project\Homework\Design_big_data\Final_Hw_修改\实践\ppt_audit_stage1\outputs\stage1_violations.json
+  OK  1ea18StructuralFix_TestA copy.pptx: 20 页, 52 对象（含文字 43）, 越界 0
+  OK  AddAgendaSlide_TestA.pptx: 10 页, 77 对象（含文字 36）, 越界 1
+  OK  BulletsNormalizeLevels_Test.pptx: 1 页, 2 对象（含文字 2）, 越界 0
+  OK  CalibriToTimesTestA.pptx: 20 页, 41 对象（含文字 41）, 越界 1
+  OK  CenterAlignTitles_TestA.pptx: 10 页, 163 对象（含文字 70）, 越界 2
+  OK  ColorblindPalette_TestA.pptx: 1 页, 3 对象（含文字 3）, 越界 0
+
+[PASS] 检测程序正常退出: returncode=0
+[PASS] 读取的 PPT 份数: 6 份（基线 6，锁文件 0 个已跳过）
+[PASS] 读取的总页数: 62 页（基线 62）
+[PASS] 全部文件解析成功: 失败 0 份
+[PASS] 对象总数与基线一致: 338 个对象（基线 338，含组内子对象）
+[PASS] 每个对象都有四至坐标与尺寸: 338/338 个对象几何完整
+[PASS] 对象 ID 唯一且齐全: 同页内 shape_id 唯一
+[PASS] 文字提取结果与基线一致: 195 个对象含文字（基线 195）
+[PASS] 文字内容可回溯: 含文字对象均有非空 text 字段
+[PASS] 组形状坐标变换自洽: 共 16 个组，校验 9 个子对象无旋转的组，偏差均 < 0.02in
+[PASS] 自检样本生成: [OK] 已生成 D:\Codex_Project\Homework\Design_big_data\Final_Hw_修改\实践\ppt_audit_stage1\test_samples\selfcheck_stage1.pptx
+[PASS] 自检样本检测运行: returncode=0
+[PASS] 正常页零误报: 第 1 页 5 个对象，越界 0 条
+[PASS] 越界页检出数量: 检出 4 条，预期 4 条：['越界-上', '越界-下', '越界-右', '越界-左']
+[PASS] 越界方向与距离准确: 左 0.60in / 右 0.50in / 上 0.35in / 下 0.50in 全部命中（容差 ±0.02in）
+[PASS] 同页正常对象不误报: 对照组均未出现：['对照-旋转但未越界', '对照-正常对象']
+[PASS] 旋转对象按外接框判定: rotation=30.0°，外接框在页内，未误报
+[PASS] 原始 PPT 未被修改: 6 份文件 SHA-256 与修改时间均未变化
+[PASS] JSON 输出齐全: stage1_structure.json, stage1_violations.json
+
+ALL PASS  (19/19)

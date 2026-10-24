@@ -1,0 +1,34 @@
+{
+  "deck": "selfcheck_stage1.pptx",
+  "slide_size_in": [
+    10.0,
+    7.5
+  ],
+  "slide1_expected_violations": 0,
+  "slide2_expected": [
+    {
+      "name": "越界-左",
+      "side": "left",
+      "distance_in": 0.6
+    },
+    {
+      "name": "越界-右",
+      "side": "right",
+      "distance_in": 0.5
+    },
+    {
+      "name": "越界-上",
+      "side": "top",
+      "distance_in": 0.35
+    },
+    {
+      "name": "越界-下",
+      "side": "bottom",
+      "distance_in": 0.5
+    }
+  ],
+  "slide2_expected_clean_names": [
+    "对照-旋转但未越界",
+    "对照-正常对象"
+  ]
+}

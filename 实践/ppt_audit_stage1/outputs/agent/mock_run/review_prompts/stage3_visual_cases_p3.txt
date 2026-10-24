@@ -1,0 +1,18 @@
+你是 PPT 版面视觉质量审查员。请只根据这张页面截图做判断。
+页面尺寸 960×540 pt，截图像素 1920×1080。
+
+待核对对象：
+- shape_id=3，名称“QA_V3_TEXT”，页码 3
+  文本摘录：The conclusion of this slide is hidden behind the red block: the agent must fuse z-order a
+  对象外框：L=72.0 T=201.6 R=648.0 B=316.8 pt；COM 可见文字范围：L=79.2 T=205.2 R=622.92 B=313.2 pt
+  文字越出页面：0 pt；页边墨迹占比：无
+  规则侧怀疑：文字虽未越出页面，但被更高 z 序的不透明对象覆盖；页边裁切规则天然看不到这类问题
+
+判定要求：
+1. 只能描述截图中实际可见的内容；不得根据坐标推断被页面裁掉、或被其他形状盖住的内容。
+2. 每条 observation 必须给出可核对的位置（例如“页面底边 y≈1030-1080px，第二行文字下缘被截断”）。
+3. 若截图分辨率或遮挡导致无法判断，verdict 用 uncertain，不要猜。
+4. 不要评价内容对错，只评价可见性：是否被裁切、被覆盖、对比度是否足以阅读。
+
+只输出 JSON，不要额外文字：
+{"page_assessment":"一句话","objects":[{"shape_id":13,"verdict":"visible_clip|visible_occlusion|low_readability|no_visible_problem|uncertain","confidence":"high|medium|low","observations":["..."],"evidence_refs":["页面底边 y=1030-1080px"],"uncertainty":null}],"suggestion":"针对该页的修改建议"}

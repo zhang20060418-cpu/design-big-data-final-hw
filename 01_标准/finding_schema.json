@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://local/ppt-audit/finding.schema.json",
+  "title": "Finding",
+  "description": "AI 生成 PPT 质量审查系统的最小结论原子。所有检测器输出、融合、报告与实验统计均以此结构为准。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "finding_id",
+    "slide_index",
+    "defect_code",
+    "detector",
+    "severity",
+    "status",
+    "confidence",
+    "confidence_source",
+    "evidence",
+    "rationale",
+    "cost_calls",
+    "cost_tokens",
+    "rule_version"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "全局唯一，建议格式 {code}-{slide}-{seq}"
+    },
+    "slide_index": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "页码，从 1 开始"
+    },
+    "defect_code": {
+      "type": "string",
+      "enum": [
+        "S-OVERSHOOT",
+        "S-TEXT-OVERFLOW",
+        "S-FONT-FALLBACK",
+        "S-PAGECOUNT",
+        "S-EMPTY",
+        "S-DENSITY",
+        "S-DECO-COUNT",
+        "V-WHITESPACE",
+        "V-ALIGN",
+        "V-HIERARCHY",
+        "V-COLOR",
+        "V-TEMPLATE-REPEAT",
+        "M-CROSSPAGE",
+        "M-IMAGE-TEXT",
+        "M-DECO-FUNC",
+        "R-CONTENT-MISS",
+        "R-STYLE-DEVIATE",
+        "R-SCOPE"
+      ]
+    },
+    "detector": {
+      "type": "string",
+      "minLength": 1,
+      "description": "检测器标识，建议 {family}.{method}@{version}，如 rule.geometry@0.1"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["blocking", "major", "minor", "info"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["confirmed", "probable", "needs_review"],
+      "description": "与 severity 正交：确定性维度，不表示严重程度"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "confidence_source": {
+      "type": "string",
+      "enum": ["rule", "model_prob", "llm_report", "fused"],
+      "description": "confidence 的语义来源，不同来源的数值不可直接比较"
+    },
+    "bbox": {
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "归一化 [x, y, w, h]，页级缺陷可省略"
+    },
+    "element_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "description": "空证据记录不允许存在",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "ref"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["structural", "visual", "semantic", "requirement"]
+          },
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "description": "structural: slide.{i}.shape.{id} | visual: slide.{i}.region.[x,y,w,h] | semantic: pages.[i,j] | requirement: prompt.cond.{cid}"
+          },
+          "value": {},
+          "expected": {},
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "description": "面向用户的一句话解释，须能被 evidence 支撑"
+    },
+    "suggestion": {
+      "type": "string"
+    },
+    "cost_calls": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "产生该记录消耗的模型调用次数，规则为 0"
+    },
+    "cost_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "dedup_group": {
+      "type": "string"
+    },
+    "rule_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "规则集或模型版本，用于结果可复现"
+    },
+    "detectors_checked": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "本单元被哪些检测器检查过，作为交叉验证广度的依据"
+    },
+    "conflict_detectors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "明确判定不存在、与结论相反的检测器；非空时 status 必须为 needs_review"
+    }
+  }
+}

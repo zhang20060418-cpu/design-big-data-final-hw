@@ -1,0 +1,142 @@
+{
+  "generated_at": "2026-10-24T17:40:42+08:00",
+  "passed": true,
+  "check_count": 23,
+  "failed_count": 0,
+  "checks": [
+    {
+      "name": "第一阶段 JSON 未被改写",
+      "pass": true,
+      "detail": "stage1_structure.json f8672765、stage1_violations.json 1cf21d57"
+    },
+    {
+      "name": "复检覆盖第一阶段全部 4 条记录",
+      "pass": true,
+      "detail": "real=4 / stage1=4"
+    },
+    {
+      "name": "geometry_evidence 与第一阶段逐字段一致（方向/距离/级别）",
+      "pass": true,
+      "detail": "4/4 一致"
+    },
+    {
+      "name": "AddAgenda p3 id13 未被判为已确认裁切",
+      "pass": true,
+      "detail": "status=no_visible_clip"
+    },
+    {
+      "name": "Calibri p14 id4 未被判为已确认裁切",
+      "pass": true,
+      "detail": "status=no_visible_clip"
+    },
+    {
+      "name": "R2 的整段越界被归因于空段落（可见文字未越界）",
+      "pass": true,
+      "detail": "整段 Bound* 越界但可见段落未越界；差额来自末尾空段落"
+    },
+    {
+      "name": "R3 空形状判为 not_applicable 且保留结构记录",
+      "pass": true,
+      "detail": "status=not_applicable empty=True"
+    },
+    {
+      "name": "R4 空形状判为 not_applicable 且保留结构记录",
+      "pass": true,
+      "detail": "status=not_applicable empty=True"
+    },
+    {
+      "name": "not_applicable 空形状的审查图不绘制几何框（虚线像素=0）",
+      "pass": true,
+      "detail": "R3/R4 dash_px=0"
+    },
+    {
+      "name": "有文字的候选仍绘制几何框（隐藏只针对空形状）",
+      "pass": true,
+      "detail": "R1 dash_px=10166"
+    },
+    {
+      "name": "第 4 页覆盖台账：10 个文字对象 / 复检 0 / 跳过 10，且注明不代表整页无问题",
+      "pass": true,
+      "detail": "10/0/10"
+    },
+    {
+      "name": "覆盖口径自洽：checked + skipped = 总数",
+      "pass": true,
+      "detail": "2+17=19"
+    },
+    {
+      "name": "S2_RightClippedText 被发现为 confirmed_clip（页边墨迹 9.3%）",
+      "pass": true,
+      "detail": "status=confirmed_clip edge_ink=0.093"
+    },
+    {
+      "name": "S2_BottomClippedText 被发现为 confirmed_clip（页边墨迹 44.4%）",
+      "pass": true,
+      "detail": "status=confirmed_clip edge_ink=0.444"
+    },
+    {
+      "name": "S1_RightFrame_TextVisible 未被误报为裁切",
+      "pass": true,
+      "detail": "status=no_visible_clip"
+    },
+    {
+      "name": "S1_BottomFrame_TextVisible 未被误报为裁切",
+      "pass": true,
+      "detail": "status=no_visible_clip"
+    },
+    {
+      "name": "S3_TightBox_NoAutofit 未被误报为裁切",
+      "pass": true,
+      "detail": "status=no_visible_clip"
+    },
+    {
+      "name": "S3_TightBox_ShrinkText 未被误报为裁切",
+      "pass": true,
+      "detail": "status=no_visible_clip"
+    },
+    {
+      "name": "每条结果字段齐备且证据图存在",
+      "pass": true,
+      "detail": "10 条"
+    },
+    {
+      "name": "状态取值均在约定集合内",
+      "pass": true,
+      "detail": "4 类枚举"
+    },
+    {
+      "name": "对照样本期望标签全部一致",
+      "pass": true,
+      "detail": "6/6，失败 0"
+    },
+    {
+      "name": "原始 PPTX 哈希与第一阶段一致",
+      "pass": true,
+      "detail": "4 份"
+    },
+    {
+      "name": "报告存在且引用的截图路径均可解析",
+      "pass": true,
+      "detail": "link=22 missing=[]"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "real_cases": 4,
+    "synthetic_samples": 6,
+    "real": {
+      "confirmed_clip": 0,
+      "no_visible_clip": 2,
+      "uncertain": 0,
+      "not_applicable": 2
+    },
+    "samples": {
+      "confirmed_clip": 2,
+      "no_visible_clip": 4,
+      "uncertain": 0,
+      "not_applicable": 0
+    },
+    "needs_multimodal": 2,
+    "real_not_confirmed_clip": 4
+  }
+}

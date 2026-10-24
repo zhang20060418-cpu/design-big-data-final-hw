@@ -1,0 +1,37 @@
+{
+  "deck": "stage3_visual_cases.pptx",
+  "cases": [
+    {
+      "case_id": "V1",
+      "slide": 1,
+      "shape_name": "QA_V1_TEXT",
+      "expected_second_pass": "no_visible_clip",
+      "expected_route": "report",
+      "why": "文字完整位于页内，无任何异常信号"
+    },
+    {
+      "case_id": "V2",
+      "slide": 2,
+      "shape_name": "QA_V2_TEXT",
+      "expected_second_pass": "uncertain",
+      "expected_route": "recheck",
+      "why": "可见文字越过页底，但复杂照片背景使页边墨迹判定不可靠"
+    },
+    {
+      "case_id": "V3",
+      "slide": 3,
+      "shape_name": "QA_V3_TEXT",
+      "expected_second_pass": "no_visible_clip",
+      "expected_route": "recheck",
+      "why": "文字未被页边裁切，但被更高 z 序的不透明色块覆盖，需遮挡规则"
+    },
+    {
+      "case_id": "V4",
+      "slide": 4,
+      "shape_name": "QA_V4_TEXT",
+      "expected_second_pass": "no_visible_clip",
+      "expected_route": "recheck",
+      "why": "无裁切，但文字整体压在花哨图片上，可读性需视觉判断"
+    }
+  ]
+}

@@ -1,0 +1,1032 @@
+{
+  "generated_at": "2026-10-24T14:05:29+08:00",
+  "tool": {
+    "name": "stage3_probe",
+    "reuses": "outputs/recheck/text_visibility_recheck.py",
+    "powerpoint": "16.0"
+  },
+  "deck": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\test_samples\\stage3\\stage3_visual_cases.pptx",
+  "deck_sha256": "230b2335c60bd5314102a5336897e54fef0f27a494e4604e987a3f33f56c3a60",
+  "page": {
+    "width_pt": 960.0,
+    "height_pt": 540.0
+  },
+  "cases": [
+    {
+      "case_id": "V1",
+      "group": "stage3_case",
+      "source": "stage3_synthetic",
+      "file": "stage3_visual_cases.pptx",
+      "deck_path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\test_samples\\stage3\\stage3_visual_cases.pptx",
+      "slide": 1,
+      "shape_id": 3,
+      "name": "QA_V1_TEXT",
+      "shape_type": "TEXT_BOX",
+      "text_excerpt": "This page is a clean control sample.\rThe paragraph stays well inside the slide boundary,\rso the second pass should report no visible clipping\rand the agent shou",
+      "page": {
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "width_in": 13.3333,
+        "height_in": 7.5
+      },
+      "geometry_evidence": {
+        "label": "geometry_evidence",
+        "note": "第一阶段仅判断对象外框越界，不代表文字被裁切",
+        "first_pass_detector": null,
+        "frame_bbox_pt": {
+          "left_pt": 59.76,
+          "top_pt": 187.2,
+          "width_pt": 590.4,
+          "height_pt": 230.4,
+          "right_pt": 650.16,
+          "bottom_pt": 417.6
+        },
+        "frame_bbox_in": {
+          "left_pt": 59.76,
+          "top_pt": 187.2,
+          "width_pt": 590.4,
+          "height_pt": 230.4,
+          "right_pt": 650.16,
+          "bottom_pt": 417.6,
+          "left_in": 0.83,
+          "top_in": 2.6,
+          "right_in": 9.03,
+          "bottom_in": 5.8,
+          "width_in": 8.2,
+          "height_in": 3.2
+        },
+        "violations": [],
+        "geometry_severity": null,
+        "frame_overflow_sides": [],
+        "in_stage1_result": false
+      },
+      "visibility": {
+        "shape_visible": true,
+        "has_text_frame": true,
+        "has_text": true,
+        "fill_visible": 0,
+        "line_visible": 0,
+        "xml_effect": false,
+        "empty_graphics": false,
+        "z_order": 2
+      },
+      "text_layout": {
+        "source": "PowerPoint COM TextFrame2",
+        "layout_bbox_pt": {
+          "left_pt": 66.96,
+          "top_pt": 190.8,
+          "width_pt": 503.305,
+          "height_pt": 114.0,
+          "right_pt": 570.265,
+          "bottom_pt": 304.8
+        },
+        "layout_bbox_in": {
+          "left_pt": 66.96,
+          "top_pt": 190.8,
+          "width_pt": 503.305,
+          "height_pt": 114.0,
+          "right_pt": 570.265,
+          "bottom_pt": 304.8,
+          "left_in": 0.93,
+          "top_in": 2.65,
+          "right_in": 7.9203,
+          "bottom_in": 4.2333,
+          "width_in": 6.9903,
+          "height_in": 1.5833
+        },
+        "visible_bbox_pt": {
+          "left_pt": 66.96,
+          "top_pt": 190.8,
+          "width_pt": 503.305,
+          "height_pt": 114.0,
+          "right_pt": 570.265,
+          "bottom_pt": 304.8
+        },
+        "visible_bbox_in": {
+          "left_pt": 66.96,
+          "top_pt": 190.8,
+          "width_pt": 503.305,
+          "height_pt": 114.0,
+          "right_pt": 570.265,
+          "bottom_pt": 304.8,
+          "left_in": 0.93,
+          "top_in": 2.65,
+          "right_in": 7.9203,
+          "bottom_in": 4.2333,
+          "width_in": 6.9903,
+          "height_in": 1.5833
+        },
+        "visible_basis": {
+          "basis": "union_of_non_blank_paragraphs",
+          "paragraph_count": 4,
+          "blank_paragraph_count": 0,
+          "used_paragraphs": 4,
+          "trailing_blank_paragraphs_in_xml": 0
+        },
+        "inner_frame_pt": {
+          "left_pt": 66.96,
+          "top_pt": 190.8,
+          "width_pt": 576.0,
+          "height_pt": 223.2,
+          "right_pt": 642.96,
+          "bottom_pt": 414.0
+        },
+        "text_exceeds_inner_frame": [],
+        "autosize": 1,
+        "word_wrap": -1,
+        "anchor": 1,
+        "effective_font_pt": 20.0,
+        "explicit_font_pt": [
+          20.0
+        ],
+        "xml_autofit": "spAutoFit",
+        "font_scale_attr": null,
+        "autofit_note": null,
+        "paragraph_font_pt": [
+          20.0,
+          20.0,
+          20.0,
+          20.0
+        ],
+        "probe_error": null
+      },
+      "page_overflow": {
+        "basis": "visible_bbox",
+        "sides": [],
+        "max_pt": 0.0,
+        "layout_bbox_sides": [],
+        "layout_only_note": null
+      },
+      "render_evidence": {
+        "page_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide01.png",
+        "ink": {
+          "available": true,
+          "bg_lum": 254,
+          "bg_share": 0.9558,
+          "bg_reliable": true,
+          "region_px": [
+            133,
+            381,
+            1141,
+            610
+          ],
+          "ink_px": 34275,
+          "ink_ratio": 0.14848,
+          "ink_bbox_pt": {
+            "left_pt": 67.5,
+            "top_pt": 193.5,
+            "right_pt": 563.5,
+            "bottom_pt": 305.0,
+            "width_pt": 496.0,
+            "height_pt": 111.5
+          },
+          "edge": {}
+        }
+      },
+      "second_pass": {
+        "status": "no_visible_clip",
+        "status_cn": "未发现可见裁切",
+        "confidence": "high",
+        "reasons": [
+          "实际文字排版范围完整落在页面内，按页面裁切定义不成立",
+          "渲染图墨迹距最近页面边缘 67.5 pt，无字迹贴近边界"
+        ],
+        "evidence_sources": [
+          "com_textframe2",
+          "rendered_png",
+          "pixel_ink"
+        ],
+        "defect_severity": "none",
+        "needs_multimodal_review": false,
+        "unresolved_reason": null
+      },
+      "annotation": {
+        "frame_suppressed": false,
+        "frame_drawn": true,
+        "suppress_reason": null,
+        "debug_switch": "--debug-frames",
+        "annotated_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\evidence\\V1_stage3_p1_id3_annotated.png",
+        "debug_frames": false,
+        "clean_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide01.png"
+      },
+      "expected": {
+        "second_pass": "no_visible_clip",
+        "route": "report",
+        "why": "文字完整位于页内，无任何异常信号"
+      },
+      "clean_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide01.png"
+    },
+    {
+      "case_id": "V2",
+      "group": "stage3_case",
+      "source": "stage3_synthetic",
+      "file": "stage3_visual_cases.pptx",
+      "deck_path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\test_samples\\stage3\\stage3_visual_cases.pptx",
+      "slide": 2,
+      "shape_id": 3,
+      "name": "QA_V2_TEXT",
+      "shape_type": "TEXT_BOX",
+      "text_excerpt": "Reservoir damage caused by additive residue can plug the pore throat\rand reduce permeability in the invaded zone; the last lines of this\rparagraph deliberately ",
+      "page": {
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "width_in": 13.3333,
+        "height_in": 7.5
+      },
+      "geometry_evidence": {
+        "label": "geometry_evidence",
+        "note": "第一阶段仅判断对象外框越界，不代表文字被裁切",
+        "first_pass_detector": "S-OVERSHOOT",
+        "frame_bbox_pt": {
+          "left_pt": 64.8,
+          "top_pt": 493.2,
+          "width_pt": 777.6,
+          "height_pt": 100.8,
+          "right_pt": 842.4,
+          "bottom_pt": 594.0
+        },
+        "frame_bbox_in": {
+          "left_pt": 64.8,
+          "top_pt": 493.2,
+          "width_pt": 777.6,
+          "height_pt": 100.8,
+          "right_pt": 842.4,
+          "bottom_pt": 594.0,
+          "left_in": 0.9,
+          "top_in": 6.85,
+          "right_in": 11.7,
+          "bottom_in": 8.25,
+          "width_in": 10.8,
+          "height_in": 1.4
+        },
+        "violations": [
+          {
+            "side": "bottom",
+            "distance_pt": 54.0,
+            "distance_in": 0.75
+          }
+        ],
+        "geometry_severity": "high",
+        "frame_overflow_sides": [
+          {
+            "side": "bottom",
+            "distance_pt": 54.0,
+            "distance_in": 0.75
+          }
+        ],
+        "in_stage1_result": true
+      },
+      "visibility": {
+        "shape_visible": true,
+        "has_text_frame": true,
+        "has_text": true,
+        "fill_visible": 0,
+        "line_visible": 0,
+        "xml_effect": false,
+        "empty_graphics": false,
+        "z_order": 2
+      },
+      "text_layout": {
+        "source": "PowerPoint COM TextFrame2",
+        "layout_bbox_pt": {
+          "left_pt": 72.0,
+          "top_pt": 496.8,
+          "width_pt": 745.645,
+          "height_pt": 91.2,
+          "right_pt": 817.645,
+          "bottom_pt": 588.0
+        },
+        "layout_bbox_in": {
+          "left_pt": 72.0,
+          "top_pt": 496.8,
+          "width_pt": 745.645,
+          "height_pt": 91.2,
+          "right_pt": 817.645,
+          "bottom_pt": 588.0,
+          "left_in": 1.0,
+          "top_in": 6.9,
+          "right_in": 11.3562,
+          "bottom_in": 8.1667,
+          "width_in": 10.3562,
+          "height_in": 1.2667
+        },
+        "visible_bbox_pt": {
+          "left_pt": 72.0,
+          "top_pt": 496.8,
+          "width_pt": 745.645,
+          "height_pt": 91.2,
+          "right_pt": 817.645,
+          "bottom_pt": 588.0
+        },
+        "visible_bbox_in": {
+          "left_pt": 72.0,
+          "top_pt": 496.8,
+          "width_pt": 745.645,
+          "height_pt": 91.2,
+          "right_pt": 817.645,
+          "bottom_pt": 588.0,
+          "left_in": 1.0,
+          "top_in": 6.9,
+          "right_in": 11.3562,
+          "bottom_in": 8.1667,
+          "width_in": 10.3562,
+          "height_in": 1.2667
+        },
+        "visible_basis": {
+          "basis": "union_of_non_blank_paragraphs",
+          "paragraph_count": 3,
+          "blank_paragraph_count": 0,
+          "used_paragraphs": 3,
+          "trailing_blank_paragraphs_in_xml": 0
+        },
+        "inner_frame_pt": {
+          "left_pt": 72.0,
+          "top_pt": 496.8,
+          "width_pt": 763.2,
+          "height_pt": 93.6,
+          "right_pt": 835.2,
+          "bottom_pt": 590.4
+        },
+        "text_exceeds_inner_frame": [],
+        "autosize": 1,
+        "word_wrap": -1,
+        "anchor": 1,
+        "effective_font_pt": 22.0,
+        "explicit_font_pt": [
+          22.0
+        ],
+        "xml_autofit": "spAutoFit",
+        "font_scale_attr": null,
+        "autofit_note": null,
+        "paragraph_font_pt": [
+          22.0,
+          22.0,
+          22.0
+        ],
+        "probe_error": null
+      },
+      "page_overflow": {
+        "basis": "visible_bbox",
+        "sides": [
+          {
+            "side": "bottom",
+            "distance_pt": 48.0,
+            "distance_in": 0.6667
+          }
+        ],
+        "max_pt": 48.0,
+        "layout_bbox_sides": [
+          {
+            "side": "bottom",
+            "distance_pt": 48.0,
+            "distance_in": 0.6667
+          }
+        ],
+        "layout_only_note": null
+      },
+      "render_evidence": {
+        "page_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide02.png",
+        "ink": {
+          "available": true,
+          "bg_lum": 70,
+          "bg_share": 0.1238,
+          "bg_reliable": false,
+          "region_px": [
+            144,
+            993,
+            1636,
+            1080
+          ],
+          "ink_px": 18701,
+          "ink_ratio": 0.14407,
+          "ink_bbox_pt": {
+            "left_pt": 73.0,
+            "top_pt": 496.5,
+            "right_pt": 810.0,
+            "bottom_pt": 540.0,
+            "width_pt": 737.0,
+            "height_pt": 43.5
+          },
+          "edge": {
+            "bottom": {
+              "edge_ink_ratio": 0.47431,
+              "edge_ink_px": 2123,
+              "strip_px": 4476,
+              "ink_gap_to_edge_pt": 0.0
+            }
+          }
+        }
+      },
+      "second_pass": {
+        "status": "uncertain",
+        "status_cn": "不确定",
+        "confidence": "low",
+        "reasons": [
+          "文字排版范围越出页面",
+          "下边墨迹占比 47.4%，字形在页面边界处被切断",
+          "页面背景复杂（主背景占比过低），页边墨迹判定不可靠"
+        ],
+        "evidence_sources": [
+          "com_textframe2",
+          "pixel_ink"
+        ],
+        "defect_severity": "unknown",
+        "needs_multimodal_review": true,
+        "unresolved_reason": "页边背景复杂，无法可靠区分文字墨迹与背景"
+      },
+      "annotation": {
+        "frame_suppressed": false,
+        "frame_drawn": true,
+        "suppress_reason": null,
+        "debug_switch": "--debug-frames",
+        "annotated_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\evidence\\V2_stage3_p2_id3_annotated.png",
+        "debug_frames": false,
+        "clean_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide02.png"
+      },
+      "expected": {
+        "second_pass": "uncertain",
+        "route": "recheck",
+        "why": "可见文字越过页底，但复杂照片背景使页边墨迹判定不可靠"
+      },
+      "clean_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide02.png"
+    },
+    {
+      "case_id": "V3",
+      "group": "stage3_case",
+      "source": "stage3_synthetic",
+      "file": "stage3_visual_cases.pptx",
+      "deck_path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\test_samples\\stage3\\stage3_visual_cases.pptx",
+      "slide": 3,
+      "shape_id": 3,
+      "name": "QA_V3_TEXT",
+      "shape_type": "TEXT_BOX",
+      "text_excerpt": "The conclusion of this slide is hidden behind the red block:\rthe agent must fuse z-order and fill evidence,\rbecause page-edge clipping rules cannot see this def",
+      "page": {
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "width_in": 13.3333,
+        "height_in": 7.5
+      },
+      "geometry_evidence": {
+        "label": "geometry_evidence",
+        "note": "第一阶段仅判断对象外框越界，不代表文字被裁切",
+        "first_pass_detector": null,
+        "frame_bbox_pt": {
+          "left_pt": 72.0,
+          "top_pt": 201.6,
+          "width_pt": 576.0,
+          "height_pt": 115.2,
+          "right_pt": 648.0,
+          "bottom_pt": 316.8
+        },
+        "frame_bbox_in": {
+          "left_pt": 72.0,
+          "top_pt": 201.6,
+          "width_pt": 576.0,
+          "height_pt": 115.2,
+          "right_pt": 648.0,
+          "bottom_pt": 316.8,
+          "left_in": 1.0,
+          "top_in": 2.8,
+          "right_in": 9.0,
+          "bottom_in": 4.4,
+          "width_in": 8.0,
+          "height_in": 1.6
+        },
+        "violations": [],
+        "geometry_severity": null,
+        "frame_overflow_sides": [],
+        "in_stage1_result": false
+      },
+      "visibility": {
+        "shape_visible": true,
+        "has_text_frame": true,
+        "has_text": true,
+        "fill_visible": 0,
+        "line_visible": 0,
+        "xml_effect": false,
+        "empty_graphics": false,
+        "z_order": 2
+      },
+      "text_layout": {
+        "source": "PowerPoint COM TextFrame2",
+        "layout_bbox_pt": {
+          "left_pt": 79.2,
+          "top_pt": 205.2,
+          "width_pt": 549.59,
+          "height_pt": 108.0,
+          "right_pt": 628.79,
+          "bottom_pt": 313.2
+        },
+        "layout_bbox_in": {
+          "left_pt": 79.2,
+          "top_pt": 205.2,
+          "width_pt": 549.59,
+          "height_pt": 108.0,
+          "right_pt": 628.79,
+          "bottom_pt": 313.2,
+          "left_in": 1.1,
+          "top_in": 2.85,
+          "right_in": 8.7332,
+          "bottom_in": 4.35,
+          "width_in": 7.6332,
+          "height_in": 1.5
+        },
+        "visible_bbox_pt": {
+          "left_pt": 79.2,
+          "top_pt": 205.2,
+          "width_pt": 543.72,
+          "height_pt": 108.0,
+          "right_pt": 622.92,
+          "bottom_pt": 313.2
+        },
+        "visible_bbox_in": {
+          "left_pt": 79.2,
+          "top_pt": 205.2,
+          "width_pt": 543.72,
+          "height_pt": 108.0,
+          "right_pt": 622.92,
+          "bottom_pt": 313.2,
+          "left_in": 1.1,
+          "top_in": 2.85,
+          "right_in": 8.6517,
+          "bottom_in": 4.35,
+          "width_in": 7.5517,
+          "height_in": 1.5
+        },
+        "visible_basis": {
+          "basis": "union_of_non_blank_paragraphs",
+          "paragraph_count": 3,
+          "blank_paragraph_count": 0,
+          "used_paragraphs": 3,
+          "trailing_blank_paragraphs_in_xml": 0
+        },
+        "inner_frame_pt": {
+          "left_pt": 79.2,
+          "top_pt": 205.2,
+          "width_pt": 561.6,
+          "height_pt": 108.0,
+          "right_pt": 640.8,
+          "bottom_pt": 313.2
+        },
+        "text_exceeds_inner_frame": [],
+        "autosize": 1,
+        "word_wrap": -1,
+        "anchor": 1,
+        "effective_font_pt": 20.0,
+        "explicit_font_pt": [
+          20.0
+        ],
+        "xml_autofit": "spAutoFit",
+        "font_scale_attr": null,
+        "autofit_note": null,
+        "paragraph_font_pt": [
+          20.0,
+          20.0,
+          20.0
+        ],
+        "probe_error": null
+      },
+      "page_overflow": {
+        "basis": "visible_bbox",
+        "sides": [],
+        "max_pt": 0.0,
+        "layout_bbox_sides": [],
+        "layout_only_note": null
+      },
+      "render_evidence": {
+        "page_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide03.png",
+        "ink": {
+          "available": true,
+          "bg_lum": 254,
+          "bg_share": 0.9033,
+          "bg_reliable": true,
+          "region_px": [
+            158,
+            410,
+            1246,
+            627
+          ],
+          "ink_px": 125494,
+          "ink_ratio": 0.53154,
+          "ink_bbox_pt": {
+            "left_pt": 79.5,
+            "top_pt": 205.0,
+            "right_pt": 622.5,
+            "bottom_pt": 313.5,
+            "width_pt": 543.0,
+            "height_pt": 108.5
+          },
+          "edge": {}
+        }
+      },
+      "second_pass": {
+        "status": "no_visible_clip",
+        "status_cn": "未发现可见裁切",
+        "confidence": "high",
+        "reasons": [
+          "实际文字排版范围完整落在页面内，按页面裁切定义不成立",
+          "渲染图墨迹距最近页面边缘 79.5 pt，无字迹贴近边界"
+        ],
+        "evidence_sources": [
+          "com_textframe2",
+          "rendered_png",
+          "pixel_ink"
+        ],
+        "defect_severity": "none",
+        "needs_multimodal_review": false,
+        "unresolved_reason": null
+      },
+      "annotation": {
+        "frame_suppressed": false,
+        "frame_drawn": true,
+        "suppress_reason": null,
+        "debug_switch": "--debug-frames",
+        "annotated_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\evidence\\V3_stage3_p3_id3_annotated.png",
+        "debug_frames": false,
+        "clean_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide03.png"
+      },
+      "expected": {
+        "second_pass": "no_visible_clip",
+        "route": "recheck",
+        "why": "文字未被页边裁切，但被更高 z 序的不透明色块覆盖，需遮挡规则"
+      },
+      "clean_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide03.png"
+    },
+    {
+      "case_id": "V4",
+      "group": "stage3_case",
+      "source": "stage3_synthetic",
+      "file": "stage3_visual_cases.pptx",
+      "deck_path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\test_samples\\stage3\\stage3_visual_cases.pptx",
+      "slide": 4,
+      "shape_id": 3,
+      "name": "QA_V4_TEXT",
+      "shape_type": "TEXT_BOX",
+      "text_excerpt": "Pale yellow text on a bright confetti photo:\rnothing is clipped, but readability is a judgement call.",
+      "page": {
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "width_in": 13.3333,
+        "height_in": 7.5
+      },
+      "geometry_evidence": {
+        "label": "geometry_evidence",
+        "note": "第一阶段仅判断对象外框越界，不代表文字被裁切",
+        "first_pass_detector": null,
+        "frame_bbox_pt": {
+          "left_pt": 57.6,
+          "top_pt": 216.0,
+          "width_pt": 806.4,
+          "height_pt": 115.2,
+          "right_pt": 864.0,
+          "bottom_pt": 331.2
+        },
+        "frame_bbox_in": {
+          "left_pt": 57.6,
+          "top_pt": 216.0,
+          "width_pt": 806.4,
+          "height_pt": 115.2,
+          "right_pt": 864.0,
+          "bottom_pt": 331.2,
+          "left_in": 0.8,
+          "top_in": 3.0,
+          "right_in": 12.0,
+          "bottom_in": 4.6,
+          "width_in": 11.2,
+          "height_in": 1.6
+        },
+        "violations": [],
+        "geometry_severity": null,
+        "frame_overflow_sides": [],
+        "in_stage1_result": false
+      },
+      "visibility": {
+        "shape_visible": true,
+        "has_text_frame": true,
+        "has_text": true,
+        "fill_visible": 0,
+        "line_visible": 0,
+        "xml_effect": false,
+        "empty_graphics": false,
+        "z_order": 2
+      },
+      "text_layout": {
+        "source": "PowerPoint COM TextFrame2",
+        "layout_bbox_pt": {
+          "left_pt": 64.8,
+          "top_pt": 219.6,
+          "width_pt": 621.66,
+          "height_pt": 63.6,
+          "right_pt": 686.46,
+          "bottom_pt": 283.2
+        },
+        "layout_bbox_in": {
+          "left_pt": 64.8,
+          "top_pt": 219.6,
+          "width_pt": 621.66,
+          "height_pt": 63.6,
+          "right_pt": 686.46,
+          "bottom_pt": 283.2,
+          "left_in": 0.9,
+          "top_in": 3.05,
+          "right_in": 9.5342,
+          "bottom_in": 3.9333,
+          "width_in": 8.6342,
+          "height_in": 0.8833
+        },
+        "visible_bbox_pt": {
+          "left_pt": 64.8,
+          "top_pt": 219.6,
+          "width_pt": 614.54,
+          "height_pt": 63.6,
+          "right_pt": 679.34,
+          "bottom_pt": 283.2
+        },
+        "visible_bbox_in": {
+          "left_pt": 64.8,
+          "top_pt": 219.6,
+          "width_pt": 614.54,
+          "height_pt": 63.6,
+          "right_pt": 679.34,
+          "bottom_pt": 283.2,
+          "left_in": 0.9,
+          "top_in": 3.05,
+          "right_in": 9.4353,
+          "bottom_in": 3.9333,
+          "width_in": 8.5353,
+          "height_in": 0.8833
+        },
+        "visible_basis": {
+          "basis": "union_of_non_blank_paragraphs",
+          "paragraph_count": 2,
+          "blank_paragraph_count": 0,
+          "used_paragraphs": 2,
+          "trailing_blank_paragraphs_in_xml": 0
+        },
+        "inner_frame_pt": {
+          "left_pt": 64.8,
+          "top_pt": 219.6,
+          "width_pt": 792.0,
+          "height_pt": 108.0,
+          "right_pt": 856.8,
+          "bottom_pt": 327.6
+        },
+        "text_exceeds_inner_frame": [],
+        "autosize": 1,
+        "word_wrap": -1,
+        "anchor": 1,
+        "effective_font_pt": 24.0,
+        "explicit_font_pt": [
+          24.0
+        ],
+        "xml_autofit": "spAutoFit",
+        "font_scale_attr": null,
+        "autofit_note": null,
+        "paragraph_font_pt": [
+          24.0,
+          24.0
+        ],
+        "probe_error": null
+      },
+      "page_overflow": {
+        "basis": "visible_bbox",
+        "sides": [],
+        "max_pt": 0.0,
+        "layout_bbox_sides": [],
+        "layout_only_note": null
+      },
+      "render_evidence": {
+        "page_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide04.png",
+        "ink": {
+          "available": true,
+          "bg_lum": 238,
+          "bg_share": 0.517,
+          "bg_reliable": false,
+          "region_px": [
+            129,
+            439,
+            1359,
+            567
+          ],
+          "ink_px": 0,
+          "ink_ratio": 0.0,
+          "ink_bbox_pt": null,
+          "edge": {}
+        }
+      },
+      "second_pass": {
+        "status": "no_visible_clip",
+        "status_cn": "未发现可见裁切",
+        "confidence": "high",
+        "reasons": [
+          "实际文字排版范围完整落在页面内，按页面裁切定义不成立"
+        ],
+        "evidence_sources": [
+          "com_textframe2",
+          "rendered_png",
+          "pixel_ink"
+        ],
+        "defect_severity": "none",
+        "needs_multimodal_review": false,
+        "unresolved_reason": null
+      },
+      "annotation": {
+        "frame_suppressed": false,
+        "frame_drawn": true,
+        "suppress_reason": null,
+        "debug_switch": "--debug-frames",
+        "annotated_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\evidence\\V4_stage3_p4_id3_annotated.png",
+        "debug_frames": false,
+        "clean_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide04.png"
+      },
+      "expected": {
+        "second_pass": "no_visible_clip",
+        "route": "recheck",
+        "why": "无裁切，但文字整体压在花哨图片上，可读性需视觉判断"
+      },
+      "clean_png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\outputs\\agent\\render\\stage3\\slide04.png"
+    }
+  ],
+  "page_shapes": {
+    "1": [
+      {
+        "z": 1,
+        "id": 2,
+        "name": "QA_V1_TITLE",
+        "type": 17,
+        "shape_type": "TEXT_BOX",
+        "bbox_pt": {
+          "left_pt": 59.76,
+          "top_pt": 100.8,
+          "width_pt": 619.2,
+          "height_pt": 64.8,
+          "right_pt": 678.96,
+          "bottom_pt": 165.6
+        },
+        "fill_visible": 0,
+        "line_visible": 0,
+        "has_text": true,
+        "text_excerpt": "V1 正常对照页"
+      },
+      {
+        "z": 2,
+        "id": 3,
+        "name": "QA_V1_TEXT",
+        "type": 17,
+        "shape_type": "TEXT_BOX",
+        "bbox_pt": {
+          "left_pt": 59.76,
+          "top_pt": 187.2,
+          "width_pt": 590.4,
+          "height_pt": 230.4,
+          "right_pt": 650.16,
+          "bottom_pt": 417.6
+        },
+        "fill_visible": 0,
+        "line_visible": 0,
+        "has_text": true,
+        "text_excerpt": "This page is a clean control sample.\rThe paragraph stays well inside the slide b"
+      }
+    ],
+    "2": [
+      {
+        "z": 1,
+        "id": 2,
+        "name": "Picture 1",
+        "type": 13,
+        "shape_type": "PICTURE",
+        "bbox_pt": {
+          "left_pt": 0.0,
+          "top_pt": 0.0,
+          "width_pt": 959.998,
+          "height_pt": 540.0,
+          "right_pt": 959.998,
+          "bottom_pt": 540.0
+        },
+        "fill_visible": 0,
+        "line_visible": 0,
+        "has_text": false,
+        "text_excerpt": ""
+      },
+      {
+        "z": 2,
+        "id": 3,
+        "name": "QA_V2_TEXT",
+        "type": 17,
+        "shape_type": "TEXT_BOX",
+        "bbox_pt": {
+          "left_pt": 64.8,
+          "top_pt": 493.2,
+          "width_pt": 777.6,
+          "height_pt": 100.8,
+          "right_pt": 842.4,
+          "bottom_pt": 594.0
+        },
+        "fill_visible": 0,
+        "line_visible": 0,
+        "has_text": true,
+        "text_excerpt": "Reservoir damage caused by additive residue can plug the pore throat\rand reduce "
+      }
+    ],
+    "3": [
+      {
+        "z": 1,
+        "id": 2,
+        "name": "QA_V3_TITLE",
+        "type": 17,
+        "shape_type": "TEXT_BOX",
+        "bbox_pt": {
+          "left_pt": 57.6,
+          "top_pt": 57.6,
+          "width_pt": 648.0,
+          "height_pt": 57.6,
+          "right_pt": 705.6,
+          "bottom_pt": 115.2
+        },
+        "fill_visible": 0,
+        "line_visible": 0,
+        "has_text": true,
+        "text_excerpt": "V3 文字被覆盖"
+      },
+      {
+        "z": 2,
+        "id": 3,
+        "name": "QA_V3_TEXT",
+        "type": 17,
+        "shape_type": "TEXT_BOX",
+        "bbox_pt": {
+          "left_pt": 72.0,
+          "top_pt": 201.6,
+          "width_pt": 576.0,
+          "height_pt": 115.2,
+          "right_pt": 648.0,
+          "bottom_pt": 316.8
+        },
+        "fill_visible": 0,
+        "line_visible": 0,
+        "has_text": true,
+        "text_excerpt": "The conclusion of this slide is hidden behind the red block:\rthe agent must fuse"
+      },
+      {
+        "z": 3,
+        "id": 4,
+        "name": "QA_V3_COVER",
+        "type": 1,
+        "shape_type": "AUTO_SHAPE",
+        "bbox_pt": {
+          "left_pt": 327.6,
+          "top_pt": 190.8,
+          "width_pt": 252.0,
+          "height_pt": 140.4,
+          "right_pt": 579.6,
+          "bottom_pt": 331.2
+        },
+        "fill_visible": -1,
+        "line_visible": 0,
+        "has_text": false,
+        "text_excerpt": ""
+      }
+    ],
+    "4": [
+      {
+        "z": 1,
+        "id": 2,
+        "name": "Picture 1",
+        "type": 13,
+        "shape_type": "PICTURE",
+        "bbox_pt": {
+          "left_pt": 0.0,
+          "top_pt": 0.0,
+          "width_pt": 959.998,
+          "height_pt": 540.0,
+          "right_pt": 959.998,
+          "bottom_pt": 540.0
+        },
+        "fill_visible": 0,
+        "line_visible": 0,
+        "has_text": false,
+        "text_excerpt": ""
+      },
+      {
+        "z": 2,
+        "id": 3,
+        "name": "QA_V4_TEXT",
+        "type": 17,
+        "shape_type": "TEXT_BOX",
+        "bbox_pt": {
+          "left_pt": 57.6,
+          "top_pt": 216.0,
+          "width_pt": 806.4,
+          "height_pt": 115.2,
+          "right_pt": 864.0,
+          "bottom_pt": 331.2
+        },
+        "fill_visible": 0,
+        "line_visible": 0,
+        "has_text": true,
+        "text_excerpt": "Pale yellow text on a bright confetti photo:\rnothing is clipped, but readability"
+      }
+    ]
+  }
+}

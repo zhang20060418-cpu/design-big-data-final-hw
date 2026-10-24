@@ -1,0 +1,208 @@
+[
+  {
+    "file": "AddAgendaSlide_TestA.pptx",
+    "slide": 3,
+    "shape_id": 13,
+    "shape_name": "Content Placeholder 2",
+    "shape_type": "PLACEHOLDER",
+    "directions": [
+      {
+        "side": "bottom",
+        "distance_emu": 528878,
+        "distance_pt": 41.64,
+        "distance_in": 0.5784
+      }
+    ],
+    "bbox_in": {
+      "left_in": 1.024,
+      "top_in": 2.1613,
+      "width_in": 11.2792,
+      "height_in": 5.9171,
+      "right_in": 12.3033,
+      "bottom_in": 8.0784,
+      "rotation_applied": false
+    },
+    "page_png": "pages/AddAgendaSlide_TestA_p3.png",
+    "annotated_png": "annotated/AddAgendaSlide_TestA_p3_annotated.png",
+    "scale_px_per_in": 144.0004,
+    "box_px_full": [
+      267.5,
+      451.2,
+      1891.7,
+      1303.3
+    ],
+    "box_px_visible": [
+      267.5,
+      451.2,
+      1891.7,
+      1220
+    ],
+    "clipped": true,
+    "render_invisible": false,
+    "page_size_px": [
+      1920,
+      1080
+    ],
+    "canvas_size_px": [
+      2160,
+      1340
+    ],
+    "text_in_object": "Some additive can cause any residue after it’s added to base fracturing fluid and can plug the pore throat and decreasing permeability in invaded zone. This research was conducted using compatibility test between Guar Gum based fracturing fluid and boron as crosslinker and three type of breaker. The"
+  },
+  {
+    "file": "CalibriToTimesTestA.pptx",
+    "slide": 14,
+    "shape_id": 4,
+    "shape_name": "TextBox 3",
+    "shape_type": "TEXT_BOX",
+    "directions": [
+      {
+        "side": "right",
+        "distance_emu": 92241,
+        "distance_pt": 7.26,
+        "distance_in": 0.1009
+      },
+      {
+        "side": "bottom",
+        "distance_emu": 391926,
+        "distance_pt": 30.86,
+        "distance_in": 0.4286
+      }
+    ],
+    "bbox_in": {
+      "left_in": 0.2474,
+      "top_in": 6.8852,
+      "width_in": 13.1868,
+      "height_in": 1.0434,
+      "right_in": 13.4342,
+      "bottom_in": 7.9286,
+      "rotation_applied": false
+    },
+    "page_png": "pages/CalibriToTimesTestA_p14.png",
+    "annotated_png": "annotated/CalibriToTimesTestA_p14_annotated.png",
+    "scale_px_per_in": 144.0004,
+    "box_px_full": [
+      155.6,
+      1131.5,
+      2054.5,
+      1281.7
+    ],
+    "box_px_visible": [
+      155.6,
+      1131.5,
+      2040,
+      1220
+    ],
+    "clipped": true,
+    "render_invisible": false,
+    "page_size_px": [
+      1920,
+      1080
+    ],
+    "canvas_size_px": [
+      2160,
+      1340
+    ],
+    "text_in_object": "*Momper JD, Mulugeta Y, Green DJ, Karesh A, Krudys KM, Sachs HC, Yao LP, Burckart GJ. Adolescent dosing and labeling since the Food and Drug Administration Amendments Act of 2007. JAMA pediatrics. 2013 Oct 1;167(10):926-32."
+  },
+  {
+    "file": "CenterAlignTitles_TestA.pptx",
+    "slide": 4,
+    "shape_id": 4,
+    "shape_name": "AutoShape 2",
+    "shape_type": "AUTO_SHAPE",
+    "directions": [
+      {
+        "side": "top",
+        "distance_emu": 72223,
+        "distance_pt": 5.69,
+        "distance_in": 0.079
+      }
+    ],
+    "bbox_in": {
+      "left_in": 1.7827,
+      "top_in": -0.079,
+      "width_in": 0.1666,
+      "height_in": 0.1666,
+      "right_in": 1.9493,
+      "bottom_in": 0.0877,
+      "rotation_applied": false
+    },
+    "page_png": "pages/CenterAlignTitles_TestA_p4.png",
+    "annotated_png": "annotated/CenterAlignTitles_TestA_p4_annotated.png",
+    "scale_px_per_in": 144.0004,
+    "box_px_full": [
+      376.7,
+      128.6,
+      400.7,
+      152.6
+    ],
+    "box_px_visible": [
+      376.7,
+      140,
+      400.7,
+      152.6
+    ],
+    "clipped": true,
+    "render_invisible": true,
+    "page_size_px": [
+      1920,
+      1080
+    ],
+    "canvas_size_px": [
+      2160,
+      1340
+    ],
+    "text_in_object": ""
+  },
+  {
+    "file": "CenterAlignTitles_TestA.pptx",
+    "slide": 5,
+    "shape_id": 4,
+    "shape_name": "AutoShape 2",
+    "shape_type": "AUTO_SHAPE",
+    "directions": [
+      {
+        "side": "top",
+        "distance_emu": 72223,
+        "distance_pt": 5.69,
+        "distance_in": 0.079
+      }
+    ],
+    "bbox_in": {
+      "left_in": 1.7827,
+      "top_in": -0.079,
+      "width_in": 0.1666,
+      "height_in": 0.1666,
+      "right_in": 1.9493,
+      "bottom_in": 0.0877,
+      "rotation_applied": false
+    },
+    "page_png": "pages/CenterAlignTitles_TestA_p5.png",
+    "annotated_png": "annotated/CenterAlignTitles_TestA_p5_annotated.png",
+    "scale_px_per_in": 144.0004,
+    "box_px_full": [
+      376.7,
+      128.6,
+      400.7,
+      152.6
+    ],
+    "box_px_visible": [
+      376.7,
+      140,
+      400.7,
+      152.6
+    ],
+    "clipped": true,
+    "render_invisible": true,
+    "page_size_px": [
+      1920,
+      1080
+    ],
+    "canvas_size_px": [
+      2160,
+      1340
+    ],
+    "text_in_object": ""
+  }
+]
