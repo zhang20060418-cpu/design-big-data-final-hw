@@ -1,0 +1,5 @@
+# Local write lock, interrupted transaction and exact-byte safety backup.
+review_server.lock
+review_transaction.json
+review_backup/
+*.tmp-*
