@@ -3,7 +3,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 
@@ -21,9 +21,12 @@ const formalManifest = await fs.readFile(path.join(source, 'benchmark_manifest.c
 const formalState = await fs.readFile(path.join(source, 'preparation_state.json'));
 await fs.mkdir(fixture, {recursive:true});
 for (const entry of await fs.readdir(source, {withFileTypes:true})) {
-  if (['review_history.json','review_transaction.json','review_backup','review_server.lock','renders.zip'].includes(entry.name)) continue;
+  if (['review_history.json','review_transaction.json','review_backup','review_server.lock','renders.zip','freeze_record.json','frozen_labels.csv'].includes(entry.name)) continue;
   await fs.cp(path.join(source, entry.name), path.join(fixture, entry.name), {recursive:true});
 }
+// Existing real human work must never be reset: initialize only this disposable copy.
+const reset=spawnSync(python,['-B','-c',`import csv,sys\nfrom pathlib import Path\np=Path(sys.argv[1])/'benchmark_manifest.csv'\nwith p.open(encoding='utf-8-sig',newline='') as f:r=csv.DictReader(f);fields=r.fieldnames;rows=list(r)\nfor row in rows:\n for key in ['improper_font_sizing','occluded_content','cluttered_layout','content_overflow_cutoff']:row[key]='unknown'\n row.update(human_reviewed='no',annotation_status='pending_human_review',reviewer_id='',reviewed_at='',render_review_status='pending_human_review',font_review_status='pending_human_review')\nwith p.open('w',encoding='utf-8-sig',newline='') as f:w=csv.DictWriter(f,fieldnames=fields,lineterminator='\\n');w.writeheader();w.writerows(rows)`,fixture],{windowsHide:true,encoding:'utf8'});
+assert.equal(reset.status,0,reset.stderr);
 const planPath = path.join(fixture, 'source_plan.json');
 const plan = JSON.parse(await fs.readFile(planPath, 'utf8'));
 for (const doc of [...plan.documents, ...plan.probes]) doc.source_path = path.join(fixture, doc.original_path);
@@ -31,7 +34,7 @@ await fs.writeFile(planPath, JSON.stringify(plan, null, 2));
 await fs.mkdir(path.join(work, 'ml_stage4', 'reports'), {recursive:true});
 // Fault injection exists only in the temporary server launcher, never the app.
 const faultLauncher = path.join(fixture, 'fault_server.py');
-await fs.writeFile(faultLauncher, `from pathlib import Path\nimport review_app\nreal=review_app.atomic_write\ndef atomic(path,data):\n if Path(path).name=='benchmark_manifest.csv' and (Path(__file__).parent/'inject_save_failure').exists():\n  raise PermissionError('Temporary smoke-test disk failure')\n return real(path,data)\nreview_app.atomic_write=atomic\nreview_app.main()\n`);
+await fs.writeFile(faultLauncher, `from pathlib import Path\nimport review_app\nreal=review_app.atomic_write\ndef atomic(path,data,**kwargs):\n if Path(path).name=='benchmark_manifest.csv' and (Path(__file__).parent/'inject_save_failure').exists():\n  raise PermissionError('Temporary smoke-test disk failure')\n if Path(path).name=='review_history.json' and (Path(__file__).parent/'inject_history_failure').exists():\n  raise PermissionError('Temporary smoke-test history failure')\n return real(path,data,**kwargs)\nreview_app.atomic_write=atomic\nreview_app.main()\n`);
 let server, edge, cdp, origin, latest;
 async function startServer() {
   server = spawn(python, ['-B','-u',faultLauncher,'--root',fixture,'--port','0','--no-browser'],
@@ -47,10 +50,10 @@ function connect(url) {
   return new Promise((resolve,reject)=>{
     const ws=new WebSocket(url);let sequence=0;const pending=new Map();
     ws.onopen=()=>resolve({
-      send(method,params={}){return new Promise((done,fail)=>{const id=++sequence;pending.set(id,{done,fail});ws.send(JSON.stringify({id,method,params}));});},
+      send(method,params={}){return new Promise((done,fail)=>{const id=++sequence;const timer=setTimeout(()=>{pending.delete(id);fail(Error('CDP timed out: '+method));},20000);pending.set(id,{done,fail,timer});ws.send(JSON.stringify({id,method,params}));});},
       close(){ws.close();}
     });
-    ws.onerror=reject;ws.onmessage=event=>{const m=JSON.parse(event.data);if(pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);m.error?p.fail(Error(JSON.stringify(m.error))):p.done(m.result);}};
+    ws.onerror=reject;ws.onmessage=event=>{const m=JSON.parse(event.data);if(pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);clearTimeout(p.timer);m.error?p.fail(Error(JSON.stringify(m.error))):p.done(m.result);}};
   });
 }
 async function evaluate(expression) {const r=await cdp.send('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true,userGesture:true});if(r.exceptionDetails)throw Error(JSON.stringify(r.exceptionDetails));return r.result?.value;}
@@ -58,6 +61,16 @@ const click=selector=>evaluate(`document.querySelector(${JSON.stringify(selector
 async function key(value, modifiers=0) {const upper=value.toUpperCase();const code=value.length===1?upper.charCodeAt(0):0;await cdp.send('Input.dispatchKeyEvent',{type:'keyDown',key:value,code:'Key'+upper,windowsVirtualKeyCode:code,modifiers});await cdp.send('Input.dispatchKeyEvent',{type:'keyUp',key:value,code:'Key'+upper,windowsVirtualKeyCode:code,modifiers});}
 async function imageReady() {await until(()=>evaluate(`document.querySelectorAll('#imageStage img').length>0 && [...document.querySelectorAll('#imageStage img')].every(i=>i.complete&&i.naturalWidth>0) && !document.querySelector('button[data-label]').disabled`),'image ready');}
 async function labelSaved(sid, field, value) {await until(async()=>{const s=await state();return s.rows.find(r=>r.sample_id===sid)[field]===value&&await evaluate(`document.getElementById('saveStatus').textContent.includes('已保存')`);},'label saved');}
+async function startBrowser(suffix='initial') {
+  const edgePath=process.env.EDGE_PATH||'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+  const profile=path.join(work,'edge-profile-'+suffix);await fs.mkdir(profile,{recursive:true});
+  edge=spawn(edgePath,['--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--remote-debugging-port=0','--user-data-dir='+profile,'about:blank'],{windowsHide:true,stdio:'ignore'});
+  let debugPort;await until(async()=>{try{debugPort=(await fs.readFile(path.join(profile,'DevToolsActivePort'),'utf8')).split('\n')[0];return Boolean(debugPort);}catch{return false;}},'Edge debug port');
+  const pages=await (await fetch('http://127.0.0.1:'+debugPort+'/json/list')).json();
+  cdp=await connect(pages.find(p=>p.type==='page'&&p.url==='about:blank').webSocketDebuggerUrl);
+  await cdp.send('Page.enable');await cdp.send('Runtime.enable');
+  await cdp.send('Emulation.setDeviceMetricsOverride',{width:1600,height:1100,deviceScaleFactor:1,mobile:false});
+}
 try {
   await startServer();const initial=await state();assert.equal(initial.rows.length,108);
   assert(initial.rows.every(r=>labels.every(k=>r[k]==='unknown')&&r.human_reviewed==='no'));
@@ -67,14 +80,7 @@ try {
   for(const group of five){const original=group.find(r=>r.variant_id==='original');assert(original);assert(group.every(r=>r.original_sample_id===original.sample_id));}
   for(const row of initial.rows){const r=await fetch(origin+row.image_url);assert.equal(r.status,200);assert.equal(sha(Buffer.from(await r.arrayBuffer())),row.png_sha256);}
   check('108 real PNGs load and all six five-image groups match manifest');
-  const edgePath=process.env.EDGE_PATH||'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-  const profile=path.join(work,'edge-profile');await fs.mkdir(profile,{recursive:true});
-  edge=spawn(edgePath,['--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--remote-debugging-port=0','--user-data-dir='+profile,'about:blank'],{windowsHide:true,stdio:'ignore'});
-  let debugPort;await until(async()=>{try{debugPort=(await fs.readFile(path.join(profile,'DevToolsActivePort'),'utf8')).split('\n')[0];return Boolean(debugPort);}catch{return false;}},'Edge debug port');
-  const pages=await (await fetch('http://127.0.0.1:'+debugPort+'/json/list')).json();
-  cdp=await connect(pages.find(p=>p.type==='page').webSocketDebuggerUrl);
-  await cdp.send('Page.enable');await cdp.send('Runtime.enable');
-  await cdp.send('Emulation.setDeviceMetricsOverride',{width:1600,height:1100,deviceScaleFactor:1,mobile:false});
+  await startBrowser();
   await cdp.send('Page.navigate',{url:origin});
   await until(()=>evaluate(`document.getElementById('reviewerDialog')?.open`),'reviewer dialog');
   await evaluate(`document.getElementById('reviewerInput').value='SMOKE_ONLY_NOT_HUMAN';document.getElementById('reviewerForm').requestSubmit()`);
@@ -127,6 +133,23 @@ try {
   const titleBefore=await evaluate(`document.getElementById('sampleMeta').textContent`);await key('n');assert.equal(await evaluate(`document.getElementById('sampleMeta').textContent`),titleBefore);
   await fs.unlink(path.join(fixture,'inject_save_failure'));await click('#retrySave');await labelSaved(modified.sample_id,labels[0],'1');
   check('real server disk failure is visible, blocks navigation and retries safely');
+  assert.equal((await state()).pending_save,null);
+  await imageReady();
+  await fs.writeFile(path.join(fixture,'inject_save_failure'),'temporary test fault');
+  await click(`button[data-label="${labels[1]}"][data-value="0"]`);
+  await until(()=>evaluate(`!document.getElementById('saveFailure').hidden`),'second save blocked');
+  assert((await state()).pending_save?.recoverable);
+  cdp.close();edge.kill();
+  await stopServer();await startServer();
+  await startBrowser('recovery');
+  await cdp.send('Page.navigate',{url:origin+'/?recover=1'});
+  await until(()=>evaluate(`location.search==='?recover=1'&&document.getElementById('pendingRecovery')&&!document.getElementById('pendingRecovery').hidden`),'pending operation survives browser/server restart');
+  assert.equal((await state()).rows.find(r=>r.sample_id===modified.sample_id)[labels[1]],'unknown');
+  await fs.unlink(path.join(fixture,'inject_save_failure'));
+  let recoverDialog=click('#recoverPending');await pause(120);await cdp.send('Page.handleJavaScriptDialog',{accept:true});await recoverDialog;
+  await labelSaved(modified.sample_id,labels[1],'0');assert.equal((await state()).pending_save,null);
+  assert.equal(await evaluate(`document.getElementById('pendingRecovery').hidden`),true);
+  check('failed real click persists across browser/server restart and explicit recovery restores it');
   await evaluate(`document.getElementById('renderFontDetails').open=true;document.getElementById('renderStatus').value='confirmed';document.getElementById('renderStatus').dispatchEvent(new Event('change',{bubbles:true}))`);
   await until(async()=>(await state()).rows.find(r=>r.sample_id===modified.sample_id).render_review_status==='confirmed','render confirmation');
   await evaluate(`document.getElementById('fontStatus').value='confirmed_no_visible_issue';document.getElementById('fontStatus').dispatchEvent(new Event('change',{bubbles:true}))`);
@@ -141,6 +164,21 @@ try {
   await until(async()=>(await state()).rows.find(r=>r.sample_id===modified.sample_id).human_reviewed==='yes','active completion');
   await click('#undoButton');await until(async()=>(await state()).rows.find(r=>r.sample_id===modified.sample_id).human_reviewed==='no','completion undo');
   check('render/font are active checks; all-clear is confirmed and current-page-only; completion requires a separate action');
+  await imageReady();
+  const historyBefore=JSON.parse(await fs.readFile(path.join(fixture,'review_history.json'),'utf8'));
+  const labelCountBefore=historyBefore.actions.filter(action=>action.operation==='label').length;
+  await fs.writeFile(path.join(fixture,'inject_history_failure'),'temporary test fault');
+  await click(`button[data-label="${labels[2]}"][data-value="1"]`);
+  await until(()=>evaluate(`!document.getElementById('saveFailure').hidden&&state.pending_save?.csv_already_written===true`),'history failure exposes recoverable partial commit');
+  assert.equal((await fetch(origin+'/api/state')).status,409);
+  assert.equal(await evaluate(`document.querySelector('button[data-label]').disabled`),true);
+  await fs.unlink(path.join(fixture,'inject_history_failure'));
+  dialogAction=click('#retrySave');await pause(120);await cdp.send('Page.handleJavaScriptDialog',{accept:true});await dialogAction;
+  await labelSaved(modified.sample_id,labels[2],'1');await imageReady();
+  const historyAfter=JSON.parse(await fs.readFile(path.join(fixture,'review_history.json'),'utf8'));
+  assert.equal(historyAfter.actions.filter(action=>action.operation==='label').length,labelCountBefore+1);
+  assert.equal((await state()).pending_save,null);
+  check('CSV/history partial commit recovers through Retry without duplicate label actions');
   const png=path.join(fixture,modified.png_path);await fs.rename(png,png+'.smoke-missing');
   await evaluate(`currentRow().image_url+='?smoke-missing='+Date.now();imageKey='';renderImage(currentRow())`);await until(()=>evaluate(`document.querySelector('#imageStage .image-error')!==null`),'image loading error');
   assert(await evaluate(`[...document.querySelectorAll('button[data-label]')].every(b=>b.disabled)&&document.getElementById('completeButton').disabled`));
@@ -171,10 +209,12 @@ try {
   await until(()=>evaluate(`document.getElementById('startupError').hidden && typeof state!=='undefined' && state!==null`),'explicit external reload');
   assert.equal(sha(await fs.readFile(path.join(fixture,'benchmark_manifest.csv'))),sha(externallyEdited));
   check('external CSV conflict survives browser refresh and explicit reload preserves external bytes');
-  assert.equal(sha(await fs.readFile(path.join(source,'benchmark_manifest.csv'))),sha(formalManifest));
-  assert.equal(sha(await fs.readFile(path.join(source,'preparation_state.json'))),sha(formalState));
-  check('formal manifest/state unchanged: 108 pending pages and 432 unknown labels');
-  await fs.writeFile(path.join(work,'result.json'),JSON.stringify({passed:true,tests:results,fixture,formal_manifest_sha256:sha(formalManifest)},null,2));
+  const formalAfter=await fs.readFile(path.join(source,'benchmark_manifest.csv'));
+  const stateAfter=await fs.readFile(path.join(source,'preparation_state.json'));
+  const unchanged=sha(formalAfter)===sha(formalManifest)&&sha(stateAfter)===sha(formalState);
+  assert(!formalAfter.toString('utf8').includes('SMOKE_ONLY_NOT_HUMAN'));
+  check(unchanged?'formal human annotations unchanged by smoke test':'formal user session changed concurrently; smoke identity never entered formal CSV');
+  await fs.writeFile(path.join(work,'result.json'),JSON.stringify({passed:true,tests:results,fixture,formal_manifest_before:sha(formalManifest),formal_manifest_after:sha(formalAfter),formal_unchanged:unchanged},null,2));
   process.stdout.write(JSON.stringify({passed:true,checks:results.length,output:work})+'\n');
 } finally {
   if(cdp){try{await cdp.send('Browser.close');}catch{}cdp.close();}

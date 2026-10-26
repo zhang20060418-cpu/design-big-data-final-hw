@@ -14,6 +14,11 @@
   </header>
   <main>
     <div id="startupError" class="notice error" hidden></div>
+    <section id="pendingRecovery" class="notice warning" hidden aria-live="polite">
+      <strong>有一次审核操作尚未完成保存</strong>
+      <p id="pendingRecoveryText"></p>
+      <button id="recoverPending" type="button">恢复保存这次真实操作</button>
+    </section>
     <section class="overview" aria-label="标注总览">
       <div class="overview-title"><h2>标注总览</h2><span id="freezeStatus" class="freeze-status">未冻结，禁止进行模型性能测试</span><button id="checkButton" type="button">检查是否可以冻结</button></div>
       <div class="stats" id="stats"></div>

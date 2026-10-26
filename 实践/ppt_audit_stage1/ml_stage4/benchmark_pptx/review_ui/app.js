@@ -49,7 +49,7 @@ function receiveState(next, initial = false) {
   state = next;
   if (!reviewer) reviewer = next.session?.reviewer_id || "";
   if (initial) {
-    const last = next.session?.last_sample_id;
+    const last = next.pending_save?.sample_id || next.session?.last_sample_id;
     currentId = next.rows.some(row => row.sample_id === last) ? last : next.rows[0]?.sample_id || "";
     populateFilters();
   }
@@ -171,7 +171,7 @@ function renderLabels(row) {
   $("labelCards").innerHTML = LABELS.map((label,index) => {
     const v = labelView(row,label.key);
     let status = v.inspected ? (v.value === "unknown" ? "已检查但无法判断" : "已主动确认") : "尚未检查";
-    if (v.pending) status += " · 等待写入磁盘";
+    if (v.pending) status += " · 等待保存完成";
     return `<section class="label-card ${selectedLabel === index ? "selected" : ""}" data-label="${label.key}" tabindex="-1"><div class="label-card-head"><span class="key-badge">${label.hotkey}</span><h3>${label.name}</h3></div><div class="label-action-grid">${[["1","存在缺陷"],["0","不存在缺陷"],["unknown","不确定"]].map(([value,title]) => `<button type="button" data-label="${label.key}" data-value="${value}" class="${v.inspected && v.value === value ? "chosen" : ""}" aria-pressed="${Boolean(v.inspected && v.value === value)}">${title}<b>（${value}）</b></button>`).join("")}</div><p class="label-inspection ${v.inspected && v.value === "unknown" ? "uncertain" : ""}">${escapeHTML(status)}${v.reason ? `：${escapeHTML(v.reason)}` : ""}</p><details${openGuides.has(label.key) ? " open" : ""}><summary>如何判断？</summary><p><b>标 1：</b>${label.yes}</p><p><b>标 0：</b>${label.no}</p><p><b>注意：</b>${label.note}</p></details></section>`;
   }).join("");
   $("labelCards").querySelectorAll("button[data-label]").forEach(button => button.addEventListener("click", () => chooseLabel(button.dataset.label, button.dataset.value)));
@@ -191,18 +191,34 @@ function renderGroup(row) {
 }
 
 function renderEnabledState() {
-  const canAnnotate = Boolean(currentRow() && currentImageReady && annotationImageVisible() && !isReadOnly() && !failedJob);
+  const blocked = Boolean(failedJob || state?.pending_save);
+  const canAnnotate = Boolean(currentRow() && currentImageReady && annotationImageVisible() && !isReadOnly() && !blocked);
   document.querySelectorAll("#labelCards button, #allClear, #completeButton").forEach(button => button.disabled = !canAnnotate);
-  for (const id of ["reviewNotes","undoButton"]) $(id).disabled = isReadOnly() || Boolean(failedJob);
+  for (const id of ["reviewNotes","undoButton"]) $(id).disabled = isReadOnly() || blocked;
   for (const id of ["renderStatus","fontStatus"]) $(id).disabled = !canAnnotate;
   $("saveButton").disabled = isReadOnly();
   $("retrySave").disabled = saving;
   $("zoomButton").disabled = !currentImageReady;
+  $("recoverPending").disabled = saving || isReadOnly() || state?.pending_save?.recoverable === false;
+  if (blocked) $("pageStatus").textContent = "保存受阻，已保留选择；请先恢复保存";
+  else if (currentRow()) $("pageStatus").textContent = progress(currentRow()).current_status || "待人工核验";
+}
+
+function renderPendingRecovery() {
+  const pending = state?.pending_save;
+  $("pendingRecovery").hidden = !pending;
+  if (!pending) return;
+  const changed = (pending.fields || []).filter(change => LABELS.some(label => label.key === change.field));
+  const summary = changed.map(change => `${LABELS.find(label => label.key === change.field).name}：${change.old} → ${change.new}`).join("；");
+  $("pendingRecoveryText").textContent = pending.recoverable
+    ? `样本 ${pending.sample_id}；原审核者 ${pending.reviewer_id || "见操作记录"}；原操作时间 ${pending.at || "见操作记录"}。${summary || "已保留原审核内容。"} 这次操作尚未确认为完整保存。请关闭占用 CSV 的 Excel / WPS 工作簿，再点击恢复；不会自动推断标签。`
+    : `待保存记录暂不能安全恢复：${pending.error || "请保留记录并核对，不能覆盖现有清单。"}`;
 }
 
 function renderAll() {
   if (!state) return;
   renderStats();
+  renderPendingRecovery();
   const row = currentRow();
   const filtered = filteredRows();
   $("filteredCount").textContent = `筛选结果 ${filtered.length} / ${state.rows.length} 页`;
@@ -224,6 +240,7 @@ function enqueueAction(type, payload = {}, options = {}) {
   if (isReadOnly()) { toast("数据已冻结或处于只读状态，不能修改。"); return Promise.resolve(false); }
   if (!ensureReviewer()) return Promise.resolve(false);
   if (failedJob) { toast("先处理保存失败，再继续标注或导航。"); return Promise.resolve(false); }
+  if (state?.pending_save) { toast("请先恢复保存上次真实操作，避免覆盖待保存记录。"); return Promise.resolve(false); }
   const sampleId = options.sampleId || currentId;
   return new Promise(resolve => {
     const job = {id: ++jobSequence, type, payload, sampleId, reviewer, resolve};
@@ -250,9 +267,15 @@ async function pump() {
         job.resolve(true);
       } catch (error) {
         failedJob = job;
-        $("saveFailureText").textContent = `${error.message}${error.status === 409 ? " 磁盘记录有冲突，请重新载入；不会静默覆盖。" : " 当前操作未保存，暂时禁止跳页。"}`;
+        job.pendingSave = error.details?.pending_save || null;
+        if (job.pendingSave) state.pending_save = job.pendingSave;
+        const locked = error.code === "manifest_locked" || /WinError (5|32|33)/.test(error.message);
+        $("saveFailureText").textContent = locked
+          ? "标注清单被 Excel、WPS 或文件预览占用，暂时无法替换保存。请关闭正在打开 benchmark_manifest.csv 的工作簿，再点击‘重新保存’；当前选择仍保留，先不要刷新或重新载入。"
+          : `${error.message}${error.status === 409 ? " 磁盘记录有冲突，请核对后再处理；不会静默覆盖。" : " 本次保存尚未完整确认，暂时禁止跳页。"}`;
         $("saveFailure").hidden = false;
-        setSaveStatus("保存失败，当前操作尚未写入磁盘", "error-text");
+        setSaveStatus(locked ? "文件被占用：请关闭 CSV 工作簿后重新保存" : "保存未完成，当前操作尚未确认完整落盘", "error-text");
+        try { receiveState(await api("/api/state")); } catch { renderAll(); /* Keep the original error and local choice on conflicts. */ }
         job.resolve(false); renderEnabledState();
       }
     }
@@ -268,20 +291,47 @@ async function flushNotes() {
   return waitIdle();
 }
 async function navigationGate() {
+  if (state?.pending_save) { toast("存在尚未完成保存的真实操作，请先恢复保存，再继续切换页面。"); return false; }
   if (!await flushNotes() || !await waitIdle()) { toast("保存尚未成功，已保留当前页面；请先重新保存或明确重新载入。"); return false; }
   return true;
 }
 async function retrySaving() {
+  if (failedJob?.pendingSave?.csv_already_written) return recoverPendingSave();
+  if (!failedJob && state?.pending_save) return recoverPendingSave();
   if (!failedJob) return flushNotes();
   const job = failedJob; failedJob = null; jobs.unshift(job);
   $("saveFailure").hidden = true; await pump(); return !failedJob;
 }
+
+async function recoverPendingSave() {
+  if (failedJob && !failedJob.pendingSave?.csv_already_written) return retrySaving();
+  const job = failedJob;
+  const pending = job?.pendingSave || state?.pending_save;
+  if (!pending || pending.recoverable === false || !ensureReviewer() || isReadOnly()) return false;
+  if (!window.confirm(`确认恢复 ${pending.reviewer_id || "原审核者"} 对 ${pending.sample_id} 的上次真实操作？原始审核身份和时间会保留，并另外记录本次恢复。`)) return false;
+  saving = true; renderEnabledState(); setSaveStatus("正在恢复上次真实操作…");
+  try {
+    const next = await api("/api/retry-pending", {revision:state.revision,reviewer_id:reviewer,confirm:true});
+    if (job) {
+      for (const [key,value] of optimistic) if (value.jobId === job.id) optimistic.delete(key);
+      if (job.type === "notes" && noteDraft?.sampleId === job.sampleId && noteDraft.text === job.payload.notes) noteDraft = null;
+      failedJob = null;
+    }
+    receiveState(next); $("saveFailure").hidden = true;
+    setSaveStatus("已保存：已恢复上次真实操作，可继续标注", "success"); return true;
+  } catch(error) {
+    $("saveFailure").hidden = false; $("saveFailureText").textContent = error.message;
+    setSaveStatus("恢复保存尚未成功，原操作继续保留", "error-text"); return false;
+  } finally { saving = false; renderEnabledState(); if (!failedJob && jobs.length) pump(); }
+}
 async function saveNow() {
+  if (!failedJob && state?.pending_save) return recoverPendingSave();
   if (failedJob) { await retrySaving(); return; }
   const ok = await flushNotes(); if (ok) setSaveStatus("已保存到本地，当前没有待保存操作", "success");
 }
 
 async function chooseLabel(field, value) {
+  if (state?.pending_save) { toast("请先恢复上次待保存操作。"); return; }
   if (!annotationImageVisible()) { toast("当前查看的是原始对照页，请切回当前修改图或并排后再标注修改页。"); return; }
   if (!currentImageReady) { toast("图片尚未完整加载，不能开始该页标注。"); return; }
   if (!ensureReviewer() || failedJob || isReadOnly()) return;
@@ -438,6 +488,7 @@ function installEvents() {
     if (window.confirm("请确认：你已亲自完成当前页四标签、渲染和字体核验。此操作仅在现有来源及全部审核门槛通过时标记为已审核，不执行冻结。")) await enqueueAction("complete",{confirm:true});
   });
   $("saveButton").addEventListener("click",saveNow); $("retrySave").addEventListener("click",retrySaving);
+  $("recoverPending").addEventListener("click",recoverPendingSave);
   $("undoButton").addEventListener("click",async () => { if (await navigationGate()) await enqueueAction("__undo"); });
   $("reloadDisk").addEventListener("click",async () => {
     if (!window.confirm("重新载入会丢弃浏览器中尚未保存的操作和备注，并以磁盘上的清单为准。确定继续吗？")) return;

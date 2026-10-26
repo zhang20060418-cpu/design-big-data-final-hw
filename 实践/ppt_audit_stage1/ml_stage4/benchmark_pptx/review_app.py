@@ -19,6 +19,7 @@ import secrets
 import struct
 import sys
 import threading
+import time
 import uuid
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -47,7 +48,7 @@ def json_bytes(value):
     return (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
 
 
-def atomic_write(path, data):
+def atomic_write(path, data, *, before_replace=None):
     """Replace a complete file on the same volume, never truncate its target."""
     path = Path(path)
     temp = path.with_name(path.name + ".tmp-" + uuid.uuid4().hex)
@@ -56,7 +57,20 @@ def atomic_write(path, data):
             handle.write(data)
             handle.flush()
             os.fsync(handle.fileno())
-        os.replace(temp, path)
+        # Excel commonly permits reading a CSV while denying its replacement.
+        # Keep the target intact, and retry only briefly for transient locks.
+        delays = (0, .05, .1, .2, .35)
+        for attempt, delay in enumerate(delays):
+            if delay:
+                time.sleep(delay)
+            if before_replace is not None:
+                before_replace()
+            try:
+                os.replace(temp, path)
+                break
+            except OSError as exc:
+                if getattr(exc, "winerror", None) not in {5, 32, 33} or attempt == len(delays) - 1:
+                    raise
     finally:
         if temp.exists():
             temp.unlink()
@@ -121,20 +135,127 @@ class ReviewStore:
         if self.frozen:
             raise ValueError("存在未完成保存记录且基准已冻结。只读检查事务后再启动，禁止自动改写冻结数据。")
         wal = json.loads(self.wal_path.read_text(encoding="utf-8"))
-        current = digest(self.manifest.read_bytes())
-        if wal.get("schema_version") != 1:
+        if wal.get("source_plan_sha256", self.plan_sha256) != self.plan_sha256:
+            raise ValueError("来源计划与待保存事务不一致，拒绝自动恢复；请保留事务并核对来源记录。")
+        current_raw = self.manifest.read_bytes()
+        current = digest(current_raw)
+        if wal.get("schema_version") not in {1, 2}:
             raise ValueError("未完成保存事务格式异常。")
         if current == wal["after_sha256"]:
             meta = wal["metadata_after"]
             if meta.get("manifest_sha256") != current:
                 raise ValueError("保存事务摘要不匹配，拒绝恢复。")
-            atomic_write(self.history_path, json_bytes(meta))
+            atomic_write(self.history_path, json_bytes(meta),
+                         before_replace=lambda: self._check_expected_manifest(current))
             self.warning = "已恢复上次中断的审核历史；CSV 中已写入的真实操作得到保留。"
+            self.wal_path.unlink()
         elif current == wal["before_sha256"]:
-            self.warning = "上次保存尚未写入 CSV，已取消该次未完成事务，请重新检查并操作。"
+            # Never discard an actual human click just because Excel held the
+            # CSV open. It remains pending until an explicit retry is confirmed.
+            try:
+                self._pending_data(wal, current_raw)
+                self.warning = "发现尚未写入 CSV 的真实审核操作，已保留。请关闭 Excel/WPS 中的清单，再确认恢复待保存操作。"
+            except (ValueError, KeyError, TypeError) as exc:
+                self.warning = "待保存操作仍已保留，但无法安全自动恢复：" + str(exc)
         else:
             raise ValueError("CSV 与未完成保存事务均不匹配，拒绝覆盖。请保留文件并人工核对。")
-        self.wal_path.unlink()
+
+    def _check_expected_manifest(self, expected_sha):
+        self._check_plan()
+        if self.frozen:
+            raise ReviewError("基准已经冻结，禁止恢复或写入标注。", "frozen_readonly", 423)
+        if digest(self.manifest.read_bytes()) != expected_sha:
+            raise ReviewError("等待保存期间，清单已被其他程序修改。本次不会覆盖外部修改；请保留待保存记录并核对。",
+                              "external_change", 409)
+
+    @staticmethod
+    def _pending_event(wal):
+        metadata = wal.get("metadata_after")
+        if not isinstance(metadata, dict) or not isinstance(metadata.get("actions"), list):
+            raise ValueError("待保存审核历史格式异常，文件已保留。")
+        actions = metadata["actions"]
+        if any(not isinstance(event, dict) for event in actions):
+            raise ValueError("待保存人工动作格式异常，文件已保留。")
+        events = [event for event in actions if event.get("type") in {"action", "undo"}]
+        if not events:
+            raise ValueError("待保存记录缺少原始人工操作，不能推断或生成标签。")
+        return events[-1]
+
+    def _pending_data(self, wal, before_raw):
+        """Return the exact recorded CSV after checking the original operation."""
+        if wal.get("schema_version") not in {1, 2}:
+            raise ValueError("待保存事务版本不受支持，文件已保留。")
+        if wal.get("source_plan_sha256", self.plan_sha256) != self.plan_sha256:
+            raise ReviewError("来源计划与待保存操作不一致，请先核对来源记录；事务文件已保留。", "source_plan_changed", 409)
+        if digest(before_raw) != wal.get("before_sha256"):
+            raise ReviewError("清单与待保存操作的原始摘要不符，拒绝覆盖。", "external_change", 409)
+        event = self._pending_event(wal)
+        changes = event.get("fields", [])
+        if not isinstance(changes, list) or any(not isinstance(change, dict) for change in changes):
+            raise ValueError("待保存字段变更格式异常，文件已保留。")
+        fields, rows, bom, newline = self._parse(before_raw)
+        target = next((row for row in rows if row["sample_id"] == event.get("sample_id")), None)
+        if target is None:
+            raise ValueError("待保存操作的样本 ID 不在清单内。")
+        for change in changes:
+            key = change.get("field")
+            if key not in EDITABLE or target.get(key) != change.get("old") or not isinstance(change.get("new"), str):
+                raise ValueError("待保存字段与原清单不一致，不能安全恢复。")
+            target[key] = change["new"]
+        out = io.StringIO(newline="")
+        writer = csv.DictWriter(out, fieldnames=fields, lineterminator=newline)
+        writer.writeheader()
+        writer.writerows(rows)
+        reconstructed = (b"\xef\xbb\xbf" if bom else b"") + out.getvalue().encode("utf-8")
+        if wal.get("schema_version") == 2:
+            try:
+                data = base64.b64decode(wal["data_after_base64"], validate=True)
+            except (ValueError, KeyError, TypeError) as exc:
+                raise ValueError("待保存 CSV 内容损坏，请保留事务文件供检查。") from exc
+            if data != reconstructed:
+                raise ValueError("待保存 CSV 与原始人工操作字段不一致，拒绝恢复。")
+        else:
+            data = reconstructed
+        if digest(data) != wal.get("after_sha256"):
+            raise ValueError("待保存 CSV 无法按原始 SHA-256 重建；事务已保留，不能自动恢复。")
+        if wal.get("metadata_after", {}).get("manifest_sha256") != wal["after_sha256"]:
+            raise ValueError("待保存审核历史与 CSV 摘要不符。")
+        return data
+
+    def _pending_state(self):
+        if not self.wal_path.exists():
+            return None
+        try:
+            wal = json.loads(self.wal_path.read_text(encoding="utf-8"))
+            event = self._pending_event(wal)
+            result = {"recoverable": False, "error": "", "wal_version": wal.get("schema_version"),
+                      "sample_id": event.get("sample_id", ""),
+                      "operation": event.get("operation", "undo" if event.get("type") == "undo" else ""),
+                      "reviewer_id": event.get("reviewer_id", ""), "at": event.get("at", ""),
+                      "fields": event.get("fields", []), "before_sha256": wal.get("before_sha256", ""),
+                      "after_sha256": wal.get("after_sha256", ""), "csv_already_written": False}
+            try:
+                current_raw = self.manifest.read_bytes()
+                current_sha = digest(current_raw)
+                if current_sha == wal.get("after_sha256"):
+                    if wal.get("source_plan_sha256", self.plan_sha256) != self.plan_sha256:
+                        raise ValueError("来源计划与待保存历史不一致，拒绝自动恢复。")
+                    if wal.get("metadata_after", {}).get("manifest_sha256") != current_sha:
+                        raise ValueError("待保存历史与 CSV 摘要不一致，拒绝自动恢复。")
+                    if wal.get("schema_version") == 2:
+                        data = base64.b64decode(wal["data_after_base64"], validate=True)
+                        if data != current_raw:
+                            raise ValueError("待保存 CSV 内容与磁盘文件不一致。")
+                    result["csv_already_written"] = True
+                else:
+                    self._pending_data(wal, current_raw)
+                result["recoverable"] = True
+            except (ReviewError, ValueError, KeyError, TypeError) as exc:
+                result["error"] = str(exc)
+            return result
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            return {"recoverable": False, "error": "待保存事务无法读取，文件已保留：" + str(exc),
+                    "sample_id": "", "operation": "", "reviewer_id": "", "at": "", "fields": []}
 
     @staticmethod
     def _parse(raw):
@@ -338,7 +459,8 @@ class ReviewStore:
             return {"rows": rows, "stats": stats, "revision": self.revision, "csrf_token": self.csrf,
                     "session": self.metadata.get("session", {}), "documents": self.plan.get("documents", []),
                     "label_fields": LABELS, "frozen": self.frozen, "readonly": self.frozen,
-                    "warning": self.warning, "can_undo": any(action.get("type") == "action" and not action.get("undone")
+                    "warning": self.warning, "pending_save": self._pending_state(),
+                    "can_undo": any(action.get("type") == "action" and not action.get("undone")
                                                             for action in self.metadata.get("actions", []))}
 
     @staticmethod
@@ -347,10 +469,138 @@ class ReviewStore:
             raise ReviewError("请先填写真实审核者编号（1—100 个字符）。", "reviewer_required")
         return value.strip()
 
-    def _commit(self, rows, metadata):
+    @staticmethod
+    def _operation_intent(kind, sid, reviewer, payload):
+        intent = {"operation": kind, "sample_id": sid, "reviewer_id": reviewer}
+        if kind == "label":
+            intent.update(label=payload.get("label"), value=payload.get("value"), reason=payload.get("reason", "").strip())
+        elif kind == "notes":
+            intent["notes"] = payload.get("notes")
+        elif kind == "checks":
+            intent["checks"] = {key: payload[key] for key in ("render_review_status", "font_review_status") if key in payload}
+            intent["reason"] = payload.get("reason", "").strip()
+        elif kind in {"all_clear", "complete"}:
+            intent["confirm"] = payload.get("confirm") is True
+        return intent
+
+    def _pending_matches_intent(self, wal, intent):
+        if isinstance(wal.get("intent"), dict):
+            return wal["intent"] == intent
+        # Existing version-1 transactions predate explicit intent storage.
+        event = self._pending_event(wal)
+        operation = event.get("operation", "__undo" if event.get("type") == "undo" else "")
+        if any(intent.get(key) != value for key, value in
+               (("operation", operation), ("sample_id", event.get("sample_id")), ("reviewer_id", event.get("reviewer_id")))):
+            return False
+        if operation == "label":
+            changed = {key: value for key, value in event.get("progress_after", {}).get("labels", {}).items()
+                       if value.get("at") == event.get("at")}
+            return (len(changed) == 1 and intent.get("label") in changed
+                    and changed[intent["label"]].get("value") == intent.get("value")
+                    and changed[intent["label"]].get("reason", "") == intent.get("reason", ""))
+        if operation == "notes":
+            data = self._pending_data(wal, self.raw)
+            _, rows, _, _ = self._parse(data)
+            row = next(row for row in rows if row["sample_id"] == event["sample_id"])
+            return row["review_notes"] == intent.get("notes")
+        if operation == "checks":
+            changed = {key: value for key, value in event.get("progress_after", {}).get("checks", {}).items()
+                       if value.get("at") == event.get("at")}
+            return ({key: value.get("value") for key, value in changed.items()} == intent.get("checks")
+                    and all(value.get("reason", "") == intent.get("reason", "") for value in changed.values()))
+        return operation == "__undo" or (operation in {"all_clear", "complete"} and intent.get("confirm") is True)
+
+    def _write_prepared(self, data, metadata, wal):
+        """Write a previously validated human action without inventing a new one."""
+        expected_before = wal["before_sha256"]
+        expected_after = wal["after_sha256"]
+        guard = lambda: self._check_expected_manifest(expected_before)
+        atomic_write(self.wal_path, json_bytes(wal), before_replace=guard)
+        try:
+            atomic_write(self.manifest, data, before_replace=guard)
+        except OSError as exc:
+            if getattr(exc, "winerror", None) in {5, 32, 33}:
+                raise ReviewError("标注清单正被 Excel、WPS 或文件预览占用，暂时无法保存。请关闭这些程序中的 benchmark_manifest.csv（不必关闭标注网页），然后点击“重新保存”。本次操作已保留，原清单未被截断或覆盖。",
+                                  "manifest_locked", 423, retryable=True, pending_save=self._pending_state()) from exc
+            raise
+        atomic_write(self.history_path, json_bytes(metadata),
+                     before_replace=lambda: self._check_expected_manifest(expected_after))
+        self.wal_path.unlink()
+        self.raw, self.revision, self.metadata = data, self._token(data, metadata), metadata
+        self.fields, self.rows, self.csv_bom, self.newline = self._parse(data)
+        self._validate_rows()
+        self.warning = ""
+
+    @staticmethod
+    def _record_recovery(metadata, event, reviewer):
+        actions = metadata.setdefault("actions", [])
+        if not any(item.get("type") == "pending_recovery" and item.get("recovered_action_id") == event.get("id") for item in actions):
+            actions.append({"id": uuid.uuid4().hex, "type": "pending_recovery", "at": timestamp(),
+                            "reviewer_id": reviewer, "sample_id": event.get("sample_id", ""), "fields": [],
+                            "recovered_action_id": event.get("id", ""),
+                            "note": "人工确认恢复此前已经实际点击、但未完成落盘的审核操作；原动作身份与时间保留。"})
+
+    def _apply_pending(self, wal, recovery_reviewer=None):
+        self._check_disk()
+        data = self._pending_data(wal, self.raw)
+        metadata = copy.deepcopy(wal["metadata_after"])
+        if recovery_reviewer is not None:
+            self._record_recovery(metadata, self._pending_event(wal), recovery_reviewer)
+        prepared = dict(wal, schema_version=2, source_plan_sha256=self.plan_sha256,
+                        data_after_base64=base64.b64encode(data).decode("ascii"), metadata_after=metadata)
+        self._write_prepared(data, metadata, prepared)
+
+    def retry_pending(self, payload):
+        with self.lock:
+            self._check_plan()
+            if self.frozen:
+                raise ReviewError("基准已经冻结，禁止恢复或写入标注。", "frozen_readonly", 423)
+            if not isinstance(payload.get("revision"), str) or payload["revision"] != self.revision:
+                raise ReviewError("页面版本已过期，请重新载入后恢复。", "revision_conflict", 409, revision=self.revision)
+            reviewer = self._reviewer(payload.get("reviewer_id"))
+            if payload.get("confirm") is not True:
+                raise ReviewError("请明确确认恢复已记录的真实审核操作。", "confirmation_required")
+            if not self.wal_path.exists():
+                raise ReviewError("当前没有待恢复的保存操作，请重新读取磁盘记录。", "no_pending_save", 409)
+            wal = json.loads(self.wal_path.read_text(encoding="utf-8"))
+            if wal.get("source_plan_sha256", self.plan_sha256) != self.plan_sha256:
+                raise ReviewError("来源计划与待保存操作不一致，拒绝恢复。", "source_plan_changed", 409)
+            current_raw = self.manifest.read_bytes()
+            current_sha = digest(current_raw)
+            if current_sha == wal.get("after_sha256"):
+                metadata = copy.deepcopy(wal["metadata_after"])
+                if metadata.get("manifest_sha256") != current_sha:
+                    raise ReviewError("待保存历史摘要不符，事务已保留。", "pending_save_invalid", 409)
+                self._record_recovery(metadata, self._pending_event(wal), reviewer)
+                wal["metadata_after"] = metadata
+                atomic_write(self.wal_path, json_bytes(wal),
+                             before_replace=lambda: self._check_expected_manifest(current_sha))
+                self._recover()
+                self.raw = current_raw
+                self.fields, self.rows, self.csv_bom, self.newline = self._parse(current_raw)
+                self.metadata = metadata
+                self.revision = self._token(current_raw, metadata)
+                self.external_conflict = False
+                self._validate_rows()
+            else:
+                self._check_disk(payload["revision"])
+                try:
+                    self._apply_pending(wal, reviewer)
+                except (ValueError, KeyError, TypeError) as exc:
+                    raise ReviewError("待保存操作无法安全恢复，事务文件已保留：" + str(exc), "pending_save_invalid", 409) from exc
+            return self.state()
+
+    def _commit(self, rows, metadata, *, intent):
         self._check_disk()
         if self.frozen:
             raise ReviewError("基准已经冻结，标注界面仅供只读查看。", "frozen_readonly", 423)
+        if self.wal_path.exists():
+            wal = json.loads(self.wal_path.read_text(encoding="utf-8"))
+            if not self._pending_matches_intent(wal, intent):
+                raise ReviewError("还有此前尚未保存的真实审核操作，请先恢复该操作，避免被新的选择覆盖。",
+                                  "pending_save_conflict", 409, pending_save=self._pending_state())
+            self._apply_pending(wal)
+            return
         data = self._encode(rows)
         after_sha = digest(data)
         metadata["manifest_sha256"] = after_sha
@@ -358,15 +608,11 @@ class ReviewStore:
         self.backup.parent.mkdir(exist_ok=True)
         if not self.backup.exists():
             atomic_write(self.backup, self.raw)
-        wal = {"schema_version": 1, "before_sha256": digest(self.raw), "after_sha256": after_sha,
-               "at": timestamp(), "metadata_after": metadata}
-        atomic_write(self.wal_path, json_bytes(wal))
-        self._check_disk()
-        atomic_write(self.manifest, data)
-        atomic_write(self.history_path, json_bytes(metadata))
-        self.wal_path.unlink()
-        self.raw, self.revision, self.rows, self.metadata = data, self._token(data, metadata), rows, metadata
-        self._validate_rows()
+        wal = {"schema_version": 2, "before_sha256": digest(self.raw), "after_sha256": after_sha,
+               "at": timestamp(), "metadata_after": metadata, "intent": intent,
+               "source_plan_sha256": self.plan_sha256,
+               "data_after_base64": base64.b64encode(data).decode("ascii")}
+        self._write_prepared(data, metadata, wal)
 
     def action(self, payload):
         with self.lock:
@@ -450,7 +696,7 @@ class ReviewStore:
             meta.setdefault("progress", {})[sid] = progress
             meta.setdefault("actions", []).append(event)
             meta["session"] = {"reviewer_id": reviewer, "last_sample_id": sid}
-            self._commit(rows, meta)
+            self._commit(rows, meta, intent=self._operation_intent(kind, sid, reviewer, payload))
             return self.state()
 
     def undo(self, payload):
@@ -475,7 +721,7 @@ class ReviewStore:
             meta.setdefault("progress", {})[sid] = event["progress_before"]
             meta["actions"].append({"id": uuid.uuid4().hex, "type": "undo", "at": timestamp(),
                 "reviewer_id": reviewer, "sample_id": sid, "undoes": event["id"], "fields": reverse})
-            self._commit(rows, meta)
+            self._commit(rows, meta, intent=self._operation_intent("__undo", sid, reviewer, payload))
             return self.state()
 
     def session(self, payload):
@@ -611,7 +857,8 @@ class ReviewHandler(BaseHTTPRequestHandler):
         if isinstance(exc, ReviewError):
             self._json(exc.status, {"error": str(exc), "code": exc.code, **exc.detail})
         elif isinstance(exc, (OSError, ValueError, KeyError, TypeError)):
-            self._json(500, {"error": "读取或保存失败，本次未确认成功。请保留当前操作并重载检查：" + str(exc), "code": "storage_error"})
+            self._json(500, {"error": "读取或保存失败，本次尚未完整确认。请保留当前操作，先尝试重新保存：" + str(exc),
+                             "code": "storage_error", "pending_save": self.server.store._pending_state()})
         else:
             self._json(500, {"error": "本地服务发生错误，本次未确认保存。请查看终端。", "code": "internal_error"})
             import traceback
@@ -663,7 +910,8 @@ class ReviewHandler(BaseHTTPRequestHandler):
                 raise ReviewError("请求必须为对象。")
             path = urlsplit(self.path).path
             store = self.server.store
-            operations = {"/api/action": store.action, "/api/undo": store.undo, "/api/session": store.session}
+            operations = {"/api/action": store.action, "/api/undo": store.undo, "/api/session": store.session,
+                          "/api/retry-pending": store.retry_pending}
             if path == "/api/check":
                 if "revision" in payload:
                     store._check_disk(payload["revision"])
