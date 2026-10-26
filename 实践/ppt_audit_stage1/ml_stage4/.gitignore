@@ -1,0 +1,4 @@
+# Local ML runtime and reproducible download caches
+.venv/
+.cache/
+models/huggingface/

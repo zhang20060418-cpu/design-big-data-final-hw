@@ -1,0 +1,429 @@
+{
+  "evaluation_samples": false,
+  "records": [
+    {
+      "all_color_bboxes_match_full_page_mapping": true,
+      "all_four_edge_markers_present": true,
+      "aspect_ratio": 1.7777777777777777,
+      "case": "CAL_widescreen_16_9",
+      "circle_and_rectangle_shape_preserved": true,
+      "crop_or_padding_or_offset_detected": false,
+      "measurements": {
+        "probe_bottom": {
+          "bbox_max_error_pixels": 0.3998950131233414,
+          "bbox_pixels_xyxy": [
+            864,
+            1026,
+            913,
+            1075
+          ],
+          "color_rgb": [
+            255,
+            130,
+            0
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            864.0,
+            1026.0,
+            912.6001049868767,
+            1074.6001049868767
+          ],
+          "matching_pixel_count": 2401,
+          "observed_shape_aspect_ratio": 1.0,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.0
+        },
+        "probe_circle": {
+          "bbox_max_error_pixels": 1.400000000000034,
+          "bbox_pixels_xyxy": [
+            347,
+            271,
+            508,
+            432
+          ],
+          "color_rgb": [
+            255,
+            0,
+            255
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            345.59999999999997,
+            270.0,
+            507.6,
+            432.0
+          ],
+          "matching_pixel_count": 20349,
+          "observed_shape_aspect_ratio": 1.0,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.0
+        },
+        "probe_left": {
+          "bbox_max_error_pixels": 0.40000000000000036,
+          "bbox_pixels_xyxy": [
+            10,
+            486,
+            58,
+            535
+          ],
+          "color_rgb": [
+            255,
+            0,
+            0
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            9.6,
+            486.0,
+            58.20010498687664,
+            534.6001049868767
+          ],
+          "matching_pixel_count": 2352,
+          "observed_shape_aspect_ratio": 0.9795918367346939,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.020408163265306145
+        },
+        "probe_rectangle": {
+          "bbox_max_error_pixels": 0.20000000000004547,
+          "bbox_pixels_xyxy": [
+            960,
+            432,
+            1459,
+            540
+          ],
+          "color_rgb": [
+            0,
+            180,
+            210
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            960.0,
+            432.0,
+            1459.2,
+            540.0
+          ],
+          "matching_pixel_count": 53892,
+          "observed_shape_aspect_ratio": 4.62037037037037,
+          "original_shape_aspect_ratio": 4.622222222222222,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.0004006410256409687
+        },
+        "probe_right": {
+          "bbox_max_error_pixels": 0.40000000000009095,
+          "bbox_pixels_xyxy": [
+            1862,
+            486,
+            1910,
+            535
+          ],
+          "color_rgb": [
+            0,
+            160,
+            0
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            1861.7998950131232,
+            486.0,
+            1910.4,
+            534.6001049868767
+          ],
+          "matching_pixel_count": 2352,
+          "observed_shape_aspect_ratio": 0.9795918367346939,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.020408163265306145
+        },
+        "probe_top": {
+          "bbox_max_error_pixels": 0.40010498687664064,
+          "bbox_pixels_xyxy": [
+            864,
+            5,
+            913,
+            54
+          ],
+          "color_rgb": [
+            0,
+            0,
+            255
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            864.0,
+            5.400104986876641,
+            912.6001049868767,
+            54.0
+          ],
+          "matching_pixel_count": 2401,
+          "observed_shape_aspect_ratio": 1.0,
+          "original_shape_aspect_ratio": 1.0000043204569316,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 4.3204382652595186e-06
+        }
+      },
+      "mode": "proportional",
+      "output_aspect_relative_error": 0.0,
+      "passed": true,
+      "png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\ml_stage4\\benchmark_pptx\\renders\\CAL_widescreen_16_9\\original\\s0001.png",
+      "png_aspect_ratio": 1.7777777777777777,
+      "png_height": 1080,
+      "png_sha256": "5c72bcb8cc3a9245929d6118cd0418621698e39d8aff151425e456cd52eb6b91",
+      "png_width": 1920,
+      "pptx": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\ml_stage4\\benchmark_pptx\\pptx\\calibration\\widescreen_16_9.pptx",
+      "requested_height": 1080,
+      "requested_width": 1920,
+      "shape_boxes_emu": {
+        "probe_bottom": [
+          4114800,
+          4886325,
+          231458,
+          231458
+        ],
+        "probe_circle": [
+          1645920,
+          1285875,
+          771525,
+          771525
+        ],
+        "probe_left": [
+          45720,
+          2314575,
+          231458,
+          231458
+        ],
+        "probe_rectangle": [
+          4572000,
+          2057400,
+          2377440,
+          514350
+        ],
+        "probe_right": [
+          8866822,
+          2314575,
+          231458,
+          231458
+        ],
+        "probe_top": [
+          4114800,
+          25718,
+          231458,
+          231457
+        ]
+      },
+      "slide_height_emu": 5143500,
+      "slide_width_emu": 9144000,
+      "stretch_detected": false
+    },
+    {
+      "all_color_bboxes_match_full_page_mapping": true,
+      "all_four_edge_markers_present": true,
+      "aspect_ratio": 1.3333333333333333,
+      "case": "CAL_standard_4_3",
+      "circle_and_rectangle_shape_preserved": true,
+      "crop_or_padding_or_offset_detected": false,
+      "measurements": {
+        "probe_bottom": {
+          "bbox_max_error_pixels": 0.20000000000004547,
+          "bbox_pixels_xyxy": [
+            864,
+            1368,
+            929,
+            1433
+          ],
+          "color_rgb": [
+            255,
+            130,
+            0
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            864.0,
+            1368.0,
+            928.8000000000001,
+            1432.8
+          ],
+          "matching_pixel_count": 4225,
+          "observed_shape_aspect_ratio": 1.0,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.0
+        },
+        "probe_circle": {
+          "bbox_max_error_pixels": 1.400000000000034,
+          "bbox_pixels_xyxy": [
+            347,
+            361,
+            562,
+            576
+          ],
+          "color_rgb": [
+            255,
+            0,
+            255
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            345.59999999999997,
+            360.0,
+            561.5999999999999,
+            576.0
+          ],
+          "matching_pixel_count": 36286,
+          "observed_shape_aspect_ratio": 1.0,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.0
+        },
+        "probe_left": {
+          "bbox_max_error_pixels": 0.4000000000000057,
+          "bbox_pixels_xyxy": [
+            10,
+            648,
+            74,
+            713
+          ],
+          "color_rgb": [
+            255,
+            0,
+            0
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            9.6,
+            648.0,
+            74.4,
+            712.8
+          ],
+          "matching_pixel_count": 4160,
+          "observed_shape_aspect_ratio": 0.9846153846153847,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.01538461538461533
+        },
+        "probe_rectangle": {
+          "bbox_max_error_pixels": 0.20000000000004547,
+          "bbox_pixels_xyxy": [
+            960,
+            576,
+            1459,
+            720
+          ],
+          "color_rgb": [
+            0,
+            180,
+            210
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            960.0,
+            576.0,
+            1459.2,
+            720.0
+          ],
+          "matching_pixel_count": 71856,
+          "observed_shape_aspect_ratio": 3.4652777777777777,
+          "original_shape_aspect_ratio": 3.466666666666667,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.00040064102564107973
+        },
+        "probe_right": {
+          "bbox_max_error_pixels": 0.40000000000009095,
+          "bbox_pixels_xyxy": [
+            1846,
+            648,
+            1910,
+            713
+          ],
+          "color_rgb": [
+            0,
+            160,
+            0
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            1845.6000000000001,
+            648.0,
+            1910.4,
+            712.8
+          ],
+          "matching_pixel_count": 4160,
+          "observed_shape_aspect_ratio": 0.9846153846153847,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.01538461538461533
+        },
+        "probe_top": {
+          "bbox_max_error_pixels": 0.20000000000000018,
+          "bbox_pixels_xyxy": [
+            864,
+            7,
+            929,
+            72
+          ],
+          "color_rgb": [
+            0,
+            0,
+            255
+          ],
+          "expected_bbox_using_output_scale_xyxy": [
+            864.0,
+            7.2,
+            928.8000000000001,
+            72.0
+          ],
+          "matching_pixel_count": 4225,
+          "observed_shape_aspect_ratio": 1.0,
+          "original_shape_aspect_ratio": 1.0,
+          "position_and_extent_match": true,
+          "relative_shape_aspect_error": 0.0
+        }
+      },
+      "mode": "proportional",
+      "output_aspect_relative_error": 0.0,
+      "passed": true,
+      "png": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\ml_stage4\\benchmark_pptx\\renders\\CAL_standard_4_3\\original\\s0001.png",
+      "png_aspect_ratio": 1.3333333333333333,
+      "png_height": 1440,
+      "png_sha256": "7c900d6cdd3d53e9ad11ec7ac972e28ae721604a6c215a92d9e275f50e69ceb6",
+      "png_width": 1920,
+      "pptx": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\ml_stage4\\benchmark_pptx\\pptx\\calibration\\standard_4_3.pptx",
+      "requested_height": 1440,
+      "requested_width": 1920,
+      "shape_boxes_emu": {
+        "probe_bottom": [
+          4114800,
+          6515100,
+          308610,
+          308610
+        ],
+        "probe_circle": [
+          1645920,
+          1714500,
+          1028700,
+          1028700
+        ],
+        "probe_left": [
+          45720,
+          3086100,
+          308610,
+          308610
+        ],
+        "probe_rectangle": [
+          4572000,
+          2743200,
+          2377440,
+          685800
+        ],
+        "probe_right": [
+          8789670,
+          3086100,
+          308610,
+          308610
+        ],
+        "probe_top": [
+          4114800,
+          34290,
+          308610,
+          308610
+        ]
+      },
+      "slide_height_emu": 6858000,
+      "slide_width_emu": 9144000,
+      "stretch_detected": false
+    }
+  ]
+}
