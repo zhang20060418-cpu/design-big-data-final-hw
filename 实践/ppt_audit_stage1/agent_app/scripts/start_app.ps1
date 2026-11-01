@@ -55,7 +55,7 @@ if ($Stop) {
 if (-not (Test-Path $Python)) {
     $py = Get-Command python -ErrorAction SilentlyContinue
     if (-not $py) {
-        throw "未找到 Python。请安装 Python 3.11+ 并勾选 Add to PATH，然后重新运行。"
+        throw "未找到 Python。请安装 Python 3.12 或 3.13 并勾选 Add to PATH，然后重新运行。"
     }
     Write-Host "[1/3] 首次运行：创建 Python 虚拟环境并安装依赖（约 2-4 分钟）…" -ForegroundColor Cyan
     & python -m venv (Join-Path $Backend '.venv')
@@ -79,14 +79,13 @@ if ($missing) {
     if ($LASTEXITCODE -ne 0) { throw "后端依赖安装失败。" }
 }
 
+# Six-detector runtime is small and independent of optional CLIP weights.
+& (Join-Path $Root 'scripts\setup_ml.ps1') -PythonExe $Python
+
 # ---------------------------------------------------------------- 前端构建
 $Dist = Join-Path $Frontend 'dist\index.html'
 $needBuild = $Rebuild.IsPresent -or (-not (Test-Path $Dist))
-if (-not $needBuild) {
-    $newest = Get-ChildItem (Join-Path $Frontend 'src') -Recurse -File |
-        Sort-Object LastWriteTime -Descending | Select-Object -First 1
-    if ($newest -and $newest.LastWriteTime -gt (Get-Item $Dist).LastWriteTime) { $needBuild = $true }
-}
+# Checkout timestamps are not a reliable build signal. Use -Rebuild after source edits.
 
 if ($needBuild) {
     $npm = Get-Command npm -ErrorAction SilentlyContinue
@@ -104,7 +103,7 @@ if ($needBuild) {
     finally { Pop-Location }
 }
 else {
-    Write-Host "[2/3] 前端构建已是最新。" -ForegroundColor DarkGray
+    Write-Host "[2/3] 使用仓库附带的前端构建。" -ForegroundColor DarkGray
 }
 
 # ---------------------------------------------------------------- 端口检查

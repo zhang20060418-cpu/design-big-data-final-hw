@@ -1,6 +1,0 @@
-{
-  "task_id": "7f5f31dffcdf4545",
-  "gate_before": "{\"state\": \"executing\", \"note\": \"synthetic; zero provider calls; do not reset\"}",
-  "synthetic": true,
-  "actual_external_calls": 0
-}

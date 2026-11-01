@@ -1,0 +1,1597 @@
+{
+  "schema_version": "M-cell-transform-proof-v1",
+  "status": "verified_on_controls",
+  "method": "TextFrame2_cell_anchor_relative",
+  "proof_id": "results/coordinate_transform_proof.json",
+  "control_cells": 28,
+  "anchored_glyph_containment_pass": 28,
+  "simple_origin_translation_glyph_containment_pass": 0,
+  "control_results_sha256": "750e7ef5fee82922fc75aed1b1a98141d1cd3b591e8c826227ce6a12b7bca78f",
+  "formula": "tx=cell.Left; ty=cell.Top + f*cell.Height + (0.5-f)*(MarginTop+MarginBottom); f={top:0,middle:0.5,bottom:1}",
+  "evidence": "Black-on-white actual PowerPoint PNG glyph containment, not merely layout fitting inside the cell",
+  "office_versions": [
+    "16.0"
+  ],
+  "limitations": [
+    "single line controls",
+    "Arial 18/20 pt controls, source-font extrapolation reported separately",
+    "horizontal unrotated cells only",
+    "not proof of rendered clipping or human defect truth",
+    "margin/anchor affine origin is empirically verified on this Office, not specified by Microsoft documentation"
+  ],
+  "sources": [
+    "https://learn.microsoft.com/en-us/office/vba/api/powerpoint.textrange2.boundtop",
+    "https://learn.microsoft.com/en-us/office/vba/api/office.textframe2.verticalanchor",
+    "https://learn.microsoft.com/en-us/office/vba/api/office.textframe2.margintop"
+  ],
+  "rows": [
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r1c1",
+      "anchor": 1,
+      "margins_pt": {
+        "left": 5.0,
+        "right": 6.0,
+        "top": 4.0,
+        "bottom": 5.0
+      },
+      "raw_bbox_pt": {
+        "x": 5.0,
+        "y": -0.5,
+        "w": 97.7699966430664,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 65.0,
+        "y": 69.5,
+        "w": 97.7699966430664,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 65.0,
+        "y": 74.0,
+        "w": 97.7699966430664,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 66.5,
+        "y": 79.0,
+        "w": 87.5,
+        "h": 18.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          60.0
+        ],
+        [
+          0,
+          1,
+          74.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r1c2",
+      "anchor": 1,
+      "margins_pt": {
+        "left": 9.0,
+        "right": 7.0,
+        "top": 4.0,
+        "bottom": 5.0
+      },
+      "raw_bbox_pt": {
+        "x": 94.3124771118164,
+        "y": -0.5,
+        "w": 98.87503814697266,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 434.3124771118164,
+        "y": 69.5,
+        "w": 98.87503814697266,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 434.3124771118164,
+        "y": 74.0,
+        "w": 98.87503814697266,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 436.0,
+        "y": 79.0,
+        "w": 90.5,
+        "h": 18.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          340.0
+        ],
+        [
+          0,
+          1,
+          74.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r1c3",
+      "anchor": 1,
+      "margins_pt": {
+        "left": 13.0,
+        "right": 8.0,
+        "top": 4.0,
+        "bottom": 5.0
+      },
+      "raw_bbox_pt": {
+        "x": 178.6250457763672,
+        "y": -0.5,
+        "w": 98.87496185302734,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 798.6250457763672,
+        "y": 69.5,
+        "w": 98.87496185302734,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 798.6250457763672,
+        "y": 74.0,
+        "w": 98.87496185302734,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 800.5,
+        "y": 79.0,
+        "w": 91.0,
+        "h": 18.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          620.0
+        ],
+        [
+          0,
+          1,
+          74.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r2c1",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 5.0,
+        "right": 6.0,
+        "top": 7.0,
+        "bottom": 6.0
+      },
+      "raw_bbox_pt": {
+        "x": 5.0,
+        "y": -11.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 65.0,
+        "y": 188.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 65.0,
+        "y": 253.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 66.5,
+        "y": 258.5,
+        "w": 87.0,
+        "h": 18.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          60.0
+        ],
+        [
+          0,
+          1,
+          265.0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r2c2",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 9.0,
+        "right": 7.0,
+        "top": 7.0,
+        "bottom": 6.0
+      },
+      "raw_bbox_pt": {
+        "x": 94.875,
+        "y": -11.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 434.875,
+        "y": 188.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 434.875,
+        "y": 253.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 436.5,
+        "y": 259.0,
+        "w": 89.5,
+        "h": 18.0
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          340.0
+        ],
+        [
+          0,
+          1,
+          265.0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r2c3",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 13.0,
+        "right": 8.0,
+        "top": 7.0,
+        "bottom": 6.0
+      },
+      "raw_bbox_pt": {
+        "x": 179.75,
+        "y": -11.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 799.75,
+        "y": 188.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 799.75,
+        "y": 253.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 801.5,
+        "y": 259.0,
+        "w": 89.5,
+        "h": 18.0
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          620.0
+        ],
+        [
+          0,
+          1,
+          265.0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r3c1",
+      "anchor": 4,
+      "margins_pt": {
+        "left": 5.0,
+        "right": 6.0,
+        "top": 10.0,
+        "bottom": 7.0
+      },
+      "raw_bbox_pt": {
+        "x": 5.0,
+        "y": -22.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 65.0,
+        "y": 307.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 65.0,
+        "y": 429.0,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 66.5,
+        "y": 434.0,
+        "w": 87.0,
+        "h": 18.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          60.0
+        ],
+        [
+          0,
+          1,
+          451.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r3c2",
+      "anchor": 4,
+      "margins_pt": {
+        "left": 9.0,
+        "right": 7.0,
+        "top": 10.0,
+        "bottom": 7.0
+      },
+      "raw_bbox_pt": {
+        "x": 94.875,
+        "y": -22.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 434.875,
+        "y": 307.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 434.875,
+        "y": 429.0,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 436.5,
+        "y": 434.5,
+        "w": 89.5,
+        "h": 18.0
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          340.0
+        ],
+        [
+          0,
+          1,
+          451.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0001",
+      "object_id": "s0001-shapeid2-r3c3",
+      "anchor": 4,
+      "margins_pt": {
+        "left": 13.0,
+        "right": 8.0,
+        "top": 10.0,
+        "bottom": 7.0
+      },
+      "raw_bbox_pt": {
+        "x": 179.75,
+        "y": -22.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 799.75,
+        "y": 307.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 799.75,
+        "y": 429.0,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 801.5,
+        "y": 434.5,
+        "w": 89.5,
+        "h": 18.0
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          620.0
+        ],
+        [
+          0,
+          1,
+          451.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0002",
+      "object_id": "s0002-shapeid2-r1c1",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 93.00504302978516,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 81.0,
+        "y": 31.199999809265137,
+        "w": 93.00504302978516,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 81.0,
+        "y": 73.69999980926514,
+        "w": 93.00504302978516,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 82.5,
+        "y": 78.5,
+        "w": 83.5,
+        "h": 16.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          70.0
+        ],
+        [
+          0,
+          1,
+          82.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0002",
+      "object_id": "s0002-shapeid2-r1c3",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 94.0,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 627.6666259765625,
+        "y": 31.199999809265137,
+        "w": 94.0,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 627.6666259765625,
+        "y": 73.69999980926514,
+        "w": 94.0,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 629.0,
+        "y": 78.5,
+        "w": 87.0,
+        "h": 16.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          616.6666259765625
+        ],
+        [
+          0,
+          1,
+          82.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0002",
+      "object_id": "s0002-shapeid2-r2c1",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 81.0,
+        "y": 116.19999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 81.0,
+        "y": 158.69999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 82.5,
+        "y": 163.5,
+        "w": 81.0,
+        "h": 16.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          70.0
+        ],
+        [
+          0,
+          1,
+          167.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0002",
+      "object_id": "s0002-shapeid2-r2c2",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 354.33331298828125,
+        "y": 116.19999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 354.33331298828125,
+        "y": 158.69999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 355.5,
+        "y": 163.5,
+        "w": 84.0,
+        "h": 16.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          343.33331298828125
+        ],
+        [
+          0,
+          1,
+          167.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_wide",
+      "sample_id": "control_wide_s0002",
+      "object_id": "s0002-shapeid2-r2c3",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 627.6666259765625,
+        "y": 116.19999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 627.6666259765625,
+        "y": 158.69999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 629.0,
+        "y": 163.5,
+        "w": 84.0,
+        "h": 16.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          616.6666259765625
+        ],
+        [
+          0,
+          1,
+          167.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r1c1",
+      "anchor": 1,
+      "margins_pt": {
+        "left": 5.0,
+        "right": 6.0,
+        "top": 4.0,
+        "bottom": 5.0
+      },
+      "raw_bbox_pt": {
+        "x": 5.0,
+        "y": -0.5,
+        "w": 97.7699966430664,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 65.0,
+        "y": 69.5,
+        "w": 97.7699966430664,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 65.0,
+        "y": 74.0,
+        "w": 97.7699966430664,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 66.375,
+        "y": 79.125,
+        "w": 87.375,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          60.0
+        ],
+        [
+          0,
+          1,
+          74.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r1c2",
+      "anchor": 1,
+      "margins_pt": {
+        "left": 9.0,
+        "right": 7.0,
+        "top": 4.0,
+        "bottom": 5.0
+      },
+      "raw_bbox_pt": {
+        "x": 54.31248092651367,
+        "y": -0.5,
+        "w": 98.87503814697266,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 314.3124809265137,
+        "y": 69.5,
+        "w": 98.87503814697266,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 314.3124809265137,
+        "y": 74.0,
+        "w": 98.87503814697266,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 315.75,
+        "y": 79.125,
+        "w": 90.75,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          260.0
+        ],
+        [
+          0,
+          1,
+          74.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r1c3",
+      "anchor": 1,
+      "margins_pt": {
+        "left": 13.0,
+        "right": 8.0,
+        "top": 4.0,
+        "bottom": 5.0
+      },
+      "raw_bbox_pt": {
+        "x": 98.62503814697266,
+        "y": -0.5,
+        "w": 98.87496185302734,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 558.6250381469727,
+        "y": 69.5,
+        "w": 98.87496185302734,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 558.6250381469727,
+        "y": 74.0,
+        "w": 98.87496185302734,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 560.25,
+        "y": 79.125,
+        "w": 91.125,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          460.0
+        ],
+        [
+          0,
+          1,
+          74.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r2c1",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 5.0,
+        "right": 6.0,
+        "top": 7.0,
+        "bottom": 6.0
+      },
+      "raw_bbox_pt": {
+        "x": 5.0,
+        "y": -11.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 65.0,
+        "y": 188.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 65.0,
+        "y": 253.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 66.75,
+        "y": 258.75,
+        "w": 86.625,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          60.0
+        ],
+        [
+          0,
+          1,
+          265.0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r2c2",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 9.0,
+        "right": 7.0,
+        "top": 7.0,
+        "bottom": 6.0
+      },
+      "raw_bbox_pt": {
+        "x": 54.875,
+        "y": -11.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 314.875,
+        "y": 188.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 314.875,
+        "y": 253.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 316.875,
+        "y": 258.75,
+        "w": 89.25,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          260.0
+        ],
+        [
+          0,
+          1,
+          265.0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r2c3",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 13.0,
+        "right": 8.0,
+        "top": 7.0,
+        "bottom": 6.0
+      },
+      "raw_bbox_pt": {
+        "x": 99.75,
+        "y": -11.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 559.75,
+        "y": 188.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 559.75,
+        "y": 253.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 561.75,
+        "y": 258.75,
+        "w": 89.25,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          460.0
+        ],
+        [
+          0,
+          1,
+          265.0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r3c1",
+      "anchor": 4,
+      "margins_pt": {
+        "left": 5.0,
+        "right": 6.0,
+        "top": 10.0,
+        "bottom": 7.0
+      },
+      "raw_bbox_pt": {
+        "x": 5.0,
+        "y": -22.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 65.0,
+        "y": 307.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 65.0,
+        "y": 429.0,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 66.75,
+        "y": 434.25,
+        "w": 86.625,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          60.0
+        ],
+        [
+          0,
+          1,
+          451.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r3c2",
+      "anchor": 4,
+      "margins_pt": {
+        "left": 9.0,
+        "right": 7.0,
+        "top": 10.0,
+        "bottom": 7.0
+      },
+      "raw_bbox_pt": {
+        "x": 54.875,
+        "y": -22.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 314.875,
+        "y": 307.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 314.875,
+        "y": 429.0,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 316.875,
+        "y": 434.25,
+        "w": 89.25,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          260.0
+        ],
+        [
+          0,
+          1,
+          451.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0001",
+      "object_id": "s0001-shapeid2-r3c3",
+      "anchor": 4,
+      "margins_pt": {
+        "left": 13.0,
+        "right": 8.0,
+        "top": 10.0,
+        "bottom": 7.0
+      },
+      "raw_bbox_pt": {
+        "x": 99.75,
+        "y": -22.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 559.75,
+        "y": 307.5,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "anchored_page_bbox_pt": {
+        "x": 559.75,
+        "y": 429.0,
+        "w": 97.75,
+        "h": 24.0
+      },
+      "png_ink_bbox_pt": {
+        "x": 561.75,
+        "y": 434.25,
+        "w": 89.25,
+        "h": 18.375
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          460.0
+        ],
+        [
+          0,
+          1,
+          451.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0002",
+      "object_id": "s0002-shapeid2-r1c1",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 93.00504302978516,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 81.0,
+        "y": 31.199999809265137,
+        "w": 93.00504302978516,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 81.0,
+        "y": 73.69999980926514,
+        "w": 93.00504302978516,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 82.5,
+        "y": 78.375,
+        "w": 83.625,
+        "h": 16.875
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          70.0
+        ],
+        [
+          0,
+          1,
+          82.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0002",
+      "object_id": "s0002-shapeid2-r1c3",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 94.0,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 467.6666259765625,
+        "y": 31.199999809265137,
+        "w": 94.0,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 467.6666259765625,
+        "y": 73.69999980926514,
+        "w": 94.0,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 469.125,
+        "y": 78.375,
+        "w": 87.0,
+        "h": 16.875
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          456.6666259765625
+        ],
+        [
+          0,
+          1,
+          82.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0002",
+      "object_id": "s0002-shapeid2-r2c1",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 81.0,
+        "y": 116.19999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 81.0,
+        "y": 158.69999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 82.5,
+        "y": 163.5,
+        "w": 81.375,
+        "h": 16.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          70.0
+        ],
+        [
+          0,
+          1,
+          167.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0002",
+      "object_id": "s0002-shapeid2-r2c2",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 274.33331298828125,
+        "y": 116.19999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 274.33331298828125,
+        "y": 158.69999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 275.625,
+        "y": 163.5,
+        "w": 84.0,
+        "h": 16.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          263.33331298828125
+        ],
+        [
+          0,
+          1,
+          167.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "document_id": "control_four_three",
+      "sample_id": "control_four_three_s0002",
+      "object_id": "s0002-shapeid2-r2c3",
+      "anchor": 3,
+      "margins_pt": {
+        "left": 11.0,
+        "right": 7.199999809265137,
+        "top": 13.0,
+        "bottom": 9.0
+      },
+      "raw_bbox_pt": {
+        "x": 11.0,
+        "y": -8.800000190734863,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "orientation_evidence": "native OpenXML a:bodyPr vert=horz",
+      "simple_cell_origin_page_bbox_pt": {
+        "x": 467.6666259765625,
+        "y": 116.19999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "anchored_page_bbox_pt": {
+        "x": 467.6666259765625,
+        "y": 158.69999980926514,
+        "w": 91.0,
+        "h": 21.600000381469727
+      },
+      "png_ink_bbox_pt": {
+        "x": 469.125,
+        "y": 163.5,
+        "w": 84.0,
+        "h": 16.5
+      },
+      "anchored_contains_actual_glyphs": true,
+      "simple_translation_contains_actual_glyphs": false,
+      "transform_matrix": [
+        [
+          1,
+          0,
+          456.6666259765625
+        ],
+        [
+          0,
+          1,
+          167.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    }
+  ]
+}

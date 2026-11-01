@@ -1,0 +1,28 @@
+{
+  "D6": {
+    "version": "d6-engineering-v1-20261029",
+    "registration_basis": "Fixed interpretable engineering hypotheses before running new 130-page candidates; no D6 human truth or fitted thresholds",
+    "layout_similarity_min": 0.92,
+    "layout_min_objects": 3,
+    "repeat_cluster_min_pages": 4,
+    "repeat_run_min_pages": 4,
+    "repeat_content_difference_min": 0.60,
+    "icon_max_area": 0.035,
+    "icon_max_side": 0.22,
+    "icon_aspect_min": 0.5,
+    "icon_aspect_max": 2.0,
+    "icon_count_min": 10,
+    "icon_per_module_min": 2.0,
+    "icon_repeat_fraction_min": 0.50,
+    "decoration_count_min": 16,
+    "decoration_area_min": 0.12,
+    "decoration_per_module_min": 2.5,
+    "style_min_text_objects": 6,
+    "style_font_families_min": 6,
+    "style_fill_colors_min": 8,
+    "style_min_peer_pages": 4,
+    "style_role_distance_min": 0.75,
+    "style_internal_minority_fraction_min": 0.35,
+    "material_artifact_semantic_detector": "unsupported_no_validated_OCR_or_visual_artifact_model"
+  }
+}

@@ -1,0 +1,8 @@
+-r requirements-runtime.txt
+# Optional frozen CLIP + PNG10 auxiliary classifier
+scikit-learn==1.9.1
+joblib==1.6.0
+torch==2.14.1
+transformers==5.20.2
+huggingface-hub==2.3.0
+safetensors==0.8.0

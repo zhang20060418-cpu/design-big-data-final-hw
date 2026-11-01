@@ -1,5 +1,0 @@
-written: outputs\agent\agent_findings.json
-written: outputs\agent\agent_report.md
-written: outputs\agent\agent_run_log.json
-候选对象 8 条（真实语料 4 条 + 合成用例 4 条）：2 条确认问题、1 条可能有问题、0 条待人工核实、3 条未发现问题、2 条不适用（无可见文字）；真实语料 195 个文字对象中只检查了 2 个，另有 193 个未检查对象保持 not_checked / 待人工核实，不能据此宣称整套 PPT 无文字缺陷。
-复核模式=host 视觉复核=3 HTTP=0 队列=3

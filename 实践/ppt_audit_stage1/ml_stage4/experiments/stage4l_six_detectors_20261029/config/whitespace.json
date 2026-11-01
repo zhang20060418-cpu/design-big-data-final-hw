@@ -1,0 +1,15 @@
+{
+  "version": "whitespace-ordinal-v1",
+  "registration_note": "Fixed engineering hypotheses registered before reading any 130-page D5 candidate results. No D5 human labels are available; these values are not fitted or calibrated.",
+  "low_occupancy_upper": 0.16,
+  "tiny_occupancy_upper": 0.06,
+  "largest_empty_ratio": 0.45,
+  "off_center_distance": 0.38,
+  "compact_bounds_area": 0.16,
+  "grid_peak_share": 0.65,
+  "unknown_area_max": 0.05,
+  "extreme_half_imbalance": 0.85,
+  "eligible_roles": ["body", "chart", "contents"],
+  "protected_minimal_roles": ["cover", "section", "ending"],
+  "multiscale_grids": [2, 3, 4]
+}

@@ -13,7 +13,7 @@ API 配置完整时，任务默认开启 LLM 复检，也可在配置页关闭�
 
 失败、跳过或中断后可点击 **继续审查**，复用经校验的原计划成功步骤和复核结果；也可 **重新审查**。两者均创建新记录并保留父任务。服务重启会识别已中断任务，不自动重发请求。详见 [证据引用与恢复验收](docs/4.4BC/review_recovery.md)。
 
-![首页](docs/screenshots/01-home.png)
+
 
 ---
 
@@ -44,13 +44,15 @@ SlideSentinel 是一个**本地运行**的 PPTX 设计质量审查工作台。�
 
 ## 2. 快速开始（Windows）
 
+仓库取舍、首次运行和可选模型安装以[根目录 README](../../../README.md)为准。验收截图与原始任务记录仅在作者本地保留。
+
 ### 环境要求
 
 - Windows 10/11；
-- Python 3.11+（已在 3.13 验证），首次运行需要联网安装后端依赖；
+- Python 3.12 或 3.13（后端已在 3.13 验证），首次运行需要联网安装后端依赖；
 - **日常使用不需要 Node.js**：仓库包含已构建的 `frontend/dist`；只有修改前端源码后才需要 Node.js 20+ 重新构建；
 - Microsoft PowerPoint 用于按原始比例渲染页面；没有 PowerPoint 时结构检查仍可运行，但预览、视觉复核和修复前后图不可用；
-- 六类专用检测复用同项目的 `ml_stage4/.venv` 与版本化研究实现；未安装或测量失败时明确标记 unsupported/unknown，不伪造正常结果。PDF 导出使用本机 Edge/Chrome。
+- 首次启动通过 `scripts/setup_ml.ps1` 安装六类检测所需的 `ml_stage4/.venv`；冻结实现与校准记录已随仓库保留，逐文件 SHA 校验不依赖作者电脑路径。未安装或测量失败时明确标记 unsupported/unknown，不伪造正常结果。PDF 导出使用本机 Edge/Chrome。
 
 ### 双击启动（推荐）
 
@@ -61,9 +63,9 @@ SlideSentinel 是一个**本地运行**的 PPTX 设计质量审查工作台。�
 | `SlideSentinel.exe` | 可选的轻量图形启动器，构建后使用 |
 | `SlideSentinel.Stop.exe` | 可选的轻量图形停止入口，构建后使用 |
 
-首次启动会自动创建 `backend\.venv`、安装 Python 依赖，然后打开 `http://127.0.0.1:8000/`；前端已经构建，不执行 npm install。后续启动会复用现有环境，静默拉起服务并打开浏览器。已经在运行时只打开工作台，不重复启动。
+首次启动会自动创建 `backend\.venv` 和 `ml_stage4\.venv`、安装后端与六类检测依赖，然后打开 `http://127.0.0.1:8000/`；前端已经构建，不执行 npm install。后续启动会复用现有环境，静默拉起服务并打开浏览器。已经在运行时只打开工作台，不重复启动。
 
-> **EXE 只是启动器，不是独立安装包。**它不包含 Python、依赖、前端或模型，必须保留在完整的 `agent_app` 根目录使用，不能单独复制到桌面。它同样不能消除 PowerPoint、可选 ML 环境和 Edge/Chrome 等外部依赖。
+> **EXE 只是启动器，不是独立安装包。**它不包含 Python、依赖、前端或模型，必须保留在完整的 `agent_app` 根目录使用，不能单独复制到桌面。它同样不能消除 PowerPoint、六类检测环境与可选 CLIP 模型和 Edge/Chrome 等外部依赖。
 
 ### 构建 EXE 启动器（可选）
 
@@ -159,10 +161,6 @@ SlideSentinel 是一个**本地运行**的 PPTX 设计质量审查工作台。�
 6. **追问和导出**。对具体问题补充设计意图，原 Claim 和历史均保留；导出 JSON、自包含 HTML 或由同一模板打印的 PDF。
 7. **可选：一键修复**。结构规则给出的条目可在副本上自动修（移回画布 / 换行撑高 / 提字号 / 图层置顶），视觉检测器条目与拥挤、留白、异常设计一律留人工；修复后用同一套结构规则复检，报告 `before → after` 与新增数。原件与审查报告不改。
 
-![配置页](docs/screenshots/02-configure.png)
-![进度页](docs/screenshots/04-progress-done.png)
-![逐页结果](docs/screenshots/05-results.png)
-![报告页](docs/screenshots/06-report.png)
 
 > 一键修复见 [docs/4.4BC/auto_repair.md](docs/4.4BC/auto_repair.md)：链路、动作词表、复检口径、三次真实执行记录。
 
@@ -261,7 +259,6 @@ agent_app/
 - API 配置完整时，新任务默认启用复检；首轮结束后的 5 秒窗口内可跳过，也可在任务配置页提前关闭。复检开始后会把选中页面的 JPEG、结构证据及可选 CLIP 辅助证据发送到配置的服务。已发送的请求不能通过跳过撤回；
 - 请求失败会逐页记录，不影响已完成的结构检查与报告。
 
-![设置页](docs/screenshots/07-settings.png)
 
 ---
 
@@ -281,7 +278,6 @@ agent_app/
 - 报告顶部与页脚强制显示 `DEMO`，视觉模型名称为 `DEMO-FIXTURE（演示占位，非真实模型）`；
 - 不调用外部 API。
 
-![演示结果](docs/screenshots/11-demo-results-ai.png)
 
 ---
 

@@ -1,3 +1,5 @@
+> 当前应用入口：[`agent_app/README.md`](agent_app/README.md)。本页以下为早期原型记录；数据、实验输出和答辩材料不随代码分发。
+
 # ppt_audit_stage1 — PPT 版面质量审查（三阶段原型）
 
 ## 1. 项目目标

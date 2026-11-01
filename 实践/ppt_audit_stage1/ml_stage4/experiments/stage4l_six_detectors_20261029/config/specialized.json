@@ -1,0 +1,15 @@
+{
+  "version": "specialized-engineering-v1",
+  "registration": "Fixed before stage4l candidate evaluation; engineering thresholds, not human-calibrated probabilities",
+  "D1": {
+    "minimum_characters": 8,
+    "role_min_pt_at_540": {"title": 20, "body": 12, "chart_label": 10, "table_text": 10, "footnote": 7, "navigation": 8, "page_number": 7},
+    "role_hard_min_pt_at_540": {"title": 12, "body": 9, "chart_label": 6, "table_text": 6, "footnote": 5, "navigation": 5, "page_number": 5},
+    "relative_role_ratio": 0.65,
+    "low_rendered_line_height_pt_at_540": 11,
+    "title_to_body_ratio": 0.85
+  },
+  "D2": {"local_coverage_threshold": 0.45, "minimum_page_area_ratio": null, "text_intersection_requires_pixel_confirmation": true},
+  "D3": {"scales": [1.0, 0.5, 0.25], "minimum_local_text_objects": 8, "maximum_median_characters": 32, "minimum_text_count_per_page_area": 80, "near_gap_normalized": 0.012, "minimum_close_neighbor_fraction": 0.6, "minimum_local_occupancy": 0.22, "minimum_overlap_pair_fraction": 0.15},
+  "D4": {"page_overflow_tolerance_pt": 2.88, "containment_tolerance_pt": 2.88, "minimum_information_object_page_area": 0.003, "pixel_clipping_required_for_confirmation": true}
+}

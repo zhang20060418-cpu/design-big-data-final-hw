@@ -62,20 +62,19 @@ def write(path, value):
 def run(context_path: Path, output: Path, document_id: str):
     import numpy as np
     started = time.perf_counter()
-    bundle = read(R2 / "candidate_bundle.json")
-    # Verify the actual reused implementation/configuration files, without
-    # loading any historical result artifacts or benchmark data.
-    paths = [L / "detector_implementation/specialized.py", L / "config/specialized.json",
-        L / "config/shared_features.json", M / "implementation/pipeline.py", M / "config/roles.json",
-        V3 / "implementation/context_refinement.py", LOCAL / "implementation/local_detectors.py",
-        ALL / "implementation/d5_detector.py", ALL / "implementation/material_evidence.py",
-        LAST / "implementation/d6_recall.py", R2 / "implementation/evidence_refinement.py",
-        R2 / "implementation/evidence_refinement_v2.py", R2 / "implementation/routing.py", R2 / "implementation/routing_v2.py"]
-    expected = {**bundle.get("read_only_dependency_sha256", {}), **bundle.get("source_sha256", {})}
-    source_versions = {str(p): sha(p) for p in paths}
-    for name, actual in source_versions.items():
-        if name in expected and expected[name] != actual:
+    # Relative paths make the frozen source check independent of checkout location.
+    pin_path = Path(__file__).resolve().parents[2] / "models/six_runtime_manifest.json"
+    pins = read(pin_path)
+    root = (PROJECT / "ml_stage4").resolve()
+    paths = []
+    for name, expected in pins["assets_sha256"].items():
+        path = (root / name).resolve()
+        if not path.is_relative_to(root):
+            raise ValueError("Frozen detector path outside runtime root")
+        if sha(path) != expected:
             raise ValueError("Frozen detector source SHA mismatch: " + name)
+        paths.append(path)
+    source_versions = {str(p): sha(p) for p in paths}
     contexts = read(context_path)
     if not contexts or len({c["sample_id"] for c in contexts}) != len(contexts):
         raise ValueError("Fresh contexts must contain unique pages")
@@ -173,7 +172,7 @@ def run(context_path: Path, output: Path, document_id: str):
             numpy=np.__version__, seconds=time.perf_counter() - started),
         source_sha256=source_versions, input_context_sha256=input_sha,
         input_source_sha256=contexts[0]["source"]["pptx_sha256"],
-        input_artifact_sha256=input_files, candidate_bundle_sha256=sha(R2 / "candidate_bundle.json"),
+        input_artifact_sha256=input_files, candidate_bundle_sha256=sha(pin_path),
         refinement_audit=refinement_audit, frozen_thresholds=dict(routing.THRESHOLDS),
         labels_used_for_features=False, benchmark_files_read=0, classifier_fits=0, CLIP_forwards=0, LLM_calls=0,
         A05_semantic_status="unsupported", sources_unchanged=True)

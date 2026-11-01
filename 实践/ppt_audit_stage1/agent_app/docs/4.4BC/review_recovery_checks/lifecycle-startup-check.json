@@ -1,9 +1,0 @@
-{
-  "task_id": "7f5f31dffcdf4545",
-  "status": "failed",
-  "error": "interrupted: 服务重启后确认原执行进程已中断；未自动重新发送请求，可选择继续审查或重新审查。 上次API请求结果未知，继续可能产生新的调用消耗。",
-  "recovery_available": true,
-  "synthetic": true,
-  "actual_external_llm_calls": 0,
-  "gate_unchanged": true
-}

@@ -1,0 +1,14 @@
+{
+  "mask_height": 96,
+  "mask_width": 128,
+  "spatial_scales": [2, 3, 4, 6],
+  "window_stride_fraction": 0.5,
+  "page_role_source": "engineering native hierarchy inference, not known author intent",
+  "background_area_lower": 0.80,
+  "main_image_area_lower": 0.03,
+  "auxiliary_bottom_y": 0.91,
+  "repeated_auxiliary_position_quantum": 0.01,
+  "paragraph_layout_mask_not_glyph_mask": true,
+  "unknown_semantic_image_content": true,
+  "cache_policy": "require current PPTX/PNG hashes and immutable K artifact ledger match; reuse COM once per page"
+}

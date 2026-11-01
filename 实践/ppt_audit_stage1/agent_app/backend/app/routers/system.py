@@ -2,10 +2,11 @@
 from __future__ import annotations
 
 from datetime import datetime
+import json
 
 from fastapi import APIRouter
 
-from ..config import (DEFECT_LABELS_ZH, DEFECT_TYPES, MAX_SLIDES, MAX_UPLOAD_BYTES,
+from ..config import (APP_DIR, DEFECT_LABELS_ZH, DEFECT_TYPES, MAX_SLIDES, MAX_UPLOAD_BYTES,
                       RENDER_LONG_EDGE, frontend_build_id, settings)
 from ..services import orchestrator
 from ..storage import demo_store, real_store, settings_store
@@ -27,7 +28,14 @@ def capabilities():
     mllm_state = "ready" if (key_set and app_settings.get("api_base_url")
                             and app_settings.get("api_model")) else "not_configured"
     from ..services.six_detector import DEFAULT_ML_PYTHON, PROJECT, VERSION
-    six_dependencies = DEFAULT_ML_PYTHON.is_file() and (PROJECT / "ml_stage4/experiments/recall_precision_refinement_20261030/candidate_bundle.json").is_file()
+    try:
+        pins = json.loads((APP_DIR / "models/six_runtime_manifest.json").read_text(encoding="utf-8"))
+        root = (PROJECT / "ml_stage4").resolve()
+        assets = [(root / name).resolve() for name in pins["assets_sha256"]]
+        six_dependencies = DEFAULT_ML_PYTHON.is_file() and bool(assets) and all(
+            path.is_relative_to(root) and path.is_file() for path in assets)
+    except (OSError, ValueError, KeyError, TypeError):
+        six_dependencies = False
     return {
         "app": {
             "name": settings.app_name,

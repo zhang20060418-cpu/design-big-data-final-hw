@@ -44,3 +44,59 @@ __MACOSX/
 
 # Nested upstream Git metadata is local; its checked-out data is archived
 **/.git/
+
+# Teacher handoff: coursework documents and media remain on the author's machine.
+/05_报告/
+/视频/
+*.ppt
+*.pptx
+*.pptm
+*.potx
+*.docx
+*.pdf
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.mp3
+*.wav
+*.zip
+*.7z
+*.tar
+*.gz
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+*.csv
+*.npy
+*.npz
+*.parquet
+*.pkl
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.joblib
+!/实践/ppt_audit_stage1/ml_stage4/models/fusion_routing_candidate.joblib
+*.log
+node_modules/
+.cache/
+.run/
+.local/
+_local_checkpoints/
+# Only known synthetic PowerPoint fixtures belong in Git.
+!/实践/ppt_audit_stage1/agent_app/fixtures/*.pptx
+!/实践/ppt_audit_stage1/test_samples/*.pptx
+!/实践/ppt_audit_stage1/test_samples/**/*.pptx
+/实践/python-ppt/downloaded_pptx/
+/实践/ppt_audit_stage1/_archive/
+/实践/ppt_audit_stage1/outputs/
+/实践/ppt_audit_stage1/visual_validation/
+/实践/ppt_audit_stage1/素材/
+# Acceptance payloads and screenshots can contain task history and uploaded decks.
+/实践/ppt_audit_stage1/agent_app/docs/4.4BC/*/
+/实践/ppt_audit_stage1/agent_app/docs/screenshots/
+/实践/ppt_audit_stage1/agent_app/SlideSentinel.exe
+/实践/ppt_audit_stage1/agent_app/SlideSentinel.Stop.exe
