@@ -1,0 +1,31 @@
+{
+  "version": "4.4C-review-rules-1.0",
+  "rule_id": "D5",
+  "title": "过分留白",
+  "definition": "有效内容尺度或分布异常，空间闲置影响表达与构图。",
+  "positive_criteria": [
+    "主要正文缩在角落并明显过小。",
+    "图表被异常压缩而大块空间闲置。"
+  ],
+  "reasonable_exceptions": [
+    "正常极简封面、章节过渡、重点强调、合理不对称设计。"
+  ],
+  "required_evidence": [
+    "页面角色、用途、有效内容模块占位和整页构图；背景与空文本框不算信息内容。"
+  ],
+  "review_questions": [
+    "可观察损害是什么？",
+    "正常设计例外是否成立？"
+  ],
+  "uncertainty_policy": "无法判断输出 uncertain；失败、超时与未执行均不能输出 supported 或 rejected。",
+  "severity": {
+    "high": "主要信息缺失或不可读",
+    "medium": "可读性、分组或表达受到明显影响",
+    "low": "轻微风险，尚可阅读"
+  },
+  "recommendation_principles": [
+    "L1说明要检查的对象或区域。",
+    "L2数值建议必须引用实际测量证据，不能凭经验编造精确参数。",
+    "L3给出PowerPoint可执行的操作路径，不自动修改文稿。"
+  ]
+}

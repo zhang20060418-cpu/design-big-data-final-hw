@@ -1,0 +1,20 @@
+{
+  "adapter": "python_module",
+  "module": "visual_model_impl",
+  "callable": "predict_slide",
+  "model_version": "g2-final-2026xxxx",
+  "work_point": "4.3G-2 最终工作点与阈值说明",
+  "labels": [
+    "improper_font_sizing",
+    "occluded_content",
+    "cluttered_layout",
+    "content_overflow_cutoff"
+  ],
+  "thresholds": {
+    "improper_font_sizing": 0.5,
+    "occluded_content": 0.5,
+    "cluttered_layout": 0.5,
+    "content_overflow_cutoff": 0.5
+  },
+  "input_recipe": "full-slide PNG, long edge 1920, RGB"
+}

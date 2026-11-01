@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ report.document.file_name }} · 设计质量审查报告</title>
+<style>
+  :root{
+    --ink:#0b1020; --ink-2:#2a3345; --muted:#5b6478; --line:#e3e7f0;
+    --paper:#f6f7fb; --card:#ffffff; --indigo:#3d5afe; --cyan:#00a9b5; --orange:#e8662a;
+    --danger:#d9363e; --ok:#0f9d76; --demo:#b25e00;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Inter","Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 32px 72px}
+  .demo-banner{background:#fff4e5;border:1px solid #ffd7a1;color:#8a4a00;border-radius:12px;
+    padding:12px 16px;margin-bottom:20px;font-weight:600}
+  .notice-ok{background:#eff8f2;border:1px solid #bfe3cd;color:#155e3f;border-radius:12px;
+    padding:12px 16px;margin-bottom:20px;font-weight:600}
+  .advice-lead{font-size:17px;font-weight:700;line-height:1.5;margin:0 0 6px;letter-spacing:-.01em}
+  .advice-verdict{margin:0 0 12px;font-size:13.5px;color:var(--ink-2)}
+  ul.advice-list{margin:0 0 16px;padding-left:18px;font-size:13px;color:var(--ink-2)}
+  ul.advice-list li{margin:4px 0}
+  .advice-action{border-top:1px dashed var(--line);padding:14px 0 4px}
+  .advice-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .advice-head b{font-size:14px}
+  .advice-dir{margin:6px 0 4px;font-size:13px;color:var(--ink-2)}
+  ol.advice-steps{margin:4px 0 6px;padding-left:20px;font-size:12.5px;color:var(--ink-2)}
+  ol.advice-steps li{margin:3px 0}
+  .advice-accept{margin:0;font-size:12px;color:var(--ok)}
+  .advice-seq{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+  .advice-phase{display:flex;gap:10px;font-size:12.5px;padding:3px 0}
+  .advice-phase b{flex:none;width:104px;color:var(--ink-2)}
+  .advice-foot{margin:14px 0 0;font-size:11.5px;color:var(--muted);line-height:1.7}
+  header.hero{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;
+    padding:28px 30px;border-radius:20px;color:#f4f7ff;
+    background:radial-gradient(120% 160% at 0% 0%,#182a63 0%,#0b1020 55%,#070b16 100%);
+    border:1px solid #1d2a4d}
+  header.hero .brand{font-size:11px;letter-spacing:.22em;color:#6fe3ea;font-weight:700}
+  header.hero h1{margin:8px 0 6px;font-size:30px;line-height:1.25;letter-spacing:-.01em}
+  header.hero .sub{color:#a8b6cf;font-size:13px}
+  .hero-meta{text-align:right;font-size:12px;color:#93a3bf;white-space:nowrap}
+  .hero-meta b{display:block;color:#e8eeff;font-size:20px;letter-spacing:.02em}
+  .grid{display:grid;gap:16px}
+  .cols-4{grid-template-columns:repeat(4,1fr)}
+  .cols-3{grid-template-columns:repeat(3,1fr)}
+  .cols-2{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .card h2{font-size:13px;margin:0 0 14px;letter-spacing:.06em;color:var(--muted);font-weight:700}
+  .stat .k{font-size:12px;color:var(--muted)}
+  .stat .v{font-size:30px;font-weight:750;letter-spacing:-.02em;margin-top:2px}
+  .stat .u{font-size:12px;color:var(--muted);font-weight:500}
+  .stat.warn .v{color:var(--orange)} .stat.danger .v{color:var(--danger)}
+  .stat.ok .v{color:var(--ok)}
+  .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 22px;font-size:12px}
+  .meta div span{display:block;color:var(--muted);font-size:11px;margin-bottom:2px}
+  .meta div b{font-weight:600;color:var(--ink-2);word-break:break-all}
+  h2.section{font-size:19px;margin:34px 0 12px;letter-spacing:-.01em}
+  h2.section .idx{color:var(--indigo);font-family:"JetBrains Mono",Consolas,monospace;font-size:12px;margin-right:8px}
+  .module{display:flex;gap:12px;align-items:flex-start}
+  .dot{width:9px;height:9px;border-radius:50%;margin-top:7px;flex:none}
+  .dot.done{background:var(--ok)} .dot.off{background:#a7b0c2} .dot.fail{background:var(--danger)}
+  .module b{display:block;font-size:14px}
+  .module p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;
+    padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fafbfe}
+  .badge.rule{color:#2f45c9;border-color:#ccd4ff;background:#f1f3ff}
+  .badge.model{color:#006d75;border-color:#b8ecef;background:#eefcfd}
+  .badge.ai{color:#8a4a00;border-color:#ffd7a1;background:#fff8ee}
+  .badge.high{color:#b0242b;border-color:#f6c9cb;background:#fff2f2}
+  .badge.demo{color:#8a4a00;border-color:#ffd7a1;background:#fff4e5}
+  .bar{height:10px;border-radius:99px;background:#edf0f7;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#3d5afe,#00c2cb)}
+  .dist-row{display:grid;grid-template-columns:120px 1fr 46px;gap:12px;align-items:center;margin:10px 0;font-size:13px}
+  .dist-row .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-2);font-weight:600}
+  .page{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:14px 0}
+  .page-head{display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfcff}
+  .page-head b{font-size:14px}
+  .page-body{display:grid;grid-template-columns:260px 1fr;gap:18px;padding:16px 18px}
+  .thumb{width:100%;border-radius:8px;border:1px solid var(--line);display:block;background:#0b1020}
+  .issue{border-top:1px dashed var(--line);padding:11px 0}
+  .issue:first-child{border-top:0;padding-top:0}
+  .issue .t{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .issue .t b{font-size:13.5px}
+  .issue p{margin:5px 0;font-size:12.5px;color:var(--ink-2)}
+  .issue .rec{color:var(--ok)}
+  .issue .coords{font-family:"JetBrains Mono",Consolas,monospace;font-size:11px;color:var(--muted)}
+  .empty{padding:26px;text-align:center;color:var(--muted);font-size:13px}
+  .risk{display:flex;gap:10px;padding:10px 0;border-top:1px dashed var(--line);font-size:12.5px}
+  .risk:first-child{border-top:0}
+  .risk .tag{flex:none;font-size:11px;color:var(--muted);font-weight:700}
+  ul.limits{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-2)}
+  ul.limits li{margin:5px 0}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+  th{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.04em}
+  .mono{font-family:"JetBrains Mono",Consolas,monospace;font-size:11.5px}
+  footer{margin-top:38px;pt:18px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px}
+  @media print{
+    @page{size:A4;margin:12mm}
+    body{background:#fff} .wrap{max-width:none;padding:0}
+    .page,.card{break-inside:avoid} header.hero{background:#0b1020 !important;-webkit-print-color-adjust:exact}
+    h2{break-after:avoid} tr{break-inside:avoid}
+    .advice-act,.advice-phase,.advice-page,.advice-lead,.advice-verdict{break-inside:avoid}
+    .advice-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:860px){
+    .cols-4,.cols-3,.cols-2,.meta{grid-template-columns:1fr 1fr}
+    .page-body{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  {% if report.is_demo %}
+  <div class="demo-banner">演示数据 · DEMO — 本报告由系统生成的演示文稿与演示占位模型产出，不代表真实模型评估结果，不可用于研究结论。</div>
+  {% endif %}
+  {% if report.get('mock_review') %}
+  <div class="demo-banner">MOCK 模拟复核：六类检测使用实际上传 PPTX 与渲染图；LLM 复核没有调用真实模型，全部模拟结论均为不确定，不能作为缺陷判断或性能证据。</div>
+  {% endif %}
+  {% if report.get('review_gate') and report.review_gate.get('skipped_by_user') %}
+  <div class="demo-banner">用户跳过自动 LLM 复检：{{ report.review_gate.get('warning') }} 后续局部复核如有执行，请分别查看历史记录。</div>
+  {% endif %}
+  {% if report.get('lineage') %}
+  <div class="demo-banner">{{ '继续审查' if report.lineage.action == 'continue' else '完整重新审查' }}的新记录，原任务 {{ report.lineage.parent_task_id }} 保留。
+    {% if report.get('recovery') %}复用 {{ report.recovery.reused_review_calls }} 项已核验成功复核；本次实际新增 {{ report.recovery.actual_new_http_calls }} 次 HTTP 调用。历史消耗单独记录，不计为本次新增调用。{% endif %}
+  </div>
+  {% endif %}
+
+  {% if report.summary.get('dismissed_count') %}
+  <div class="notice-ok">人工复核排除 {{ report.summary.dismissed_count }} 条误判：这些条目已从计数、逐页证据、修改建议与导出 Prompt 中移除，原始检测记录保留在任务目录。</div>
+  {% endif %}
+
+  <header class="hero">
+    <div>
+      <div class="brand">SLIDE SENTINEL · DESIGN QUALITY AUDIT</div>
+      <h1>{{ report.document.file_name }}</h1>
+      <div class="sub">{{ report.task.name }} · 审查任务 {{ report.task.id }}</div>
+    </div>
+    <div class="hero-meta">
+      <span>发现问题</span><b>{{ report.summary.visible_issue_count }}</b>
+      <span>涉及页面</span><b>{{ report.summary.pages_with_issues }} / {{ report.summary.slide_count }}</b>
+    </div>
+  </header>
+
+  <div class="grid cols-4" style="margin-top:18px">
+    <div class="card stat"><div class="k">总页数</div><div class="v">{{ report.summary.slide_count }}</div><div class="u">实际解析页数</div></div>
+    <div class="card stat"><div class="k">结构规则候选</div><div class="v">{{ report.summary.by_source.structure_rule }}</div><div class="u">几何/排版证据</div></div>
+    <div class="card stat"><div class="k">视觉模型告警</div><div class="v">{{ report.summary.by_source.visual_model }}</div><div class="u">页面级概率</div></div>
+    <div class="card stat"><div class="k">{{ 'Mock 模拟复核' if report.get('mock_review') else 'AI 复核' }}</div><div class="v">{{ report.summary.ai_reviewed_pages }}</div><div class="u">{{ '页有模拟复核记录' if report.get('mock_review') else '页已复核' }}</div></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>文稿与任务信息</h2>
+    <div class="meta">
+      <div><span>文件大小</span><b>{{ report.document.size_mb }} MB</b></div>
+      <div><span>页面比例</span><b>{{ report.document.aspect_label }}（{{ report.document.slide_width_in }} × {{ report.document.slide_height_in }} in）</b></div>
+      <div><span>可编辑 / 混合 / 位图页</span><b>{{ report.document.editable_pages }} / {{ report.document.mixed_pages }} / {{ report.document.image_only_pages }}</b></div>
+      <div><span>文本框 / 图片 / 表格 / 图表</span><b>{{ report.document.textboxes }} / {{ report.document.pictures }} / {{ report.document.tables }} / {{ report.document.charts }}</b></div>
+      <div><span>审查开始</span><b>{{ report.task.started_at or "—" }}</b></div>
+      <div><span>审查结束</span><b>{{ report.task.finished_at or "—" }}</b></div>
+      <div><span>任务状态</span><b>{{ report.status_label }}</b></div>
+      <div><span>文件 SHA-256</span><b class="mono">{{ report.document.sha256_short }}…</b></div>
+    </div>
+  </div>
+
+  {% if report.get('advice') and report.advice.get('actions') %}
+  <h2 class="section"><span class="idx">01</span>AI 修改建议</h2>
+  <div class="card">
+    <p class="advice-lead">{{ report.advice.headline }}</p>
+    <p class="advice-verdict">{{ report.advice.verdict }}</p>
+    <ul class="advice-list">{% for line in report.advice.summary %}<li>{{ line }}</li>{% endfor %}</ul>
+    {% for action in report.advice.actions %}
+    <div class="advice-action">
+      <div class="advice-head">
+        <b>{{ loop.index }}. {{ action.title }}</b>
+        <span class="badge">{{ action.count }} 条 · {{ action.pages_label }}</span>
+      </div>
+      <p class="advice-dir">{{ action.directive }}</p>
+      <ol class="advice-steps">{% for step in action.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+      <p class="advice-accept"><b>验收：</b>{{ action.acceptance }}</p>
+    </div>
+    {% endfor %}
+    {% if report.advice.get('sequence') %}
+    <div class="advice-seq">
+      {% for phase in report.advice.sequence %}
+      <div class="advice-phase"><b>{{ phase.title }}</b><span>{{ phase.detail }}（{{ phase.pages_label }}，{{ phase.count }} 条）</span></div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <p class="advice-foot">{{ report.advice.note }}{% if report.advice.source == 'llm' %} 本版由 {{ report.advice.model }} 按本次结果改写。{% else %} 本版由规则按本次结果合成。{% endif %}</p>
+  </div>
+  {% endif %}
+
+  <h2 class="section"><span class="idx">02</span>模块运行状态</h2>
+  <div class="grid cols-3">
+    {% for module in report.modules %}
+    <div class="card">
+      <div class="module">
+        <span class="dot {{ module.state_class }}"></span>
+        <div><b>{{ module.name }}</b><p>{{ module.detail }}</p></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h2 class="section"><span class="idx">03</span>缺陷类型分布</h2>
+  <div class="card">
+    {% for item in report.distribution %}
+    <div class="dist-row">
+      <span>{{ item.label }}</span>
+      <span class="bar"><i style="width:{{ item.pct }}%"></i></span>
+      <span class="n">{{ item.count }}</span>
+    </div>
+    {% endfor %}
+    <p style="margin:14px 0 0;font-size:12px;color:var(--muted)">
+      计数为未排除的候选问题（含规则候选、模型告警与 AI 提出项）；同一页同一类型可能同时有多个元素级证据。
+    </p>
+  </div>
+
+  <h2 class="section"><span class="idx">04</span>逐页问题与证据</h2>
+  {% if report.pages %}
+    {% for page in report.pages %}
+    <div class="page">
+      <div class="page-head">
+        <b>第 {{ page.index }} 页 · {{ page.issue_count }} 条问题</b>
+        <span class="badge">{{ page.mode_label }}</span>
+      </div>
+      <div class="page-body">
+        <div>
+          {% if page.thumb %}
+            <img class="thumb" src="data:image/jpeg;base64,{{ page.thumb }}" alt="第 {{ page.index }} 页预览">
+          {% else %}
+            <div class="empty">渲染图不可用</div>
+          {% endif %}
+        </div>
+        <div>
+          {% for issue in page.issues %}
+          <div class="issue">
+            <div class="t">
+              <b>{{ issue.title }}</b>
+              <span class="badge {{ issue.source_class }}">{{ issue.source_label }}</span>
+              <span class="badge {{ issue.severity_class }}">{{ issue.severity_label }}</span>
+              {% if issue.review_badge %}<span class="badge ai">{{ issue.review_badge }}</span>{% endif %}
+              {% if issue.demo %}<span class="badge demo">演示数据</span>{% endif %}
+            </div>
+            <p>{{ issue.evidence_summary }}</p>
+            {% if issue.coords %}<p class="coords">{{ issue.coords }}</p>{% endif %}
+            {% if issue.ai_evidence %}<p><b>AI 复核证据：</b>{{ issue.ai_evidence }}</p>{% endif %}
+            <p class="rec"><b>建议：</b>{{ issue.recommendation }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="card empty">本次审查没有产生未排除的问题候选。未运行的模块不代表“检查后正常”，请查看模块状态与检测局限。</div>
+  {% endif %}
+
+  <h2 class="section"><span class="idx">05</span>结构风险与素材提示</h2>
+  <div class="card">
+    {% if report.risks %}
+      {% for risk in report.risks %}
+      <div class="risk"><span class="tag">{{ risk.tag }}</span><div><b>{{ risk.title }}</b><br>{{ risk.detail }}</div></div>
+      {% endfor %}
+    {% else %}
+      <div class="empty">没有额外的结构风险提示。</div>
+    {% endif %}
+  </div>
+
+  <h2 class="section"><span class="idx">06</span>检测能力与局限</h2>
+  <div class="card">
+    <ul class="limits">
+      {% for item in report.limitations %}<li>{{ item }}</li>{% endfor %}
+    </ul>
+  </div>
+
+  <h2 class="section"><span class="idx">07</span>执行轨迹</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>阶段</th><th>状态</th><th>说明</th><th>结束时间</th></tr></thead>
+      <tbody>
+      {% for stage in report.stages %}
+        <tr><td>{{ stage.label }}</td><td>{{ stage.status_label }}</td><td>{{ stage.message }}</td><td class="mono">{{ stage.finished_at or "—" }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if report.get('user_requirements') %}
+  <h2 class="section">审查要求</h2><div class="card">
+    <p><b>用途：</b>{{ report.user_requirements.get('purpose') or '未指定' }}</p>
+    <p><b>风格：</b>{{ report.user_requirements.get('style') or '未指定' }}</p>
+    <p><b>审查重点：</b>{{ (report.user_requirements.get('review_focus') or [])|join('、') }}</p>
+    {% if report.user_requirements.get('original_prompt') %}<p><b>原始生成要求（任务符合性参考）：</b>{{ report.user_requirements.original_prompt }}</p>{% endif %}
+  </div>{% endif %}
+  {% if report.get('claims') %}
+  <h2 class="section">六类原始检测范围</h2><div class="card">
+    <p>未知、不支持、未执行均不等于正常；分数是有序强度，不是缺陷概率。D6-A05素材语义检测尚不完整。</p>
+    <table style="table-layout:fixed"><colgroup><col style="width:10%"><col style="width:17%"><col style="width:15%"><col style="width:58%"></colgroup><thead><tr><th>页/关联页</th><th>类别/子项</th><th>原始状态</th><th>版本与可判范围</th></tr></thead><tbody>
+    {% for claim in report.claims %}<tr data-defect-type="{{ claim.defect_type }}" data-raw-status="{{ claim.raw_status }}"><td>{{ claim.slide_index }}{% if claim.get('related_slides') %} / {{ claim.related_slides|join(', ') }}{% endif %}</td><td>{{ defect_labels.get(claim.defect_type, claim.defect_type) }}{% if claim.get('subtype') %} / {{ claim.subtype }}{% endif %}</td><td>{{ detection_states.get(claim.raw_status, claim.raw_status) }}</td><td>{{ claim.detector_version }}<br>{{ claim.get('limitations', [])|join('；') }}</td></tr>{% endfor %}
+    </tbody></table></div>{% endif %}
+  {% if report.get('review_plan') and report.review_plan.get('items') %}
+  <h2 class="section">按需复核调度记录</h2><div class="card"><table>
+    <thead><tr><th>页面/候选</th><th>工具</th><th>选择与原因</th><th>所需证据</th></tr></thead><tbody>
+    {% for item in report.review_plan['items'] %}<tr><td>{{ item.get('slide_index') }}<br>{{ item.get('candidate_id') }}</td><td>{{ item.get('selected_tool') }}</td><td>{{ '已选择' if item.get('selected') else '未选择' }}<br>{{ item.get('selection_reason') }}<br>{{ item.get('skip_reason', '') }}</td><td>{{ item.get('evidence_requested') }}</td></tr>{% endfor %}
+    </tbody></table></div>{% endif %}
+  {% if report.get('verification_pipeline') %}
+  <h2 class="section">首筛与分层复检状态</h2><div class="card">
+    {% for layer in report.verification_pipeline.ordered_layers %}<p><b>{{ layer.label }}</b> · {{ layer.status }}</p>{% endfor %}
+    <p>CLIP成功 {{ report.verification_pipeline.clip_pages_scored }} 页；失败 {{ report.verification_pipeline.clip_pages_failed }} 页。LLM模式：{{ report.verification_pipeline.llm_mode }}；未复检项 {{ report.verification_pipeline.llm_unreviewed_items }}；不确定结论 {{ report.verification_pipeline.llm_uncertain_verdicts }}。</p>
+    <p><b>最终复检状态：</b>{{ report.verification_pipeline.final_review_status }}</p>
+    <p>{{ report.verification_pipeline.note }}</p>
+  </div>{% endif %}
+  {% if report.get('visual_results') %}
+  <h2 class="section">CLIP 四类辅助复核</h2><div class="card">
+    <p>冻结模型输出是页级辅助证据，不提供局部定位，不排除R2原生候选；D5/D6不由此模型判断。</p>
+    <table><thead><tr><th>页</th><th>类别</th><th>概率 / 阈值</th><th>候选 / 版本 / 工作点</th></tr></thead><tbody>
+    {% for visual in report.visual_results %}
+      {% if visual.status == 'ok' %}{% for label, probability in visual.probabilities.items() %}
+      <tr><td>{{ visual.slide_index }}</td><td>{{ defect_labels.get(label,label) }}</td><td>{{ '%.8f'|format(probability) }} / {{ visual.get('thresholds',{}).get(label,'未登记') }}</td><td>{{ visual.get('alerts',{}).get(label) }}<br>{{ visual.get('model_version') }} / {{ visual.get('work_point') }}{% if visual.get('demo') %} · DEMO模拟{% endif %}</td></tr>
+      {% endfor %}{% else %}<tr><td>{{ visual.slide_index }}</td><td colspan="3">{{ visual.status }}：{{ visual.get('error') or '本页未完成CLIP复核' }}</td></tr>{% endif %}
+    {% endfor %}</tbody></table>
+  </div>{% endif %}
+  {% if report.get('reviews') %}
+  <h2 class="section">复核执行与历史</h2><div class="card">
+    {% for review in report.reviews %}<p><b>第{{ review.get('slide_index') }}页</b> · {{ review.get('status') }} · {{ review.get('model') }}{% if review.get('mock') %} · MOCK模拟{% endif %}<br>{{ review.get('error') or review.get('overall_note') or '' }}<br>规则：{{ review.get('rule_version') or '旧版接口' }} / {{ (review.get('rules_used') or [])|join(', ') }}<br>实际 HTTP 调用：{{ review.get('actual_http_calls', '旧版未记录') }}；耗时 ms：{{ review.get('elapsed_ms', review.get('latency_ms', '未知')) }}；token：{{ review.get('usage') or '未提供' }}；费用：{{ review.get('cost') if review.get('cost') is not none else '未提供' }}</p>
+    {% for verdict in review.get('verdicts', []) %}<p>{{ verdict.get('candidate_id') }} · {{ verdict.get('judgement') }}<br>{{ verdict.get('evidence') }}<br>{{ verdict.get('recommendation') }}</p>{% endfor %}
+    {% endfor %}
+  </div>{% endif %}
+  <footer>
+    由 SlideSentinel 4.4B–4.4C 生成 · {{ report.generated_at }} · 报告 schema {{ report.schema_version }}<br>
+    {% if report.is_demo %}DEMO：演示模式报告，数据隔离存放，不得作为真实审查或研究结论。{% else %}
+    结构规则结果为可解释候选，不等同于人工标注真值；视觉模型未接入时不产生任何预测。{% endif %}
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-31T03:18:49.888Z",
+  "mode": "read_only_browser",
+  "page_errors": [],
+  "mutation_requests": [],
+  "servers": [
+    {
+      "port": 8000,
+      "six_version": "six-detector-evidence-routing-r2",
+      "six_state": "ready",
+      "selection_role": "primary_candidate_screening",
+      "clip_available": false,
+      "clip_state": "not_configured",
+      "clip_reason": "历史四标签 CLIP 分类器未启用；六类专用检测可独立运行，具体结果请查看该任务的检查范围。",
+      "home_checks": "passed"
+    },
+    {
+      "port": 8011,
+      "six_version": "six-detector-evidence-routing-r2",
+      "six_state": "ready",
+      "selection_role": "primary_candidate_screening",
+      "clip_available": false,
+      "clip_state": "not_configured",
+      "clip_reason": "历史四标签 CLIP 分类器未启用；六类专用检测可独立运行，具体结果请查看该任务的检查范围。",
+      "home_checks": "passed",
+      "configure_checks": "passed; existing isolated task only, no start"
+    }
+  ],
+  "screenshots": [
+    "home.png",
+    "home-8011.png",
+    "configure-8011.png"
+  ],
+  "uploads_performed": 0,
+  "llm_calls_performed": 0,
+  "status": "passed",
+  "screenshots_finalized_at": "2026-10-31T03:19:28.991Z",
+  "screenshot_animation_policy": "Finite entrance animations disabled for clear static captures."
+}

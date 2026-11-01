@@ -1,0 +1,51 @@
+{
+  "task_id": "297fe2b0ba4e4f59",
+  "live": true,
+  "calls_limit": 1,
+  "disable_thinking": true,
+  "candidate_count": 8,
+  "image_count": 17,
+  "image_uri_bytes": 99855,
+  "checked_at": "2026-10-31T17:04:10.963495+08:00",
+  "request": {
+    "model": "deepseek-flash",
+    "max_tokens": 2800,
+    "response_format": {
+      "type": "json_object"
+    },
+    "thinking": {
+      "type": "disabled"
+    },
+    "serialized_bytes": 158431
+  },
+  "http_status": 200,
+  "usage": {
+    "prompt_tokens": 22043,
+    "completion_tokens": 2443,
+    "total_tokens": 24486,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 22043
+  },
+  "response": {
+    "finish_reason": "stop",
+    "content_chars": 5468,
+    "nonspace_content_chars": 5468,
+    "reasoning_chars": 0,
+    "reasoning_present": false
+  },
+  "results": [
+    {
+      "status": "ok",
+      "error": null,
+      "error_code": null,
+      "actual_http_calls": 1,
+      "attempts": 1,
+      "elapsed_ms": 13912.4,
+      "verdict_count": 8
+    }
+  ],
+  "actual_http_calls": 1
+}

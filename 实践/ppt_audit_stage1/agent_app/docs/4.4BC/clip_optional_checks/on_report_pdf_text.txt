@@ -1,0 +1,1668 @@
+        模拟复核：六类检测使用实际上传 PPTX 与渲染图；LLM 复核没有调用真实模型，全部模拟结论均为
+     MOCK
+     不确定，不能作为缺陷判断或性能证据。
+
+       SLIDE SENTINEL · DESIGN QUALITY AUDIT                                   发现问题
+
+                                                                                 15
+       integration_14_slides.pptx                                              涉及页面
+       可选CLIP三级链路核查 on · 审查任务 4b9f59bfc64c46f2
+                                                                             10 / 14
+
+
+
+     总页数                                            结构规则候选
+
+
+     14                                             4
+     实际解析页数                                         几何/排版证据
+
+
+
+
+     视觉模型告警                                         Mock 模拟复核
+
+
+     9                                              3
+     页面级概率                                          页有模拟复核记录
+
+
+
+
+     文稿与任务信息
+     文件大小                                        页面比例
+     0.11 MB                                     16:9   （13.333 × 7.5 in）
+     可编辑 / 混合 / 位图页                              文本框 / 图片 / 表格 / 图表
+     13 / 0 / 1                                  89 / 1 / 0 / 0
+
+     审查开始                                        审查结束
+     2026-10-31T11:51:12+08:00                   2026-10-31T11:51:44+08:00
+
+     任务状态                                        文件 SHA-256
+     已完成                                         c4427509a9b061bb…
+
+
+
+
+01   模块运行状态
+         结构规则引擎                                           视觉分类模型
+         六类检查范围已记录：84 条原始观察；候选与未知分                        14 页完成推理。
+         别保留。
+      多模态按需复核
+      模拟复核链路完成，非真实模型判断。
+
+
+
+
+02   缺陷类型分布
+     字号不合理                                                  2
+
+     内容遮挡                                                   4
+
+     布局拥挤                                                   0
+
+     内容溢出或裁切                                                3
+
+     过分留白                                                   1
+
+     异常设计风险                                                 5
+
+     计数为未排除的候选问题（含规则候选、模型告警与 AI 提出项）；同一页同一类型可能同时有多个元素级证据。
+03   逐页问题与证据
+     第 2 页 · 1 条问题                               可编辑页
+
+
+
+
+     异常设计风险候选 六类专用检测 中风险
+     D6 在可判范围发现风险候选；需要结合用途、原始页面和定位证据复核。
+     坐标（英寸）：x=1.20 · y=2.45 · w=11.20 · h=3.20
+
+     建议：先检查定位对象及原始页面，结合使用场景确认后给出调整建议。
+第 4 页 · 4 条问题                                                               可编辑页
+
+
+
+
+过分留白候选        AI   复核（多源）         中风险    Mock   模拟复核 · 非真实模型判断
+D5 在可判范围发现风险候选；需要结合用途、原始页面和定位证据复核。
+坐标（英寸）：x=0.52 · y=2.19 · w=12.29 · h=3.20
+
+ 复核证据：Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+AI
+
+建议：使用实际多模态服务或人工核验完整页面与证据。
+
+异常设计风险候选            AI   复核（多源）     中风险     Mock   模拟复核 · 非真实模型判断
+D6 在可判范围发现风险候选；需要结合用途、原始页面和定位证据复核。
+坐标（英寸）：x=0.90 · y=1.70 · w=11.60 · h=4.20
+
+ 复核证据：Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+AI
+
+建议：使用实际多模态服务或人工核验完整页面与证据。
+
+正文字号偏小        AI   复核（多源）         低风险    Mock   模拟复核 · 非真实模型判断
+「TextBox 3」的最小显式字号为 8pt（低于 9pt 参考线），其中「TextBox 3」含 316 个字符，位于 0.90,1.70 英寸处。
+坐标（英寸）：x=0.90 · y=1.70 · w=11.60 · h=3.40
+
+ 复核证据：Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+AI
+
+建议：使用实际多模态服务或人工核验完整页面与证据。
+
+视觉模型告警：内容遮挡                AI   复核（多源）    中风险       Mock   模拟复核 · 非真实模型判断
+视觉模型整页输出 p=0.16（阈值见模型工作点），仅页面级风险，模型不提供元素坐标。
+AI   复核证据：Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+建议：使用实际多模态服务或人工核验完整页面与证据。
+
+
+第 5 页 · 1 条问题                                              可编辑页
+
+
+
+
+对象越出画布边界 六类专用检测（多源） 高风险
+元素「TextBox 4」右越出画布 0.97 英寸，文本框范围 6.4,2.0 → 14.3,3.6（英寸）。
+坐标（英寸）：x=6.40 · y=2.00 · w=6.93 · h=1.60
+
+建议：将该元素移回画布安全区，或缩小字号/宽度；若为刻意出血的大字装饰请在人工复核时排除。
+第 6 页 · 2 条问题                                                                可编辑页
+
+
+
+
+视觉模型告警：内容溢出或裁切               AI   复核（多源）    中风险      Mock   模拟复核 · 非真实模型判断
+视觉模型整页输出 p=0.16（阈值见模型工作点），仅页面级风险，模型不提供元素坐标。
+
+ 复核证据：Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+AI
+建议：使用实际多模态服务或人工核验完整页面与证据。
+
+文本被上层对象覆盖           AI   复核（多源）     中风险    Mock   模拟复核 · 非真实模型判断
+元素「TextBox 3」有 67% 的面积被上层「Rounded Rectangle 4」（shape）覆盖；覆盖区域约 5.00×1.35 英寸。
+坐标（英寸）：x=1.60 · y=2.35 · w=5.00 · h=1.35
+
+ 复核证据：Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+AI
+
+建议：使用实际多模态服务或人工核验完整页面与证据。
+第 7 页 · 1 条问题                                                           可编辑页
+
+
+
+
+正文字号偏小 六类专用检测（多源） 低风险
+「TextBox 4」、「TextBox 6」、「TextBox 8」 等 18 个文本对象的最小显式字号为 8.8pt（低于 9pt 参考线），其中
+「TextBox 4」含 20 个字符，位于 0.90,1.60 英寸处。
+坐标（英寸）：x=0.90 · y=1.60 · w=1.65 · h=1.35
+
+建议：将关键正文提升到 12pt 以上，或在投影场景下重新排版为更少文字。
+第 8 页 · 1 条问题                                 可编辑页
+
+
+
+
+视觉模型告警：内容遮挡 视觉模型 中风险
+视觉模型整页输出 p=0.17（阈值见模型工作点），仅页面级风险，模型不提供元素坐标。
+
+建议：调整图层顺序或移动遮挡对象，确保正文完整可见。
+第 11 页 · 2 条问题                                可编辑页
+
+
+
+
+视觉模型告警：内容溢出或裁切 视觉模型 中风险
+视觉模型整页输出 p=0.35（阈值见模型工作点），仅页面级风险，模型不提供元素坐标。
+
+建议：把对象移回画布安全区，或缩短文本、缩小字号。
+
+视觉模型告警：内容遮挡 视觉模型 中风险
+视觉模型整页输出 p=0.32（阈值见模型工作点），仅页面级风险，模型不提供元素坐标。
+
+建议：调整图层顺序或移动遮挡对象，确保正文完整可见。
+第 12 页 · 1 条问题                                               可编辑页
+
+
+
+
+异常设计风险候选         AI   复核（多源）   中风险   Mock   模拟复核 · 非真实模型判断
+D6 在可判范围发现风险候选；需要结合用途、原始页面和定位证据复核。
+
+ 复核证据：Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+AI
+建议：使用实际多模态服务或人工核验完整页面与证据。
+第 13 页 · 1 条问题                       可编辑页
+
+
+
+
+异常设计风险候选 六类专用检测 中风险
+D6 在可判范围发现风险候选；需要结合用途、原始页面和定位证据复核。
+
+建议：先检查定位对象及原始页面，结合使用场景确认后给出调整建议。
+第 14 页 · 1 条问题                       可编辑页
+
+
+
+
+异常设计风险候选 六类专用检测 中风险
+D6 在可判范围发现风险候选；需要结合用途、原始页面和定位证据复核。
+
+建议：先检查定位对象及原始页面，结合使用场景确认后给出调整建议。
+04   结构风险与素材提示
+     能力 整页位图，原生结构检查受限
+       该页由一张铺满画布的图片构成，文本不在 PowerPoint 对象层，结构规则无法读取字号、文本框与对象位置；仅
+       视觉检查可用。
+
+
+     能力 字号不合理的能力范围
+       第5页：Text-role and viewing-context inference are engineering heuristics, not author intent.；Paragraph/line
+       envelopes are not measured glyph height; unknown inherited fonts are not assigned 18pt.；No human-calibrated
+       D1 classifier or population probability is available.
+
+
+     能力 过分留白的能力范围
+       第5页：D5_no_measurable_body_score
+
+
+     能力 字号不合理的能力范围
+       第6页：Text-role and viewing-context inference are engineering heuristics, not author intent.；Paragraph/line
+       envelopes are not measured glyph height; unknown inherited fonts are not assigned 18pt.；No human-calibrated
+       D1 classifier or population probability is available.
+
+
+     能力 内容遮挡的能力范围
+       第6页：local_cover_opacity_or_geometry_unresolved；
+       text_foreground_layout_intersection_requires_glyph_confirmation
+
+
+     能力 过分留白的能力范围
+       第6页：D5_no_measurable_body_score
+
+
+     能力 过分留白的能力范围
+       第8页：Low native occupancy and a large empty region do not establish intended whitespace.；Unknown
+       geometry is blocked in all empty-space measurements and never relabelled as background.；The ordinal score is
+       not a probability; a train-calibrated threshold may fail on other documents.；Container layout allocation protects
+       internal breathing room, while separate local compact-underfill checks remain exploratory.；All reused
+       H150/G150 pages are development diagnostics. Zero observed misses at a calibrated point does not guarantee
+       zero future misses; unresolved native regions remain explicitly unassessed.
+
+
+     能力 过分留白的能力范围
+       第9页：D5_native_content_unavailable
+
+
+     能力 异常设计风险的能力范围
+       第9页：This is a review priority, not confirmed defect probability.；Full D6 automatic sensitivity and AP are
+       unsupported because A05 is unavailable.；Sending bitmaps to human review must be counted separately in false
+       alarms and review burden.；Zero observed misses cannot guarantee zero misses on future PPTX.；A05 素材语义
+       伪影检测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+     能力 字号不合理的能力范围
+       第10页：Text-role and viewing-context inference are engineering heuristics, not author intent.；Paragraph/line
+       envelopes are not measured glyph height; unknown inherited fonts are not assigned 18pt.；No human-calibrated
+       D1 classifier or population probability is available.
+     能力 过分留白的能力范围
+       第10页：D5_no_measurable_body_score
+
+
+     能力 字号不合理的能力范围
+       第11页：Text-role and viewing-context inference are engineering heuristics, not author intent.；Paragraph/line
+       envelopes are not measured glyph height; unknown inherited fonts are not assigned 18pt.；No human-calibrated
+       D1 classifier or population probability is available.
+
+
+     能力 过分留白的能力范围
+       第11页：D5_no_measurable_body_score
+
+
+
+
+05   检测能力与局限
+      结构规则基于 PPTX 对象几何与显式字号做出保守估算，输出的是“候选”，不等同于已确认缺陷或人工标注真值。
+
+      旧结构规则的文字包络为字符数与字号估算；六类专用检测额外使用可取得的PowerPoint实际段落测量。测量失败范
+      围保持未知，特殊字体、艺术字和可见字形仍需核对渲染图。
+      六类专用检测保留实际测量、候选、未知、不支持与未执行范围；有序风险强度不等于缺陷概率。
+
+      D6-A05尚不具备完整素材语义判定能力：局部ROI提示不等于已经识别出AI伪文字。
+      未被选择或因预算跳过的范围仍未复核；按需调用不构成零漏检保证。
+
+      1 页为整页位图，对象层没有可编辑文本，结构规则对这类页面基本失效，只能依赖视觉观察。
+
+      AI 复核结果是辅助判断，不是人工标签，不得写入独立测试集 ground truth。
+      本系统不提供未经定义与验证的综合质量分数；请按类别、证据与来源分别阅读。
+06   执行轨迹
+     阶段        状态   说明                                      结束时间
+     文件检查      已完   OpenXML 校验通过，共 14 页，0.11 MB。            2026-10-
+               成                                            31T11:51:12+08:00
+
+
+     PPTX 解析   已完   解析完成：14 页，16:9，89 个文本框、1 张图片、0 个表格、0    2026-10-
+               成    个图表。                                    31T11:51:12+08:00
+
+
+     页面渲染      已完   14 页全部按比例导出（1920×1080 px）。              2026-10-
+               成                                            31T11:51:22+08:00
+
+
+     结构规则检查    已完   六类检查范围已记录：84 条原始观察；候选与未知分别保留。           2026-10-
+               成                                            31T11:51:24+08:00
+
+
+     视觉模型检测    已完   14 页完成推理。                               2026-10-
+               成                                            31T11:51:44+08:00
+
+
+     多模态按需复    已完   模拟复核链路完成，非真实模型判断。                       2026-10-
+     核         成                                            31T11:51:44+08:00
+
+
+     结果整合      已完   整合后 15 条问题，涉及 10 页；AI 支持 0 条、不成立 0 条。   2026-10-
+               成                                            31T11:51:44+08:00
+
+
+     报告生成      已完   报告已生成：report.html / report.json。        2026-10-
+               成                                            31T11:51:44+08:00
+
+
+
+
+审查要求
+     用途：未指定
+     风格：未指定
+     审查重点：
+六类原始检测范围
+ 未知、不支持、未执行均不等于正常；分数是有序强度，不是缺陷概率。D6-A05素材语义检测尚不完整。
+
+ 页/关联   类别/子项     原始状态     版本与可判范围
+ 页
+ 1/1    字号不合理     可判范围未检   specialized-engineering-v1
+                  出        Text-role and viewing-context inference are engineering heuristics,
+                           not author intent.；Paragraph/line envelopes are not measured
+                           glyph height; unknown inherited fonts are not assigned 18pt.；No
+                           human-calibrated D1 classifier or population probability is available.
+
+
+ 1/1    内容遮挡      可判范围未检   evidence-refinement-r2
+                  出        Developed using the sixmix training split only; the source documents
+                           overlap splits.；Measured paragraph envelopes are not glyph
+                           segmentation or human readability judgments.；Sparse
+                           disorganized microtext and span loss are candidate mechanisms, not
+                           a complete detector.
+
+ 1/1    布局拥挤      可判范围未检   evidence-refinement-r2
+                  出        Developed using the sixmix training split only; the source documents
+                           overlap splits.；Measured paragraph envelopes are not glyph
+                           segmentation or human readability judgments.；Sparse
+                           disorganized microtext and span loss are candidate mechanisms, not
+                           a complete detector.
+
+
+ 1/1    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                  出        Object frame, actual layout envelope and visible pixel clipping
+                           remain three distinct evidence levels.；Historical >0.04in COM
+                           paragraph-page overflow boundary is retained.；Cell/autofit
+                           containment witnesses do not prove unreadable pixels; image
+                           subject crop and rotated visible shape masks remain unresolved.
+
+
+ 1/1    过分留白      可判范围未检   d5-evidence-only-known-layout-recall-v3
+                  出        Low native occupancy and a large empty region do not establish
+                           intended whitespace.；Unknown geometry is blocked in all empty-
+                           space measurements and never relabelled as background.；The
+                           ordinal score is not a probability; a train-calibrated threshold may
+                           fail on other documents.；All reused H150/G150 pages are
+                           development diagnostics. Zero observed misses at a calibrated point
+                           does not guarantee zero future misses; unresolved native regions
+                           remain explicitly unassessed.
+页/关联   类别/子项     原始状态     版本与可判范围
+页
+1/1    异常设计风险    可判范围未检   evidence-refinement-r1+d6-recall-review-v1-20261030
+                 出        This is a review priority, not confirmed defect probability.；Full D6
+                          automatic sensitivity and AP are unsupported because A05 is
+                          unavailable.；Sending bitmaps to human review must be counted
+                          separately in false alarms and review burden.；Zero observed misses
+                          cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                          测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+2/2    字号不合理     可判范围未检   specialized-engineering-v1
+                 出        Text-role and viewing-context inference are engineering heuristics,
+                          not author intent.；Paragraph/line envelopes are not measured
+                          glyph height; unknown inherited fonts are not assigned 18pt.；No
+                          human-calibrated D1 classifier or population probability is available.
+
+
+2/2    内容遮挡      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+2/2    布局拥挤      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+2/2    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                 出        Object frame, actual layout envelope and visible pixel clipping
+                          remain three distinct evidence levels.；Historical >0.04in COM
+                          paragraph-page overflow boundary is retained.；Cell/autofit
+                          containment witnesses do not prove unreadable pixels; image
+                          subject crop and rotated visible shape masks remain unresolved.
+
+
+2/2    过分留白      可判范围未检   d5-evidence-only-known-layout-recall-v3
+                 出        Low native occupancy and a large empty region do not establish
+                          intended whitespace.；Unknown geometry is blocked in all empty-
+                          space measurements and never relabelled as background.；The
+                          ordinal score is not a probability; a train-calibrated threshold may
+                          fail on other documents.；Container layout allocation protects
+                          internal breathing room, while separate local compact-underfill
+                          checks remain exploratory.；All reused H150/G150 pages are
+                          development diagnostics. Zero observed misses at a calibrated point
+                          does not guarantee zero future misses; unresolved native regions
+                          remain explicitly unassessed.
+页/关联   类别/子项     原始状态     版本与可判范围
+页
+2/2    异常设计风险    候选问题     evidence-refinement-r1+d6-recall-review-v1-20261030
+                          This is a review priority, not confirmed defect probability.；Full D6
+                          automatic sensitivity and AP are unsupported because A05 is
+                          unavailable.；Sending bitmaps to human review must be counted
+                          separately in false alarms and review burden.；Zero observed misses
+                          cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                          测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+3/3    字号不合理     可判范围未检   specialized-engineering-v1
+                 出        Text-role and viewing-context inference are engineering heuristics,
+                          not author intent.；Paragraph/line envelopes are not measured
+                          glyph height; unknown inherited fonts are not assigned 18pt.；No
+                          human-calibrated D1 classifier or population probability is available.
+
+
+3/3    内容遮挡      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+3/3    布局拥挤      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+3/3    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                 出        Object frame, actual layout envelope and visible pixel clipping
+                          remain three distinct evidence levels.；Historical >0.04in COM
+                          paragraph-page overflow boundary is retained.；Cell/autofit
+                          containment witnesses do not prove unreadable pixels; image
+                          subject crop and rotated visible shape masks remain unresolved.
+
+
+3/3    过分留白      可判范围未检   d5-evidence-only-known-layout-recall-v3
+                 出        Low native occupancy and a large empty region do not establish
+                          intended whitespace.；Unknown geometry is blocked in all empty-
+                          space measurements and never relabelled as background.；The
+                          ordinal score is not a probability; a train-calibrated threshold may
+                          fail on other documents.；Container layout allocation protects
+                          internal breathing room, while separate local compact-underfill
+                          checks remain exploratory.；All reused H150/G150 pages are
+                          development diagnostics. Zero observed misses at a calibrated point
+                          does not guarantee zero future misses; unresolved native regions
+                          remain explicitly unassessed.
+页/关联   类别/子项     原始状态     版本与可判范围
+页
+3/3    异常设计风险    可判范围未检   evidence-refinement-r1+d6-recall-review-v1-20261030
+                 出        This is a review priority, not confirmed defect probability.；Full D6
+                          automatic sensitivity and AP are unsupported because A05 is
+                          unavailable.；Sending bitmaps to human review must be counted
+                          separately in false alarms and review burden.；Zero observed misses
+                          cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                          测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+4/4    字号不合理     候选问题     specialized-engineering-v1
+                          Text-role and viewing-context inference are engineering heuristics,
+                          not author intent.；Paragraph/line envelopes are not measured
+                          glyph height; unknown inherited fonts are not assigned 18pt.；No
+                          human-calibrated D1 classifier or population probability is available.
+
+
+4/4    内容遮挡      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+4/4    布局拥挤      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+4/4    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                 出        Object frame, actual layout envelope and visible pixel clipping
+                          remain three distinct evidence levels.；Historical >0.04in COM
+                          paragraph-page overflow boundary is retained.；Cell/autofit
+                          containment witnesses do not prove unreadable pixels; image
+                          subject crop and rotated visible shape masks remain unresolved.
+
+
+4/4    过分留白      候选问题     d5-evidence-only-known-layout-recall-v3
+                          Low native occupancy and a large empty region do not establish
+                          intended whitespace.；Unknown geometry is blocked in all empty-
+                          space measurements and never relabelled as background.；The
+                          ordinal score is not a probability; a train-calibrated threshold may
+                          fail on other documents.；Container layout allocation protects
+                          internal breathing room, while separate local compact-underfill
+                          checks remain exploratory.；All reused H150/G150 pages are
+                          development diagnostics. Zero observed misses at a calibrated point
+                          does not guarantee zero future misses; unresolved native regions
+                          remain explicitly unassessed.
+页/关联   类别/子项     原始状态     版本与可判范围
+页
+4/4    异常设计风险    候选问题     evidence-refinement-r1+d6-recall-review-v1-20261030
+                          This is a review priority, not confirmed defect probability.；Full D6
+                          automatic sensitivity and AP are unsupported because A05 is
+                          unavailable.；Sending bitmaps to human review must be counted
+                          separately in false alarms and review burden.；Zero observed misses
+                          cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                          测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+5/5    字号不合理     未知       specialized-engineering-v1
+                          Text-role and viewing-context inference are engineering heuristics,
+                          not author intent.；Paragraph/line envelopes are not measured
+                          glyph height; unknown inherited fonts are not assigned 18pt.；No
+                          human-calibrated D1 classifier or population probability is available.
+
+
+5/5    内容遮挡      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+5/5    布局拥挤      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+5/5    内容溢出或裁切   候选问题     specialized-engineering-v1
+                          Object frame, actual layout envelope and visible pixel clipping
+                          remain three distinct evidence levels.；Historical >0.04in COM
+                          paragraph-page overflow boundary is retained.；Cell/autofit
+                          containment witnesses do not prove unreadable pixels; image
+                          subject crop and rotated visible shape masks remain unresolved.
+
+
+5/5    过分留白      未知       d5-evidence-only-known-layout-recall-v3
+                          Low native occupancy and a large empty region do not establish
+                          intended whitespace.；Unknown geometry is blocked in all empty-
+                          space measurements and never relabelled as background.；The
+                          ordinal score is not a probability; a train-calibrated threshold may
+                          fail on other documents.；All reused H150/G150 pages are
+                          development diagnostics. Zero observed misses at a calibrated point
+                          does not guarantee zero future misses; unresolved native regions
+                          remain explicitly unassessed.
+页/关联   类别/子项     原始状态     版本与可判范围
+页
+5/5    异常设计风险    可判范围未检   evidence-refinement-r1+d6-recall-review-v1-20261030
+                 出        This is a review priority, not confirmed defect probability.；Full D6
+                          automatic sensitivity and AP are unsupported because A05 is
+                          unavailable.；Sending bitmaps to human review must be counted
+                          separately in false alarms and review burden.；Zero observed misses
+                          cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                          测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+6/6    字号不合理     未知       specialized-engineering-v1
+                          Text-role and viewing-context inference are engineering heuristics,
+                          not author intent.；Paragraph/line envelopes are not measured
+                          glyph height; unknown inherited fonts are not assigned 18pt.；No
+                          human-calibrated D1 classifier or population probability is available.
+
+
+6/6    内容遮挡      未知       evidence-refinement-r2
+                          Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+6/6    布局拥挤      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+6/6    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                 出        Object frame, actual layout envelope and visible pixel clipping
+                          remain three distinct evidence levels.；Historical >0.04in COM
+                          paragraph-page overflow boundary is retained.；Cell/autofit
+                          containment witnesses do not prove unreadable pixels; image
+                          subject crop and rotated visible shape masks remain unresolved.
+
+
+6/6    过分留白      未知       d5-evidence-only-known-layout-recall-v3
+                          Low native occupancy and a large empty region do not establish
+                          intended whitespace.；Unknown geometry is blocked in all empty-
+                          space measurements and never relabelled as background.；The
+                          ordinal score is not a probability; a train-calibrated threshold may
+                          fail on other documents.；All reused H150/G150 pages are
+                          development diagnostics. Zero observed misses at a calibrated point
+                          does not guarantee zero future misses; unresolved native regions
+                          remain explicitly unassessed.
+页/关联   类别/子项     原始状态     版本与可判范围
+页
+6/6    异常设计风险    可判范围未检   evidence-refinement-r1+d6-recall-review-v1-20261030
+                 出        This is a review priority, not confirmed defect probability.；Full D6
+                          automatic sensitivity and AP are unsupported because A05 is
+                          unavailable.；Sending bitmaps to human review must be counted
+                          separately in false alarms and review burden.；Zero observed misses
+                          cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                          测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+7/7    字号不合理     候选问题     specialized-engineering-v1
+                          Text-role and viewing-context inference are engineering heuristics,
+                          not author intent.；Paragraph/line envelopes are not measured
+                          glyph height; unknown inherited fonts are not assigned 18pt.；No
+                          human-calibrated D1 classifier or population probability is available.
+
+
+7/7    内容遮挡      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+7/7    布局拥挤      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+7/7    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                 出        Object frame, actual layout envelope and visible pixel clipping
+                          remain three distinct evidence levels.；Historical >0.04in COM
+                          paragraph-page overflow boundary is retained.；Cell/autofit
+                          containment witnesses do not prove unreadable pixels; image
+                          subject crop and rotated visible shape masks remain unresolved.
+
+
+7/7    过分留白      可判范围未检   d5-evidence-only-known-layout-recall-v3
+                 出        Low native occupancy and a large empty region do not establish
+                          intended whitespace.；Unknown geometry is blocked in all empty-
+                          space measurements and never relabelled as background.；The
+                          ordinal score is not a probability; a train-calibrated threshold may
+                          fail on other documents.；Container layout allocation protects
+                          internal breathing room, while separate local compact-underfill
+                          checks remain exploratory.；All reused H150/G150 pages are
+                          development diagnostics. Zero observed misses at a calibrated point
+                          does not guarantee zero future misses; unresolved native regions
+                          remain explicitly unassessed.
+页/关联   类别/子项     原始状态     版本与可判范围
+页
+7/7    异常设计风险    可判范围未检   evidence-refinement-r1+d6-recall-review-v1-20261030
+                 出        This is a review priority, not confirmed defect probability.；Full D6
+                          automatic sensitivity and AP are unsupported because A05 is
+                          unavailable.；Sending bitmaps to human review must be counted
+                          separately in false alarms and review burden.；Zero observed misses
+                          cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                          测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+8/8    字号不合理     可判范围未检   specialized-engineering-v1
+                 出        Text-role and viewing-context inference are engineering heuristics,
+                          not author intent.；Paragraph/line envelopes are not measured
+                          glyph height; unknown inherited fonts are not assigned 18pt.；No
+                          human-calibrated D1 classifier or population probability is available.
+
+
+8/8    内容遮挡      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+8/8    布局拥挤      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+8/8    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                 出        Object frame, actual layout envelope and visible pixel clipping
+                          remain three distinct evidence levels.；Historical >0.04in COM
+                          paragraph-page overflow boundary is retained.；Cell/autofit
+                          containment witnesses do not prove unreadable pixels; image
+                          subject crop and rotated visible shape masks remain unresolved.
+
+
+8/8    过分留白      未知       d5-evidence-only-known-layout-recall-v3
+                          Low native occupancy and a large empty region do not establish
+                          intended whitespace.；Unknown geometry is blocked in all empty-
+                          space measurements and never relabelled as background.；The
+                          ordinal score is not a probability; a train-calibrated threshold may
+                          fail on other documents.；Container layout allocation protects
+                          internal breathing room, while separate local compact-underfill
+                          checks remain exploratory.；All reused H150/G150 pages are
+                          development diagnostics. Zero observed misses at a calibrated point
+                          does not guarantee zero future misses; unresolved native regions
+                          remain explicitly unassessed.
+页/关联   类别/子项     原始状态     版本与可判范围
+页
+8/8    异常设计风险    可判范围未检   evidence-refinement-r1+d6-recall-review-v1-20261030
+                 出        This is a review priority, not confirmed defect probability.；Full D6
+                          automatic sensitivity and AP are unsupported because A05 is
+                          unavailable.；Sending bitmaps to human review must be counted
+                          separately in false alarms and review burden.；Zero observed misses
+                          cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                          测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+9/9    字号不合理     可判范围未检   specialized-engineering-v1
+                 出        Text-role and viewing-context inference are engineering heuristics,
+                          not author intent.；Paragraph/line envelopes are not measured
+                          glyph height; unknown inherited fonts are not assigned 18pt.；No
+                          human-calibrated D1 classifier or population probability is available.
+
+
+9/9    内容遮挡      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+
+9/9    布局拥挤      可判范围未检   evidence-refinement-r2
+                 出        Developed using the sixmix training split only; the source documents
+                          overlap splits.；Measured paragraph envelopes are not glyph
+                          segmentation or human readability judgments.；Sparse
+                          disorganized microtext and span loss are candidate mechanisms, not
+                          a complete detector.
+
+9/9    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                 出        Object frame, actual layout envelope and visible pixel clipping
+                          remain three distinct evidence levels.；Historical >0.04in COM
+                          paragraph-page overflow boundary is retained.；Cell/autofit
+                          containment witnesses do not prove unreadable pixels; image
+                          subject crop and rotated visible shape masks remain unresolved.
+
+
+9/9    过分留白      不支持      d5-evidence-only-known-layout-recall-v3
+                          Low native occupancy and a large empty region do not establish
+                          intended whitespace.；Unknown geometry is blocked in all empty-
+                          space measurements and never relabelled as background.；The
+                          ordinal score is not a probability; a train-calibrated threshold may
+                          fail on other documents.；All reused H150/G150 pages are
+                          development diagnostics. Zero observed misses at a calibrated point
+                          does not guarantee zero future misses; unresolved native regions
+                          remain explicitly unassessed.
+页/关联      类别/子项     原始状态     版本与可判范围
+页
+9/9       异常设计风险    未知       evidence-refinement-r1+d6-recall-review-v1-20261030
+                             This is a review priority, not confirmed defect probability.；Full D6
+                             automatic sensitivity and AP are unsupported because A05 is
+                             unavailable.；Sending bitmaps to human review must be counted
+                             separately in false alarms and review burden.；Zero observed misses
+                             cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                             测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+10 / 10   字号不合理     未知       specialized-engineering-v1
+                             Text-role and viewing-context inference are engineering heuristics,
+                             not author intent.；Paragraph/line envelopes are not measured
+                             glyph height; unknown inherited fonts are not assigned 18pt.；No
+                             human-calibrated D1 classifier or population probability is available.
+
+
+10 / 10   内容遮挡      可判范围未检   evidence-refinement-r2
+                    出        Developed using the sixmix training split only; the source documents
+                             overlap splits.；Measured paragraph envelopes are not glyph
+                             segmentation or human readability judgments.；Sparse
+                             disorganized microtext and span loss are candidate mechanisms, not
+                             a complete detector.
+
+
+10 / 10   布局拥挤      可判范围未检   evidence-refinement-r2
+                    出        Developed using the sixmix training split only; the source documents
+                             overlap splits.；Measured paragraph envelopes are not glyph
+                             segmentation or human readability judgments.；Sparse
+                             disorganized microtext and span loss are candidate mechanisms, not
+                             a complete detector.
+
+
+10 / 10   内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                    出        Object frame, actual layout envelope and visible pixel clipping
+                             remain three distinct evidence levels.；Historical >0.04in COM
+                             paragraph-page overflow boundary is retained.；Cell/autofit
+                             containment witnesses do not prove unreadable pixels; image
+                             subject crop and rotated visible shape masks remain unresolved.
+
+
+10 / 10   过分留白      未知       d5-evidence-only-known-layout-recall-v3
+                             Low native occupancy and a large empty region do not establish
+                             intended whitespace.；Unknown geometry is blocked in all empty-
+                             space measurements and never relabelled as background.；The
+                             ordinal score is not a probability; a train-calibrated threshold may
+                             fail on other documents.；All reused H150/G150 pages are
+                             development diagnostics. Zero observed misses at a calibrated point
+                             does not guarantee zero future misses; unresolved native regions
+                             remain explicitly unassessed.
+页/关联      类别/子项     原始状态     版本与可判范围
+页
+10 / 10   异常设计风险    可判范围未检   evidence-refinement-r1+d6-recall-review-v1-20261030
+                    出        This is a review priority, not confirmed defect probability.；Full D6
+                             automatic sensitivity and AP are unsupported because A05 is
+                             unavailable.；Sending bitmaps to human review must be counted
+                             separately in false alarms and review burden.；Zero observed misses
+                             cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                             测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+11 / 11   字号不合理     未知       specialized-engineering-v1
+                             Text-role and viewing-context inference are engineering heuristics,
+                             not author intent.；Paragraph/line envelopes are not measured
+                             glyph height; unknown inherited fonts are not assigned 18pt.；No
+                             human-calibrated D1 classifier or population probability is available.
+
+
+11 / 11   内容遮挡      可判范围未检   evidence-refinement-r2
+                    出        Developed using the sixmix training split only; the source documents
+                             overlap splits.；Measured paragraph envelopes are not glyph
+                             segmentation or human readability judgments.；Sparse
+                             disorganized microtext and span loss are candidate mechanisms, not
+                             a complete detector.
+
+
+11 / 11   布局拥挤      可判范围未检   evidence-refinement-r2
+                    出        Developed using the sixmix training split only; the source documents
+                             overlap splits.；Measured paragraph envelopes are not glyph
+                             segmentation or human readability judgments.；Sparse
+                             disorganized microtext and span loss are candidate mechanisms, not
+                             a complete detector.
+
+11 / 11   内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                    出        Object frame, actual layout envelope and visible pixel clipping
+                             remain three distinct evidence levels.；Historical >0.04in COM
+                             paragraph-page overflow boundary is retained.；Cell/autofit
+                             containment witnesses do not prove unreadable pixels; image
+                             subject crop and rotated visible shape masks remain unresolved.
+
+
+11 / 11   过分留白      未知       d5-evidence-only-known-layout-recall-v3
+                             Low native occupancy and a large empty region do not establish
+                             intended whitespace.；Unknown geometry is blocked in all empty-
+                             space measurements and never relabelled as background.；The
+                             ordinal score is not a probability; a train-calibrated threshold may
+                             fail on other documents.；All reused H150/G150 pages are
+                             development diagnostics. Zero observed misses at a calibrated point
+                             does not guarantee zero future misses; unresolved native regions
+                             remain explicitly unassessed.
+页/关联      类别/子项     原始状态     版本与可判范围
+页
+11 / 11   异常设计风险    可判范围未检   evidence-refinement-r1+d6-recall-review-v1-20261030
+                    出        This is a review priority, not confirmed defect probability.；Full D6
+                             automatic sensitivity and AP are unsupported because A05 is
+                             unavailable.；Sending bitmaps to human review must be counted
+                             separately in false alarms and review burden.；Zero observed misses
+                             cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                             测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+12 / 12   字号不合理     可判范围未检   specialized-engineering-v1
+                    出        Text-role and viewing-context inference are engineering heuristics,
+                             not author intent.；Paragraph/line envelopes are not measured
+                             glyph height; unknown inherited fonts are not assigned 18pt.；No
+                             human-calibrated D1 classifier or population probability is available.
+
+
+12 / 12   内容遮挡      可判范围未检   evidence-refinement-r2
+                    出        Developed using the sixmix training split only; the source documents
+                             overlap splits.；Measured paragraph envelopes are not glyph
+                             segmentation or human readability judgments.；Sparse
+                             disorganized microtext and span loss are candidate mechanisms, not
+                             a complete detector.
+
+
+12 / 12   布局拥挤      可判范围未检   evidence-refinement-r2
+                    出        Developed using the sixmix training split only; the source documents
+                             overlap splits.；Measured paragraph envelopes are not glyph
+                             segmentation or human readability judgments.；Sparse
+                             disorganized microtext and span loss are candidate mechanisms, not
+                             a complete detector.
+
+12 / 12   内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                    出        Object frame, actual layout envelope and visible pixel clipping
+                             remain three distinct evidence levels.；Historical >0.04in COM
+                             paragraph-page overflow boundary is retained.；Cell/autofit
+                             containment witnesses do not prove unreadable pixels; image
+                             subject crop and rotated visible shape masks remain unresolved.
+
+
+12 / 12   过分留白      可判范围未检   d5-evidence-only-known-layout-recall-v3
+                    出        Low native occupancy and a large empty region do not establish
+                             intended whitespace.；Unknown geometry is blocked in all empty-
+                             space measurements and never relabelled as background.；The
+                             ordinal score is not a probability; a train-calibrated threshold may
+                             fail on other documents.；Container layout allocation protects
+                             internal breathing room, while separate local compact-underfill
+                             checks remain exploratory.；All reused H150/G150 pages are
+                             development diagnostics. Zero observed misses at a calibrated point
+                             does not guarantee zero future misses; unresolved native regions
+                             remain explicitly unassessed.
+页/关联       类别/子项     原始状态     版本与可判范围
+页
+12 / 12,   异常设计风险    候选问题     evidence-refinement-r1+d6-recall-review-v1-20261030
+13, 14                        This is a review priority, not confirmed defect probability.；Full D6
+                              automatic sensitivity and AP are unsupported because A05 is
+                              unavailable.；Sending bitmaps to human review must be counted
+                              separately in false alarms and review burden.；Zero observed misses
+                              cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                              测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+13 / 13    字号不合理     可判范围未检   specialized-engineering-v1
+                     出        Text-role and viewing-context inference are engineering heuristics,
+                              not author intent.；Paragraph/line envelopes are not measured
+                              glyph height; unknown inherited fonts are not assigned 18pt.；No
+                              human-calibrated D1 classifier or population probability is available.
+
+
+13 / 13    内容遮挡      可判范围未检   evidence-refinement-r2
+                     出        Developed using the sixmix training split only; the source documents
+                              overlap splits.；Measured paragraph envelopes are not glyph
+                              segmentation or human readability judgments.；Sparse
+                              disorganized microtext and span loss are candidate mechanisms, not
+                              a complete detector.
+
+
+13 / 13    布局拥挤      可判范围未检   evidence-refinement-r2
+                     出        Developed using the sixmix training split only; the source documents
+                              overlap splits.；Measured paragraph envelopes are not glyph
+                              segmentation or human readability judgments.；Sparse
+                              disorganized microtext and span loss are candidate mechanisms, not
+                              a complete detector.
+
+13 / 13    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                     出        Object frame, actual layout envelope and visible pixel clipping
+                              remain three distinct evidence levels.；Historical >0.04in COM
+                              paragraph-page overflow boundary is retained.；Cell/autofit
+                              containment witnesses do not prove unreadable pixels; image
+                              subject crop and rotated visible shape masks remain unresolved.
+
+
+13 / 13    过分留白      可判范围未检   d5-evidence-only-known-layout-recall-v3
+                     出        Low native occupancy and a large empty region do not establish
+                              intended whitespace.；Unknown geometry is blocked in all empty-
+                              space measurements and never relabelled as background.；The
+                              ordinal score is not a probability; a train-calibrated threshold may
+                              fail on other documents.；Container layout allocation protects
+                              internal breathing room, while separate local compact-underfill
+                              checks remain exploratory.；All reused H150/G150 pages are
+                              development diagnostics. Zero observed misses at a calibrated point
+                              does not guarantee zero future misses; unresolved native regions
+                              remain explicitly unassessed.
+页/关联       类别/子项     原始状态     版本与可判范围
+页
+13 / 12,   异常设计风险    候选问题     evidence-refinement-r1+d6-recall-review-v1-20261030
+13, 14                        This is a review priority, not confirmed defect probability.；Full D6
+                              automatic sensitivity and AP are unsupported because A05 is
+                              unavailable.；Sending bitmaps to human review must be counted
+                              separately in false alarms and review burden.；Zero observed misses
+                              cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                              测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+
+
+14 / 14    字号不合理     可判范围未检   specialized-engineering-v1
+                     出        Text-role and viewing-context inference are engineering heuristics,
+                              not author intent.；Paragraph/line envelopes are not measured
+                              glyph height; unknown inherited fonts are not assigned 18pt.；No
+                              human-calibrated D1 classifier or population probability is available.
+
+
+14 / 14    内容遮挡      可判范围未检   evidence-refinement-r2
+                     出        Developed using the sixmix training split only; the source documents
+                              overlap splits.；Measured paragraph envelopes are not glyph
+                              segmentation or human readability judgments.；Sparse
+                              disorganized microtext and span loss are candidate mechanisms, not
+                              a complete detector.
+
+
+14 / 14    布局拥挤      可判范围未检   evidence-refinement-r2
+                     出        Developed using the sixmix training split only; the source documents
+                              overlap splits.；Measured paragraph envelopes are not glyph
+                              segmentation or human readability judgments.；Sparse
+                              disorganized microtext and span loss are candidate mechanisms, not
+                              a complete detector.
+
+14 / 14    内容溢出或裁切   可判范围未检   specialized-engineering-v1
+                     出        Object frame, actual layout envelope and visible pixel clipping
+                              remain three distinct evidence levels.；Historical >0.04in COM
+                              paragraph-page overflow boundary is retained.；Cell/autofit
+                              containment witnesses do not prove unreadable pixels; image
+                              subject crop and rotated visible shape masks remain unresolved.
+
+
+14 / 14    过分留白      可判范围未检   d5-evidence-only-known-layout-recall-v3
+                     出        Low native occupancy and a large empty region do not establish
+                              intended whitespace.；Unknown geometry is blocked in all empty-
+                              space measurements and never relabelled as background.；The
+                              ordinal score is not a probability; a train-calibrated threshold may
+                              fail on other documents.；Container layout allocation protects
+                              internal breathing room, while separate local compact-underfill
+                              checks remain exploratory.；All reused H150/G150 pages are
+                              development diagnostics. Zero observed misses at a calibrated point
+                              does not guarantee zero future misses; unresolved native regions
+                              remain explicitly unassessed.
+页/关联       类别/子项    原始状态   版本与可判范围
+页
+14 / 12,   异常设计风险   候选问题   evidence-refinement-r1+d6-recall-review-v1-20261030
+13, 14                     This is a review priority, not confirmed defect probability.；Full D6
+                           automatic sensitivity and AP are unsupported because A05 is
+                           unavailable.；Sending bitmaps to human review must be counted
+                           separately in false alarms and review burden.；Zero observed misses
+                           cannot guarantee zero misses on future PPTX.；A05 素材语义伪影检
+                           测未实现；局部 ROI 只支持进一步复核，不能证明 AI 伪文字。
+按需复核调度记录
+ 页面/候选             工具            选择与原因                               所需证据
+ 2                 None          未选择                                 ['完整页面', '六类
+ six-                            未调用：outside_manual_pages；原始风险保留。    补充检查']
+ 4b9f59bfc64c46f                 outside_manual_pages
+ 2-s0002-D6
+
+
+ 2                 None          未选择                                 ['完整页面', '六类
+ six-                            未调用：outside_manual_pages；原始风险保留。    补充检查']
+ 4b9f59bfc64c46f                 outside_manual_pages
+ 2-s0002-D6:A04
+
+
+ 4                 multimoda     已选择                                 ['完整页面', '六类
+ six-              l_full_page   R2/结构与CLIP页级证据存在响应分歧，需分别核查；CLIP阴性   补充检查']
+ 4b9f59bfc64c46f                 不能排除原生局部候选。选中页复核同时补查全部六类，避免
+ 2-s0004-D1                      只检查已报警类别。
+                                 None
+
+
+ 4                 multimoda     已选择                                 ['完整页面', '六类
+ six-              l_full_page   留白或设计异常需结合用途、页面角色及跨页上下文。选中页         补充检查']
+ 4b9f59bfc64c46f                 复核同时补查全部六类，避免只检查已报警类别。
+ 2-s0004-D5                      None
+
+
+ 4                 multimoda     已选择                                 ['完整页面', '六类
+ six-              l_full_page   留白或设计异常需结合用途、页面角色及跨页上下文。选中页         补充检查']
+ 4b9f59bfc64c46f                 复核同时补查全部六类，避免只检查已报警类别。
+ 2-s0004-D6                      None
+
+
+ 4                 multimoda     已选择                                 ['完整页面', '六类
+ six-              l_full_page   留白或设计异常需结合用途、页面角色及跨页上下文。选中页         补充检查']
+ 4b9f59bfc64c46f                 复核同时补查全部六类，避免只检查已报警类别。
+ 2-s0004-D6:A04                  None
+
+
+ 5                 None          未选择                                 ['完整页面', '六类
+ six-                            未调用：outside_manual_pages；原始风险保留。    补充检查']
+ 4b9f59bfc64c46f                 outside_manual_pages
+ 2-s0005-D1
+
+
+ 5                 None          未选择                                 ['完整页面', '六类
+ six-                            未调用：outside_manual_pages；原始风险保留。    补充检查']
+ 4b9f59bfc64c46f                 outside_manual_pages
+ 2-s0005-D4
+
+
+ 5                 None          未选择                                 ['完整页面', '六类
+ six-                            未调用：outside_manual_pages；原始风险保留。    补充检查']
+ 4b9f59bfc64c46f                 outside_manual_pages
+ 2-s0005-D5
+页面/候选             工具            选择与原因                              所需证据
+6                 multimoda     已选择                                ['完整页面', '六类
+six-              l_full_page   证据范围未知，需要补充视觉核查。选中页复核同时补查全部        补充检查']
+4b9f59bfc64c46f                 六类，避免只检查已报警类别。
+2-s0006-D1                      None
+
+6                 multimoda     已选择                                ['完整页面', '六类
+six-              l_full_page   多源可判范围或候选响应不一致，需要核对各自证据和定位；        补充检查']
+4b9f59bfc64c46f                 未检出不等于正常。选中页复核同时补查全部六类，避免只检
+2-s0006-D2                      查已报警类别。
+                                None
+
+
+6                 multimoda     已选择                                ['完整页面', '六类
+six-              l_full_page   证据范围未知，需要补充视觉核查。选中页复核同时补查全部        补充检查']
+4b9f59bfc64c46f                 六类，避免只检查已报警类别。
+2-s0006-D5                      None
+
+
+7                 None          未选择                                ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。   补充检查']
+4b9f59bfc64c46f                 outside_manual_pages
+2-s0007-D1
+
+
+8                 None          未选择                                ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。   补充检查']
+4b9f59bfc64c46f                 outside_manual_pages
+2-s0008-D5
+
+
+9                 None          未选择                                ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。   补充检查']
+4b9f59bfc64c46f                 outside_manual_pages
+2-s0009-D5
+
+
+9                 None          未选择                                ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。   补充检查']
+4b9f59bfc64c46f                 outside_manual_pages
+2-s0009-D6
+
+
+9                 None          未选择                                ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。   补充检查', '候选
+4b9f59bfc64c46f                 outside_manual_pages               ROI']
+2-s0009-D6:A05
+
+
+10                None          未选择                                ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。   补充检查']
+4b9f59bfc64c46f                 outside_manual_pages
+2-s0010-D1
+
+
+10                None          未选择                                ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。   补充检查']
+4b9f59bfc64c46f                 outside_manual_pages
+2-s0010-D5
+页面/候选             工具            选择与原因                               所需证据
+11                None          未选择                                 ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。    补充检查']
+4b9f59bfc64c46f                 outside_manual_pages
+2-s0011-D1
+
+
+11                None          未选择                                 ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。    补充检查']
+4b9f59bfc64c46f                 outside_manual_pages
+2-s0011-D5
+
+
+12                multimoda     已选择                                 ['完整页面', '六类
+six-              l_multi_pa    留白或设计异常需结合用途、页面角色及跨页上下文。选中页         补充检查', '跨页
+4b9f59bfc64c46f   ge            复核同时补查全部六类，避免只检查已报警类别。              对照']
+2-s0012-D6                      None
+
+
+12                multimoda     已选择                                 ['完整页面', '六类
+six-              l_multi_pa    留白或设计异常需结合用途、页面角色及跨页上下文。选中页         补充检查', '跨页
+4b9f59bfc64c46f   ge            复核同时补查全部六类，避免只检查已报警类别。              对照']
+2-s0012-D6:A01                  None
+
+
+13                None          未选择                                 ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。    补充检查', '跨页
+4b9f59bfc64c46f                 outside_manual_pages                对照']
+2-s0013-D6
+
+
+13                None          未选择                                 ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。    补充检查', '跨页
+4b9f59bfc64c46f                 outside_manual_pages                对照']
+2-s0013-D6:A01
+
+
+14                None          未选择                                 ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。    补充检查', '跨页
+4b9f59bfc64c46f                 outside_manual_pages                对照']
+2-s0014-D6
+
+
+14                None          未选择                                 ['完整页面', '六类
+six-                            未调用：outside_manual_pages；原始风险保留。    补充检查', '跨页
+4b9f59bfc64c46f                 outside_manual_pages                对照']
+2-s0014-D6:A01
+
+
+4                 multimoda     已选择                                 ['完整页面', '六类
+R03-s0004-01      l_full_page   R2/结构与CLIP页级证据存在响应分歧，需分别核查；CLIP阴性   补充检查']
+                                不能排除原生局部候选。选中页复核同时补查全部六类，避免
+                                只检查已报警类别。
+                                None
+
+
+5                 None          未选择                                 ['完整页面', '六类
+R01-s0005-01                    未调用：outside_manual_pages；原始风险保留。    补充检查']
+                                outside_manual_pages
+页面/候选                工具            选择与原因                               所需证据
+6                    multimoda     已选择                                 ['完整页面', '六类
+R05-s0006-01         l_full_page   多源可判范围或候选响应不一致，需要核对各自证据和定位；         补充检查']
+                                   未检出不等于正常。选中页复核同时补查全部六类，避免只检
+                                   查已报警类别。
+                                   None
+
+
+7                    None          未选择                                 ['完整页面', '六类
+R03-s0007-01                       未调用：outside_manual_pages；原始风险保留。    补充检查']
+                                   outside_manual_pages
+
+
+4                    multimoda     已选择                                 ['完整页面', '六类
+VM-s0004-            l_full_page   R2/结构与CLIP页级证据存在响应分歧，需分别核查；CLIP阴性   补充检查']
+occlud                             不能排除原生局部候选。选中页复核同时补查全部六类，避免
+                                   只检查已报警类别。
+                                   None
+
+
+6                    multimoda     已选择                                 ['完整页面', '六类
+VM-s0006-            l_full_page   R2/结构与CLIP页级证据存在响应分歧，需分别核查；CLIP阴性   补充检查']
+conten                             不能排除原生局部候选。选中页复核同时补查全部六类，避免
+                                   只检查已报警类别。
+                                   None
+
+
+8                    None          未选择                                 ['完整页面', '六类
+VM-s0008-                          未调用：outside_manual_pages；原始风险保留。    补充检查']
+occlud                             outside_manual_pages
+
+
+11                   None          未选择                                 ['完整页面', '六类
+VM-s0011-                          未调用：outside_manual_pages；原始风险保留。    补充检查']
+conten                             outside_manual_pages
+
+
+11                   None          未选择                                 ['完整页面', '六类
+VM-s0011-                          未调用：outside_manual_pages；原始风险保留。    补充检查']
+occlud                             outside_manual_pages
+
+
+6                    multimoda     已选择                                 ['完整页面', '六类
+sixscope:6:clutter   l_full_page   证据范围未知，需要补充视觉核查。选中页复核同时补查全部         补充检查']
+ed_layout                          六类，避免只检查已报警类别。
+                                   None
+
+
+6                    multimoda     已选择                                 ['完整页面', '六类
+sixscope:6:genera    l_full_page   证据范围未知，需要补充视觉核查。选中页复核同时补查全部         补充检查']
+tive_design_ano                    六类，避免只检查已报警类别。
+maly                               None
+
+
+4                    multimoda     已选择                                 ['完整页面', '六类
+sixscope:4:clutter   l_full_page   证据范围未知，需要补充视觉核查。选中页复核同时补查全部         补充检查']
+ed_layout                          六类，避免只检查已报警类别。
+                                   None
+  页面/候选                工具            选择与原因                         所需证据
+  4                    multimoda     已选择                           ['完整页面', '六类
+  sixscope:4:conten    l_full_page   证据范围未知，需要补充视觉核查。选中页复核同时补查全部   补充检查']
+  t_overflow_cutoff                  六类，避免只检查已报警类别。
+                                     None
+
+  12                   multimoda     已选择                           ['完整页面', '六类
+  sixscope:12:impr     l_multi_pa    证据范围未知，需要补充视觉核查。选中页复核同时补查全部   补充检查', '跨页
+  oper_font_sizing     ge            六类，避免只检查已报警类别。                对照']
+                                     None
+
+
+  12                   multimoda     已选择                           ['完整页面', '六类
+  sixscope:12:occlu    l_multi_pa    证据范围未知，需要补充视觉核查。选中页复核同时补查全部   补充检查', '跨页
+  ded_content          ge            六类，避免只检查已报警类别。                对照']
+                                     None
+
+
+  12                   multimoda     已选择                           ['完整页面', '六类
+  sixscope:12:clutte   l_multi_pa    证据范围未知，需要补充视觉核查。选中页复核同时补查全部   补充检查', '跨页
+  red_layout           ge            六类，避免只检查已报警类别。                对照']
+                                     None
+
+
+  12                   multimoda     已选择                           ['完整页面', '六类
+  sixscope:12:conte    l_multi_pa    证据范围未知，需要补充视觉核查。选中页复核同时补查全部   补充检查', '跨页
+  nt_overflow_cuto     ge            六类，避免只检查已报警类别。                对照']
+  ff                                 None
+
+
+  12                   multimoda     已选择                           ['完整页面', '六类
+  sixscope:12:exces    l_multi_pa    证据范围未知，需要补充视觉核查。选中页复核同时补查全部   补充检查', '跨页
+  sive_whitespace      ge            六类，避免只检查已报警类别。                对照']
+                                     None
+
+
+
+
+首筛与分层复检状态
+ R2 六类首筛 · done
+ CLIP 四类辅助复核 · done
+
+ LLM 按需复检 · done
+
+ CLIP成功 14 页；失败 0 页。LLM模式：mock；未复检项 23；不确定结论 22。
+
+ 最终复检状态：mock_only
+ CLIP只提供四类页级辅助证据，阴性不否决R2，D5/D6不由CLIP复核。LLM关闭、失败、模拟、预算跳过和
+ 不确定范围均不能称为完整最终确认。
+CLIP   四类辅助复核
+  冻结模型输出是页级辅助证据，不提供局部定位，不排除R2原生候选；D5/D6不由此模型判断。
+
+   页     类别        概率 / 阈值             候选 / 版本 / 工作点
+   1     字号不合理     0.06028557 / 0.13   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   1     内容遮挡      0.11486749 / 0.16   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   1     布局拥挤      0.06424739 / 0.57   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   1     内容溢出或裁切   0.04129026 / 0.14   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   2     字号不合理     0.09878430 / 0.13   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   2     内容遮挡      0.14315536 / 0.16   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   2     布局拥挤      0.11007339 / 0.57   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   2     内容溢出或裁切   0.05391081 / 0.14   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+   3     字号不合理     0.09497514 / 0.13   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   3     内容遮挡      0.13351004 / 0.16   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   3     布局拥挤      0.12194893 / 0.57   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   3     内容溢出或裁切   0.05573657 / 0.14   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   4     字号不合理     0.09758510 / 0.13   0
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   4     内容遮挡      0.16140679 / 0.16   1
+                                       f2c-C-frozen-53a56f3b / f1
+
+
+   4     布局拥挤      0.09341052 / 0.57   0
+                                       f2c-C-frozen-53a56f3b / f1
+页   类别        概率 / 阈值             候选 / 版本 / 工作点
+4   内容溢出或裁切   0.08420945 / 0.14   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+5   字号不合理     0.07396601 / 0.13   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+5   内容遮挡      0.08486949 / 0.16   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+5   布局拥挤      0.09081559 / 0.57   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+5   内容溢出或裁切   0.03415168 / 0.14   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+6   字号不合理     0.08223422 / 0.13   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+6   内容遮挡      0.24027208 / 0.16   1
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+6   布局拥挤      0.15711013 / 0.57   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+6   内容溢出或裁切   0.15709014 / 0.14   1
+                                  f2c-C-frozen-53a56f3b / f1
+
+7   字号不合理     0.11010438 / 0.13   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+7   内容遮挡      0.12223180 / 0.16   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+7   布局拥挤      0.11953014 / 0.57   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+7   内容溢出或裁切   0.05896595 / 0.14   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+8   字号不合理     0.11351494 / 0.13   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+8   内容遮挡      0.16956349 / 0.16   1
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+8   布局拥挤      0.08290594 / 0.57   0
+                                  f2c-C-frozen-53a56f3b / f1
+
+
+8   内容溢出或裁切   0.07905350 / 0.14   0
+                                  f2c-C-frozen-53a56f3b / f1
+页    类别        概率 / 阈值             候选 / 版本 / 工作点
+9    字号不合理     0.08303763 / 0.13   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+9    内容遮挡      0.11749801 / 0.16   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+9    布局拥挤      0.08994637 / 0.57   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+9    内容溢出或裁切   0.09327499 / 0.14   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+10   字号不合理     0.05225527 / 0.13   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+10   内容遮挡      0.15325513 / 0.16   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+10   布局拥挤      0.06755558 / 0.57   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+10   内容溢出或裁切   0.05248506 / 0.14   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+11   字号不合理     0.09014175 / 0.13   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+11   内容遮挡      0.31690136 / 0.16   1
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+11   布局拥挤      0.14834751 / 0.57   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+11   内容溢出或裁切   0.35399415 / 0.14   1
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+12   字号不合理     0.10084053 / 0.13   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+12   内容遮挡      0.11196667 / 0.16   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+12   布局拥挤      0.15468349 / 0.57   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+12   内容溢出或裁切   0.05705400 / 0.14   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+13   字号不合理     0.10030154 / 0.13   0
+                                   f2c-C-frozen-53a56f3b / f1
+页    类别        概率 / 阈值             候选 / 版本 / 工作点
+13   内容遮挡      0.11159409 / 0.16   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+13   布局拥挤      0.15723234 / 0.57   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+13   内容溢出或裁切   0.05650435 / 0.14   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+14   字号不合理     0.10075463 / 0.13   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+14   内容遮挡      0.11186267 / 0.16   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+14   布局拥挤      0.15696907 / 0.57   0
+                                   f2c-C-frozen-53a56f3b / f1
+
+
+14   内容溢出或裁切   0.05735329 / 0.14   0
+                                   f2c-C-frozen-53a56f3b / f1
+复核执行与历史
+ 第6页 · ok · mock-inconclusive · MOCK模拟
+ 明确标记的Mock运行，无真实LLM判断。
+ 规则：4.4C-review-rules-1.0 / D1, D2, D3, D4, D5, D6, general
+ 实际 HTTP 调用：0；耗时 ms：51.7；token：未提供；费用：未提供
+
+ six-4b9f59bfc64c46f2-s0006-D1 · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+
+ six-4b9f59bfc64c46f2-s0006-D2 · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+
+ six-4b9f59bfc64c46f2-s0006-D5 · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+
+ R05-s0006-01 · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+
+ VM-s0006-conten · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+
+ sixscope:6:cluttered_layout · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+
+ sixscope:6:generative_design_anomaly · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+
+ 第4页 · ok · mock-inconclusive · MOCK模拟
+ 明确标记的Mock运行，无真实LLM判断。
+ 规则：4.4C-review-rules-1.0 / A04, D1, D2, D3, D4, D5, D6, general
+ 实际 HTTP 调用：0；耗时 ms：55.1；token：未提供；费用：未提供
+
+ six-4b9f59bfc64c46f2-s0004-D1 · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+
+ six-4b9f59bfc64c46f2-s0004-D5 · uncertain
+ Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+ 使用实际多模态服务或人工核验完整页面与证据。
+six-4b9f59bfc64c46f2-s0004-D6 · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+six-4b9f59bfc64c46f2-s0004-D6:A04 · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+R03-s0004-01 · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+VM-s0004-occlud · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+sixscope:4:cluttered_layout · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+sixscope:4:content_overflow_cutoff · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+第12页 · ok · mock-inconclusive · MOCK模拟
+明确标记的Mock运行，无真实LLM判断。
+规则：4.4C-review-rules-1.0 / A01, D1, D2, D3, D4, D5, D6, general
+实际 HTTP 调用：0；耗时 ms：145.6；token：未提供；费用：未提供
+
+six-4b9f59bfc64c46f2-s0012-D6 · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+six-4b9f59bfc64c46f2-s0012-D6:A01 · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+sixscope:12:improper_font_sizing · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+sixscope:12:occluded_content · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+
+sixscope:12:cluttered_layout · uncertain
+Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+使用实际多模态服务或人工核验完整页面与证据。
+   sixscope:12:content_overflow_cutoff · uncertain
+   Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+   使用实际多模态服务或人工核验完整页面与证据。
+
+   sixscope:12:excessive_whitespace · uncertain
+   Mock仅验证调度、证据与Schema链路，未调用视觉模型，不构成缺陷判断。
+   使用实际多模态服务或人工核验完整页面与证据。
+
+
+
+
+由 SlideSentinel 4.4B–4.4C 生成 · 2026-10-31T11:51:44+08:00 · 报告 schema 4.4BC-report-1
+结构规则结果为可解释候选，不等同于人工标注真值；视觉模型未接入时不产生任何预测。
+

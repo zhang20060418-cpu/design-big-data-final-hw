@@ -1,0 +1,1157 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-31T11:51:47.387659+08:00",
+  "source_sha256": "c4427509a9b061bb60a07b99134c7e9669791ff6b76cdbef84f2f7eeb89379a6",
+  "source_unchanged": true,
+  "R2_original_claims_unchanged_by_CLIP": true,
+  "tasks": {
+    "off": {
+      "task_id": "4a40b2a37b184d1b",
+      "options": {
+        "enable_structure": true,
+        "enable_visual": false,
+        "enable_mllm": false,
+        "review_mode": "off",
+        "max_review_pages": 14,
+        "max_api_calls": 3,
+        "manual_pages": [
+          4,
+          6,
+          12
+        ],
+        "enable_six_detectors": true,
+        "review_strategy": "full_review",
+        "llm_backend": "mock",
+        "purpose": "",
+        "style": "",
+        "review_focus": [],
+        "original_prompt": ""
+      },
+      "status": "completed",
+      "visual_results": 0,
+      "pipeline": {
+        "clip_enabled": false,
+        "ordered_layers": [
+          {
+            "key": "six_detector",
+            "label": "R2 六类首筛",
+            "status": "done",
+            "scope": "six_labels_with_explicit_unknowns"
+          },
+          {
+            "key": "clip_four_label",
+            "label": "CLIP 四类辅助复核",
+            "status": "skipped",
+            "scope": "original_four_labels_page_level"
+          },
+          {
+            "key": "mllm",
+            "label": "LLM 按需复检",
+            "status": "skipped",
+            "scope": "selected_candidates_and_supplementary_scope"
+          }
+        ],
+        "clip_pages_scored": 0,
+        "clip_pages_failed": 0,
+        "llm_mode": "disabled",
+        "llm_call_records": 0,
+        "llm_actual_http_calls": 0,
+        "llm_unreviewed_items": 31,
+        "llm_uncertain_verdicts": 0,
+        "final_review_status": "not_requested",
+        "note": "CLIP只提供四类页级辅助证据，阴性不否决R2，D5/D6不由CLIP复核。LLM关闭、失败、模拟、预算跳过和不确定范围均不能称为完整最终确认。"
+      },
+      "execution": {
+        "CLIP_forwards": 0,
+        "LLM_calls": 0,
+        "model_loaded": false
+      },
+      "claims_fingerprint": [
+        [
+          1,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.18840579710144928
+        ],
+        [
+          2,
+          "generative_design_anomaly",
+          "candidate",
+          0.8
+        ],
+        [
+          3,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          3,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          3,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          3,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          3,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.2028985507246377
+        ],
+        [
+          3,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          4,
+          "improper_font_sizing",
+          "candidate",
+          0.8
+        ],
+        [
+          4,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          4,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          4,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          4,
+          "excessive_whitespace",
+          "candidate",
+          0.5857142857142857
+        ],
+        [
+          4,
+          "generative_design_anomaly",
+          "candidate",
+          0.8
+        ],
+        [
+          5,
+          "improper_font_sizing",
+          "unknown",
+          null
+        ],
+        [
+          5,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          5,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          5,
+          "content_overflow_cutoff",
+          "candidate",
+          0.85
+        ],
+        [
+          5,
+          "excessive_whitespace",
+          "unknown",
+          null
+        ],
+        [
+          5,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          6,
+          "improper_font_sizing",
+          "unknown",
+          null
+        ],
+        [
+          6,
+          "occluded_content",
+          "unknown",
+          null
+        ],
+        [
+          6,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          6,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          6,
+          "excessive_whitespace",
+          "unknown",
+          null
+        ],
+        [
+          6,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          7,
+          "improper_font_sizing",
+          "candidate",
+          0.8
+        ],
+        [
+          7,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          7,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          7,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          7,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.20833333333333334
+        ],
+        [
+          7,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "excessive_whitespace",
+          "unknown",
+          0.1271186440677966
+        ],
+        [
+          8,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "excessive_whitespace",
+          "unsupported",
+          null
+        ],
+        [
+          9,
+          "generative_design_anomaly",
+          "unknown",
+          null
+        ],
+        [
+          10,
+          "improper_font_sizing",
+          "unknown",
+          null
+        ],
+        [
+          10,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          10,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          10,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          10,
+          "excessive_whitespace",
+          "unknown",
+          null
+        ],
+        [
+          10,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          11,
+          "improper_font_sizing",
+          "unknown",
+          null
+        ],
+        [
+          11,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          11,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          11,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          11,
+          "excessive_whitespace",
+          "unknown",
+          null
+        ],
+        [
+          11,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.19718309859154928
+        ],
+        [
+          12,
+          "generative_design_anomaly",
+          "candidate",
+          0.75
+        ],
+        [
+          13,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          13,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          13,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          13,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          13,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.19718309859154928
+        ],
+        [
+          13,
+          "generative_design_anomaly",
+          "candidate",
+          0.75
+        ],
+        [
+          14,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          14,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          14,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          14,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          14,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.19718309859154928
+        ],
+        [
+          14,
+          "generative_design_anomaly",
+          "candidate",
+          0.75
+        ]
+      ],
+      "url": "http://127.0.0.1:8011/tasks/4a40b2a37b184d1b/results",
+      "elapsed_s": 13.14
+    },
+    "on": {
+      "task_id": "4b9f59bfc64c46f2",
+      "options": {
+        "enable_structure": true,
+        "enable_visual": true,
+        "enable_mllm": true,
+        "review_mode": "manual",
+        "max_review_pages": 14,
+        "max_api_calls": 3,
+        "manual_pages": [
+          4,
+          6,
+          12
+        ],
+        "enable_six_detectors": true,
+        "review_strategy": "full_review",
+        "llm_backend": "mock",
+        "purpose": "",
+        "style": "",
+        "review_focus": [],
+        "original_prompt": ""
+      },
+      "status": "completed",
+      "visual_results": 14,
+      "pipeline": {
+        "clip_enabled": true,
+        "ordered_layers": [
+          {
+            "key": "six_detector",
+            "label": "R2 六类首筛",
+            "status": "done",
+            "scope": "six_labels_with_explicit_unknowns"
+          },
+          {
+            "key": "clip_four_label",
+            "label": "CLIP 四类辅助复核",
+            "status": "done",
+            "scope": "original_four_labels_page_level"
+          },
+          {
+            "key": "mllm",
+            "label": "LLM 按需复检",
+            "status": "done",
+            "scope": "selected_candidates_and_supplementary_scope"
+          }
+        ],
+        "clip_pages_scored": 14,
+        "clip_pages_failed": 0,
+        "llm_mode": "mock",
+        "llm_call_records": 3,
+        "llm_actual_http_calls": 0,
+        "llm_unreviewed_items": 23,
+        "llm_uncertain_verdicts": 22,
+        "final_review_status": "mock_only",
+        "note": "CLIP只提供四类页级辅助证据，阴性不否决R2，D5/D6不由CLIP复核。LLM关闭、失败、模拟、预算跳过和不确定范围均不能称为完整最终确认。"
+      },
+      "execution": {
+        "clip_model_loads": 1,
+        "vision_forward_attempts": 14,
+        "successful_embeddings": 14,
+        "classifier_fits": 0,
+        "network_downloads": 0,
+        "benchmark_files_read": 0,
+        "device": "cuda:0",
+        "runtime_s": 18.952,
+        "actual_external_llm_calls": 0
+      },
+      "claims_fingerprint": [
+        [
+          1,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          1,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          2,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.18840579710144928
+        ],
+        [
+          2,
+          "generative_design_anomaly",
+          "candidate",
+          0.8
+        ],
+        [
+          3,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          3,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          3,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          3,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          3,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.2028985507246377
+        ],
+        [
+          3,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          4,
+          "improper_font_sizing",
+          "candidate",
+          0.8
+        ],
+        [
+          4,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          4,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          4,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          4,
+          "excessive_whitespace",
+          "candidate",
+          0.5857142857142857
+        ],
+        [
+          4,
+          "generative_design_anomaly",
+          "candidate",
+          0.8
+        ],
+        [
+          5,
+          "improper_font_sizing",
+          "unknown",
+          null
+        ],
+        [
+          5,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          5,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          5,
+          "content_overflow_cutoff",
+          "candidate",
+          0.85
+        ],
+        [
+          5,
+          "excessive_whitespace",
+          "unknown",
+          null
+        ],
+        [
+          5,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          6,
+          "improper_font_sizing",
+          "unknown",
+          null
+        ],
+        [
+          6,
+          "occluded_content",
+          "unknown",
+          null
+        ],
+        [
+          6,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          6,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          6,
+          "excessive_whitespace",
+          "unknown",
+          null
+        ],
+        [
+          6,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          7,
+          "improper_font_sizing",
+          "candidate",
+          0.8
+        ],
+        [
+          7,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          7,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          7,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          7,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.20833333333333334
+        ],
+        [
+          7,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          8,
+          "excessive_whitespace",
+          "unknown",
+          0.1271186440677966
+        ],
+        [
+          8,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          9,
+          "excessive_whitespace",
+          "unsupported",
+          null
+        ],
+        [
+          9,
+          "generative_design_anomaly",
+          "unknown",
+          null
+        ],
+        [
+          10,
+          "improper_font_sizing",
+          "unknown",
+          null
+        ],
+        [
+          10,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          10,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          10,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          10,
+          "excessive_whitespace",
+          "unknown",
+          null
+        ],
+        [
+          10,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          11,
+          "improper_font_sizing",
+          "unknown",
+          null
+        ],
+        [
+          11,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          11,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          11,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          11,
+          "excessive_whitespace",
+          "unknown",
+          null
+        ],
+        [
+          11,
+          "generative_design_anomaly",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          12,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.19718309859154928
+        ],
+        [
+          12,
+          "generative_design_anomaly",
+          "candidate",
+          0.75
+        ],
+        [
+          13,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          13,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          13,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          13,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          13,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.19718309859154928
+        ],
+        [
+          13,
+          "generative_design_anomaly",
+          "candidate",
+          0.75
+        ],
+        [
+          14,
+          "improper_font_sizing",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          14,
+          "occluded_content",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          14,
+          "cluttered_layout",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          14,
+          "content_overflow_cutoff",
+          "no_candidate_in_available_scope",
+          0.0
+        ],
+        [
+          14,
+          "excessive_whitespace",
+          "no_candidate_in_available_scope",
+          0.19718309859154928
+        ],
+        [
+          14,
+          "generative_design_anomaly",
+          "candidate",
+          0.75
+        ]
+      ],
+      "url": "http://127.0.0.1:8011/tasks/4b9f59bfc64c46f2/results",
+      "elapsed_s": 35.26
+    }
+  },
+  "actual_external_llm_calls": 0,
+  "classification_performance_claimed": false
+}

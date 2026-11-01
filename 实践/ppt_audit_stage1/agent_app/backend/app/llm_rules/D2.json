@@ -1,0 +1,32 @@
+{
+  "version": "4.4C-review-rules-1.0",
+  "rule_id": "D2",
+  "title": "内容遮挡",
+  "definition": "有意义的信息因前景对象或文字互相重叠而不可读。",
+  "positive_criteria": [
+    "上层对象与实际文字排版区域重叠并造成真实信息损失。",
+    "两行文字相互重叠而无法辨认，即使全页对象很少。"
+  ],
+  "reasonable_exceptions": [
+    "对象外框相交而字形不相交。",
+    "可读的半透明底板与合理装饰叠压。"
+  ],
+  "required_evidence": [
+    "整页、局部ROI、层级与局部覆盖测量；不以3%整页面积作为确认条件。"
+  ],
+  "review_questions": [
+    "可观察损害是什么？",
+    "正常设计例外是否成立？"
+  ],
+  "uncertainty_policy": "无法判断输出 uncertain；失败、超时与未执行均不能输出 supported 或 rejected。",
+  "severity": {
+    "high": "主要信息缺失或不可读",
+    "medium": "可读性、分组或表达受到明显影响",
+    "low": "轻微风险，尚可阅读"
+  },
+  "recommendation_principles": [
+    "L1说明要检查的对象或区域。",
+    "L2数值建议必须引用实际测量证据，不能凭经验编造精确参数。",
+    "L3给出PowerPoint可执行的操作路径，不自动修改文稿。"
+  ]
+}

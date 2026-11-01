@@ -1,0 +1,18 @@
+{
+  "frontend_build": "index-DnzdFhy2.js",
+  "status": "passed",
+  "browser_fixture_actual_backend_mutations": 0,
+  "browser_actual_mock_recovery_child": "72f5da7609b0424e",
+  "existing_contract_tests_passed": 8,
+  "production_readonly_checks_passed": 2,
+  "checked_at": "2026-10-31T18:29:15.2920510+08:00",
+  "build_exit": 0,
+  "production_readonly_post_count": 0,
+  "browser_actual_mock_recovery_parent": "43e8a3b9d552446f",
+  "browser_fixture_checks_passed": 6,
+  "browser_actual_mock_recovery_post_count": 1,
+  "typecheck_exit": 0,
+  "actual_external_llm_calls": 0,
+  "default_skip_contract_tests_passed": 9,
+  "browser_actual_mock_recovery_checks_passed": 4
+}

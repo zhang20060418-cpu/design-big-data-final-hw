@@ -1,0 +1,109 @@
+{
+  "checked_at": "2026-10-31T17:10:13.927154+08:00",
+  "task_id": "08041fc0de2f4e04",
+  "source_sha256": "b6f5da700f5c7b142111816dcb3471c69cd31ccb56a813e64ad3a4e28fdc64ad",
+  "source_task_unchanged": "297fe2b0ba4e4f59",
+  "status": "completed",
+  "options": {
+    "enable_structure": true,
+    "enable_visual": false,
+    "enable_mllm": true,
+    "mllm_user_choice": null,
+    "review_mode": "manual",
+    "max_review_pages": 6,
+    "max_api_calls": 1,
+    "manual_pages": [
+      3
+    ],
+    "enable_six_detectors": true,
+    "review_strategy": "full_review",
+    "llm_backend": "api",
+    "purpose": "",
+    "style": "",
+    "review_focus": [],
+    "original_prompt": ""
+  },
+  "review_gate": {
+    "gate_id": "1764f583d8d74b558f1be272f35e64c4",
+    "state": "completed",
+    "eligible": true,
+    "created_at": "2026-10-31T09:09:57.059+00:00",
+    "deadline_at": "2026-10-31T09:10:02.059+00:00",
+    "countdown_seconds": 5.0,
+    "skip_reason": null,
+    "skipped_by_user": false,
+    "execution_started_at": "2026-10-31T09:10:02.062+00:00",
+    "completed_at": "2026-10-31T09:10:13.303+00:00",
+    "outcome": "completed",
+    "warning": null,
+    "skipped_before_review": false,
+    "remaining_ms": 0,
+    "can_skip": false,
+    "duplicate_execution_guard": true,
+    "skip_available_before_stage": false
+  },
+  "provider_model": "deepseek-flash",
+  "reviews": [
+    {
+      "slide_index": 3,
+      "status": "ok",
+      "error": null,
+      "error_code": null,
+      "usage": {
+        "prompt_tokens": 21617,
+        "completion_tokens": 2402,
+        "total_tokens": 24019,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 18801
+      },
+      "response_metadata": {
+        "finish_reason": "stop",
+        "content_chars": 5424,
+        "nonspace_content_chars": 5424,
+        "reasoning_present": false,
+        "reasoning_chars": 0
+      },
+      "actual_http_calls": 1,
+      "attempts": 1,
+      "verdict_count": 8
+    }
+  ],
+  "actual_http_calls": 1,
+  "pipeline": {
+    "clip_enabled": false,
+    "ordered_layers": [
+      {
+        "key": "six_detector",
+        "label": "R2 六类首筛",
+        "status": "done",
+        "scope": "six_labels_with_explicit_unknowns"
+      },
+      {
+        "key": "clip_four_label",
+        "label": "CLIP 四类辅助复核",
+        "status": "skipped",
+        "scope": "original_four_labels_page_level"
+      },
+      {
+        "key": "mllm",
+        "label": "LLM 按需复检",
+        "status": "done",
+        "scope": "selected_candidates_and_supplementary_scope"
+      }
+    ],
+    "clip_pages_scored": 0,
+    "clip_pages_failed": 0,
+    "llm_mode": "api",
+    "llm_call_records": 1,
+    "llm_actual_http_calls": 1,
+    "llm_unreviewed_items": 39,
+    "llm_uncertain_verdicts": 1,
+    "final_review_status": "partial",
+    "user_skipped_review": false,
+    "skip_warning": null,
+    "note": "CLIP只提供四类页级辅助证据，阴性不否决R2，D5/D6不由CLIP复核。LLM关闭、失败、模拟、预算跳过和不确定范围均不能称为完整最终确认。"
+  }
+}

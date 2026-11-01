@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-31T09:04:16.967Z",
+  "fixture_only": true,
+  "findings": [
+    "Auto-choice null plus a configured API checks LLM by default even if an older saved display value was false.",
+    "Explicit close survives UI changes and is sent as mllm_user_choice=false at task start.",
+    "Pending LLM stage has an adjacent enabled skip action. Early skip keeps local screening running and does not show results prematurely.",
+    "Executing review disables the action and states that sent requests cannot be cancelled by skipping.",
+    "Failed stage shows real HTTP code and page number instead of the misleading generic execution-complete message."
+  ],
+  "browser_intercepted_mutations": [
+    {
+      "path": "/api/tasks/ui-review-gate-fixture/start",
+      "body": {
+        "options": {
+          "enable_structure": true,
+          "enable_visual": false,
+          "enable_mllm": false,
+          "review_mode": "risk_only",
+          "max_review_pages": 6,
+          "max_api_calls": 15,
+          "manual_pages": [],
+          "enable_six_detectors": true,
+          "review_strategy": "selective_review",
+          "llm_backend": "api",
+          "purpose": "UI fixture verifies explicit opt-out",
+          "style": "",
+          "review_focus": [
+            "improper_font_sizing",
+            "occluded_content",
+            "cluttered_layout",
+            "excessive_whitespace",
+            "generative_design_anomaly"
+          ],
+          "original_prompt": "",
+          "mllm_user_choice": false
+        },
+        "name": "T07_跨境电商合规治理"
+      }
+    },
+    {
+      "path": "/api/tasks/ui-review-gate-fixture/skip-review",
+      "body": null
+    }
+  ],
+  "backend_mutations": 0,
+  "actual_external_llm_calls": 0,
+  "page_errors": []
+}

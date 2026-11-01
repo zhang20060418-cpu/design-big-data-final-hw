@@ -1,0 +1,15 @@
+{
+  "adapter": "python_module",
+  "module": "frozen_clip_impl",
+  "callable": "predict_slide",
+  "batch_callable": "predict_batch",
+  "availability_callable": "check_available",
+  "model_version": "f2c-C-frozen-53a56f3b",
+  "work_point": "f1",
+  "labels": ["improper_font_sizing", "occluded_content", "cluttered_layout", "content_overflow_cutoff"],
+  "thresholds": {"improper_font_sizing": 0.13, "occluded_content": 0.16, "cluttered_layout": 0.57, "content_overflow_cutoff": 0.14},
+  "input_recipe": "冻结C：原始PNG→CLIP中心裁剪512维＋完整页PNG10→训练Scaler/√10，拼接522维；不重新训练或改阈值。",
+  "default_enabled": false,
+  "role": "optional_auxiliary_review",
+  "limitations": ["页面级四标签辅助概率，不提供对象定位。", "概率来自历史冻结分类器，未对新文稿校准，不能作为缺陷确认。", "CLIP中心裁剪会损失宽屏页面两侧信息；为保持训练/推理一致未改预处理。", "阴性不否决R2候选，不证明未知范围正常；最终仍需LLM或人工复核。"]
+}

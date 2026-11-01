@@ -1,0 +1,52 @@
+{
+  "task_id": "297fe2b0ba4e4f59",
+  "live": true,
+  "calls_limit": 1,
+  "disable_thinking": false,
+  "candidate_count": 8,
+  "image_count": 17,
+  "image_uri_bytes": 99855,
+  "checked_at": "2026-10-31T17:00:45.987339+08:00",
+  "request": {
+    "model": "deepseek-flash",
+    "max_tokens": 2800,
+    "response_format": {
+      "type": "json_object"
+    },
+    "thinking": null,
+    "serialized_bytes": 158397
+  },
+  "http_status": 200,
+  "usage": {
+    "prompt_tokens": 22068,
+    "completion_tokens": 2800,
+    "total_tokens": 24868,
+    "prompt_tokens_details": {
+      "cached_tokens": 3968
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 2800
+    },
+    "prompt_cache_hit_tokens": 3968,
+    "prompt_cache_miss_tokens": 18100
+  },
+  "response": {
+    "finish_reason": "length",
+    "content_chars": 0,
+    "nonspace_content_chars": 0,
+    "reasoning_chars": 6448,
+    "reasoning_present": true
+  },
+  "results": [
+    {
+      "status": "error",
+      "error": "响应不是合法 JSON",
+      "error_code": "invalid_response",
+      "actual_http_calls": 1,
+      "attempts": 1,
+      "elapsed_ms": 22849.0,
+      "verdict_count": 0
+    }
+  ],
+  "actual_http_calls": 1
+}

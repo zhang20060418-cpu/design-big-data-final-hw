@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "slidesentinel-tool"
+version = "1.0.0"
+description = "Agent-facing CLI and MCP shell for the SlideSentinel PPT audit service"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+ppt-audit = "ppt_audit_tool.cli:main"
+ppt-audit-mcp = "ppt_audit_tool.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ppt_audit_tool*"]

@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-31T10:21:40.390Z",
+  "checks": [
+    "Failed review has an adjacent continue action, plus terminal continue/restart with preserved-history and API-use explanation.",
+    "Simultaneous phase/footer repeated clicks send one continue request and navigate to a separate running child, with no active-task recovery buttons.",
+    "Restart sends its distinct action and opens a new progress task rather than replacing the parent result.",
+    "A 409 recovery conflict is shown in place and does not navigate or discard the original results.",
+    "Interrupted tasks without a report can recover from the report-unavailable page.",
+    "A completed task with skipped LLM review exposes continuation and restart from its results."
+  ],
+  "fixture_requests": [
+    {
+      "path": "/api/tasks/recovery-ui-parent/recover",
+      "body": {
+        "action": "continue"
+      }
+    },
+    {
+      "path": "/api/tasks/recovery-ui-parent/recover",
+      "body": {
+        "action": "restart"
+      }
+    },
+    {
+      "path": "/api/tasks/recovery-ui-parent/recover",
+      "body": {
+        "action": "continue"
+      }
+    }
+  ],
+  "actual_backend_mutations": [],
+  "actual_external_llm_calls": 0,
+  "page_errors": []
+}

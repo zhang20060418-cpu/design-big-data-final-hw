@@ -1,0 +1,26 @@
+{
+  "version": "f2c-C-frozen-53a56f3b",
+  "model": "C",
+  "clip_model": "openai/clip-vit-base-patch32",
+  "clip_revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+  "labels": ["improper_font_sizing", "occluded_content", "cluttered_layout", "content_overflow_cutoff"],
+  "thresholds": {
+    "f1": [0.13, 0.16, 0.57, 0.14],
+    "high_recall": [0.13, 0.14, 0.44, 0.08],
+    "low_fpr": [0.20, 0.20, 0.56, 0.15]
+  },
+  "png_recipe_payload_sha256": "0d1fc0aae630960bcd2236eb11f93634ad4a1457f87195a0c5d5fc533c1f42a3",
+  "frozen_selection_sha256": "0f95c3c794b4eef6e4a1d9c0b6a2c07968b3283993081fcd1221408255200993",
+  "assets_sha256": {
+    "models/fusion_routing_candidate.joblib": "53a56f3bb1d776cca5e4a33926b6db57f74d3e982d16cf73ff3a097dc592ff63",
+    "scripts/extract_png_layout_features.py": "93d85c8641d097394c358c6c1ae04400ac79ce5d20b137a720e71b1564a8f5c7",
+    "scripts/evaluate_pptx_g2.py": "b11a8ffab036ca28df8b5f35a3cc5b34e59aee1e5ad7d440775c80d06ba0effe",
+    "scripts/pptx_g2_metrics.py": "c3c9d7ec45ecb5c0cdeb3796cf1f877b22214920cd52d888449f8b225686fa3b",
+    "features/png_layout_recipe.json": "6d06910804152b6fbbbc314384c6b40041a30ad17e39190bcee7c44106c13b4a",
+    "models/huggingface/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/config.json": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+    "models/huggingface/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/preprocessor_config.json": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd",
+    "models/huggingface/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+  },
+  "input_recipe": "G-2 frozen C: original opaque RGB PNG; CLIP official short-side224 BICUBIC + center224, float32 vision projection512; float64 per-row L2; full-page PNG10 train scaler /sqrt(10); concatenate522, no further normalization",
+  "role": "optional_four_label_auxiliary_review_not_final_verdict"
+}

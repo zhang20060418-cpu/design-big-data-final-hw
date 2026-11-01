@@ -1,0 +1,307 @@
+{
+  "task_id": "8bf29916e0254aa6",
+  "url": "http://127.0.0.1:8011/tasks/8bf29916e0254aa6/results",
+  "source": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\fixtures\\integration_14_slides.pptx",
+  "source_sha256": "c4427509a9b061bb60a07b99134c7e9669791ff6b76cdbef84f2f7eeb89379a6",
+  "check_mode": "existing_task_reexport",
+  "original_task_started_at": null,
+  "original_task_finished_at": "2026-10-30T22:15:41+08:00",
+  "source_unchanged": true,
+  "slide_count": 14,
+  "claims": 84,
+  "status_counts": {
+    "no_candidate_in_available_scope": 63,
+    "candidate": 9,
+    "unknown": 11,
+    "unsupported": 1
+  },
+  "summary": {
+    "slide_count": 14,
+    "issue_count": 10,
+    "visible_issue_count": 10,
+    "rejected_count": 0,
+    "pages_with_issues": 8,
+    "high_risk_pages": [
+      5
+    ],
+    "by_type": {
+      "improper_font_sizing": 2,
+      "occluded_content": 1,
+      "cluttered_layout": 0,
+      "content_overflow_cutoff": 1,
+      "excessive_whitespace": 1,
+      "generative_design_anomaly": 5
+    },
+    "by_source": {
+      "structure_rule": 4,
+      "six_detector": 9,
+      "visual_model": 0,
+      "mllm_review": 3
+    },
+    "ai_reviewed_pages": 4,
+    "ai_supported": 0,
+    "ai_rejected": 0,
+    "visual_pages_scored": 0,
+    "unreviewed_count": 7,
+    "detection_status_counts": {
+      "candidate": 9,
+      "no_candidate_in_available_scope": 63,
+      "unknown": 11,
+      "unsupported": 1,
+      "not_checked": 0
+    },
+    "unknown_is_normal": false
+  },
+  "reviews": [
+    {
+      "slide_index": 6,
+      "related_slides": [
+        6
+      ],
+      "status": "ok",
+      "mock": true,
+      "model": "mock-inconclusive",
+      "actual_http_calls": 0,
+      "rules_used": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "general"
+      ],
+      "evidence_inventory": [
+        {
+          "evidence_id": "page:s0006",
+          "slide_index": 6,
+          "kind": "full_page",
+          "sha256": "6f29cba45a338bf4dd21748e0cd7770c0485f39f028c6076dde2611fd73a9012"
+        }
+      ]
+    },
+    {
+      "slide_index": 11,
+      "related_slides": [
+        11
+      ],
+      "status": "ok",
+      "mock": true,
+      "model": "mock-inconclusive",
+      "actual_http_calls": 0,
+      "rules_used": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "general"
+      ],
+      "evidence_inventory": [
+        {
+          "evidence_id": "page:s0011",
+          "slide_index": 11,
+          "kind": "full_page",
+          "sha256": "f5e7c94a42c31ee53b7ba473ec846fcd7a33f1382270b5c2c6273506a5c68187"
+        }
+      ]
+    },
+    {
+      "slide_index": 12,
+      "related_slides": [
+        12,
+        13,
+        14
+      ],
+      "status": "ok",
+      "mock": true,
+      "model": "mock-inconclusive",
+      "actual_http_calls": 0,
+      "rules_used": [
+        "A01",
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "general"
+      ],
+      "evidence_inventory": [
+        {
+          "evidence_id": "page:s0012",
+          "slide_index": 12,
+          "kind": "full_page",
+          "sha256": "3b94d809306fce557fe7e4e8c8cc9976fb52d4918b9eb3c21e6ebd8c1b7d7468"
+        },
+        {
+          "evidence_id": "page:s0013",
+          "slide_index": 13,
+          "kind": "full_page",
+          "sha256": "03b283ba7419d4c1b1aead208b5b5b1e27e662f4cb23005505c91ddd8890c447"
+        },
+        {
+          "evidence_id": "page:s0014",
+          "slide_index": 14,
+          "kind": "full_page",
+          "sha256": "62db9596a20127c2a8a0544d12f41e6ef716b3c11a556659ef1a68c8cf43941f"
+        }
+      ]
+    },
+    {
+      "slide_index": 4,
+      "related_slides": [
+        4
+      ],
+      "status": "ok",
+      "mock": true,
+      "model": "mock-inconclusive",
+      "actual_http_calls": 0,
+      "rules_used": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "general"
+      ],
+      "evidence_inventory": [
+        {
+          "evidence_id": "page:s0004",
+          "slide_index": 4,
+          "kind": "full_page",
+          "sha256": "74f2638a5aead17b7e9005e28564a17978bb01b6b32000418e6a3ed5c1567bb1"
+        }
+      ]
+    },
+    {
+      "slide_index": 4,
+      "related_slides": [
+        4
+      ],
+      "status": "ok",
+      "mock": true,
+      "model": "mock-inconclusive",
+      "actual_http_calls": 0,
+      "rules_used": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "general"
+      ],
+      "evidence_inventory": [
+        {
+          "evidence_id": "page:s0004",
+          "slide_index": 4,
+          "kind": "full_page",
+          "sha256": "74f2638a5aead17b7e9005e28564a17978bb01b6b32000418e6a3ed5c1567bb1"
+        }
+      ]
+    },
+    {
+      "slide_index": 4,
+      "related_slides": [
+        4
+      ],
+      "status": "ok",
+      "mock": true,
+      "model": "mock-inconclusive",
+      "actual_http_calls": 0,
+      "rules_used": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "general"
+      ],
+      "evidence_inventory": [
+        {
+          "evidence_id": "page:s0004",
+          "slide_index": 4,
+          "kind": "full_page",
+          "sha256": "74f2638a5aead17b7e9005e28564a17978bb01b6b32000418e6a3ed5c1567bb1"
+        }
+      ]
+    },
+    {
+      "slide_index": 4,
+      "related_slides": [
+        4
+      ],
+      "status": "ok",
+      "mock": true,
+      "model": "mock-inconclusive",
+      "actual_http_calls": 0,
+      "rules_used": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "general"
+      ],
+      "evidence_inventory": [
+        {
+          "evidence_id": "page:s0004",
+          "slide_index": 4,
+          "kind": "full_page",
+          "sha256": "74f2638a5aead17b7e9005e28564a17978bb01b6b32000418e6a3ed5c1567bb1"
+        }
+      ]
+    }
+  ],
+  "a05_semantic_unsupported": true,
+  "mock_only": true,
+  "actual_external_llm_calls": 0,
+  "interactive_review_history": 4,
+  "exports": {
+    "json": {
+      "path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\docs\\4.4BC\\acceptance\\demo_report.json",
+      "bytes": 2516481,
+      "sha256": "040cd4de07739f032079b3702bc111c95da34a9fbe88775983520bc4dfb613ad"
+    },
+    "html": {
+      "path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\docs\\4.4BC\\acceptance\\demo_report.html",
+      "bytes": 162968,
+      "sha256": "daf595b841e61fb3ec4737b48c19a941fb9969c4336cf3f0560ef9da230946ff"
+    },
+    "pdf": {
+      "path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\docs\\4.4BC\\acceptance\\demo_report.pdf",
+      "bytes": 1234132,
+      "sha256": "8578aef6a2ea1fc4d7ba61a072c6875b3f57e9841443604908f7a81b30492eff"
+    }
+  },
+  "elapsed_s": 2.39,
+  "options": {
+    "enable_structure": true,
+    "enable_visual": false,
+    "enable_six_detectors": true,
+    "enable_mllm": true,
+    "llm_backend": "mock",
+    "review_strategy": "full_review",
+    "review_mode": "manual",
+    "manual_pages": [
+      6,
+      11,
+      12
+    ],
+    "max_review_pages": 14,
+    "max_api_calls": 6,
+    "purpose": "课堂投影汇报；集成功能验证",
+    "style": "统一模板，允许合理极简与非对称设计",
+    "review_focus": [
+      "内容遮挡",
+      "过分留白",
+      "跨页布局重复"
+    ],
+    "original_prompt": "示例原始生成需求（不可信任务数据）：输出可读、结构清晰的汇报文稿。"
+  }
+}

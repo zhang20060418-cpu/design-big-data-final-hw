@@ -1,0 +1,30 @@
+{
+  "version": "4.4C-review-rules-1.0",
+  "rule_id": "A03",
+  "title": "无效装饰堆砌",
+  "definition": "不承担信息功能的装饰过度占用空间或注意力。",
+  "positive_criteria": [
+    "重复装饰与正文争夺空间和视觉焦点。"
+  ],
+  "reasonable_exceptions": [
+    "合理背景、底纹、品牌元素和强调标记。"
+  ],
+  "required_evidence": [
+    "装饰与有效内容关系、重复率与占用范围。"
+  ],
+  "review_questions": [
+    "可观察损害是什么？",
+    "正常设计例外是否成立？"
+  ],
+  "uncertainty_policy": "无法判断输出 uncertain；失败、超时与未执行均不能输出 supported 或 rejected。",
+  "severity": {
+    "high": "主要信息缺失或不可读",
+    "medium": "可读性、分组或表达受到明显影响",
+    "low": "轻微风险，尚可阅读"
+  },
+  "recommendation_principles": [
+    "L1说明要检查的对象或区域。",
+    "L2数值建议必须引用实际测量证据，不能凭经验编造精确参数。",
+    "L3给出PowerPoint可执行的操作路径，不自动修改文稿。"
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test"
+    ],
+    "configFile": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\playwright.config.ts",
+    "rootDir": "D:/Codex_Project/Homework/Design_big_data/Final_Hw_修改/实践/ppt_audit_stage1/agent_app/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Codex_Project/Homework/Design_big_data/Final_Hw_修改/实践/ppt_audit_stage1/agent_app/docs/4.4BC/acceptance/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/Codex_Project/Homework/Design_big_data/Final_Hw_修改/实践/ppt_audit_stage1/agent_app/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\docs\\4.4BC\\acceptance\\playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\e2e",
+        "snapshotDir": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 300000,
+        "use": {
+          "baseURL": "http://127.0.0.1:8011",
+          "browserName": "chromium",
+          "viewport": {
+            "width": 1600,
+            "height": 1000
+          },
+          "launchOptions": {
+            "executablePath": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+          },
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "acceptDownloads": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../docs/4.4BC/acceptance/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "six-review.spec.ts",
+      "file": "six-review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "已完成真实检测任务：六类、未决范围、定位、跨页、Mock追问和报告导出",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3008,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeCloseTo\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m, \u001b[22mprecision\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m32.666665536386\u001b[39m\nReceived: \u001b[31m32.6667\u001b[39m\n\nExpected precision:    5\nExpected difference: < \u001b[32m0.000005\u001b[39m\nReceived difference:   \u001b[31m0.000034463613999946574\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeCloseTo\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m, \u001b[22mprecision\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m32.666665536386\u001b[39m\nReceived: \u001b[31m32.6667\u001b[39m\n\nExpected precision:    5\nExpected difference: < \u001b[32m0.000005\u001b[39m\nReceived difference:   \u001b[31m0.000034463613999946574\u001b[39m\n    at D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\e2e\\six-review.spec.ts:41:24",
+                    "location": {
+                      "file": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\e2e\\six-review.spec.ts",
+                      "column": 24,
+                      "line": 41
+                    },
+                    "snippet": "  39 |   const normalized = localized!.normalized_bbox as { x: number; y: number; w: number; h: number }\n  40 |   expect(rendered.left).toBeCloseTo(normalized.x * 100, 5)\n> 41 |   expect(rendered.top).toBeCloseTo(normalized.y * 100, 5)\n     |                        ^\n  42 |   expect(rendered.width).toBeCloseTo(normalized.w * 100, 5)\n  43 |   expect(rendered.height).toBeCloseTo(normalized.h * 100, 5)\n  44 |   const related = issues.find((issue) => (issue.related_slides?.length ?? 0) > 1)"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\e2e\\six-review.spec.ts",
+                        "column": 24,
+                        "line": 41
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeCloseTo\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m, \u001b[22mprecision\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m32.666665536386\u001b[39m\nReceived: \u001b[31m32.6667\u001b[39m\n\nExpected precision:    5\nExpected difference: < \u001b[32m0.000005\u001b[39m\nReceived difference:   \u001b[31m0.000034463613999946574\u001b[39m\n\n  39 |   const normalized = localized!.normalized_bbox as { x: number; y: number; w: number; h: number }\n  40 |   expect(rendered.left).toBeCloseTo(normalized.x * 100, 5)\n> 41 |   expect(rendered.top).toBeCloseTo(normalized.y * 100, 5)\n     |                        ^\n  42 |   expect(rendered.width).toBeCloseTo(normalized.w * 100, 5)\n  43 |   expect(rendered.height).toBeCloseTo(normalized.h * 100, 5)\n  44 |   const related = issues.find((issue) => (issue.related_slides?.length ?? 0) > 1)\n    at D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\e2e\\six-review.spec.ts:41:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:16:31.533Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\docs\\4.4BC\\acceptance\\playwright-artifacts\\six-review-已完成真实检测任务：六类、未决范围、定位、跨页、Mock追问和报告导出\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\docs\\4.4BC\\acceptance\\playwright-artifacts\\six-review-已完成真实检测任务：六类、未决范围、定位、跨页、Mock追问和报告导出\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\docs\\4.4BC\\acceptance\\playwright-artifacts\\six-review-已完成真实检测任务：六类、未决范围、定位、跨页、Mock追问和报告导出\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\agent_app\\frontend\\e2e\\six-review.spec.ts",
+                    "column": 24,
+                    "line": 41
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fee19de9515cd52fbd72-842fae157515c28dfb99",
+          "file": "six-review.spec.ts",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "真实上传14页：准备、中文配置、六类检测与显式Mock复核闭环",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19455,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:16:36.011Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "created-task",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0YXNrX2lkIjogImU2NzhlZWE1ZjdlOTRjYjciLAogICJzb3VyY2UiOiAiRDpcXENvZGV4X1Byb2plY3RcXEhvbWV3b3JrXFxEZXNpZ25fYmlnX2RhdGFcXEZpbmFsX0h3X+S/ruaUuVxc5a6e6Le1XFxwcHRfYXVkaXRfc3RhZ2UxXFxhZ2VudF9hcHBcXGZpeHR1cmVzXFxpbnRlZ3JhdGlvbl8xNF9zbGlkZXMucHB0eCIsCiAgInNvdXJjZV9ieXRlcyI6IDExMjQxMywKICAic3RhdHVzIjogImNvbXBsZXRlZCIsCiAgInNsaWRlcyI6IDE0LAogICJvcHRpb25zIjogewogICAgImVuYWJsZV9zdHJ1Y3R1cmUiOiB0cnVlLAogICAgImVuYWJsZV92aXN1YWwiOiBmYWxzZSwKICAgICJlbmFibGVfbWxsbSI6IHRydWUsCiAgICAicmV2aWV3X21vZGUiOiAicmlza19vbmx5IiwKICAgICJtYXhfcmV2aWV3X3BhZ2VzIjogNiwKICAgICJtYXhfYXBpX2NhbGxzIjogMywKICAgICJtYW51YWxfcGFnZXMiOiBbXSwKICAgICJlbmFibGVfc2l4X2RldGVjdG9ycyI6IHRydWUsCiAgICAicmV2aWV3X3N0cmF0ZWd5IjogInNlbGVjdGl2ZV9yZXZpZXciLAogICAgImxsbV9iYWNrZW5kIjogIm1vY2siLAogICAgInB1cnBvc2UiOiAi5oqV5b2x5rGH5oql5LiO6K++5aCC5ryU56S6IiwKICAgICJzdHlsZSI6ICLkv53mjIHnu5/kuIDmqKHmnb/vvIzlhYHorrjlkIjnkIbmnoHnroDlkozpnZ7lr7nnp7Dorr7orqEiLAogICAgInJldmlld19mb2N1cyI6IFtdLAogICAgIm9yaWdpbmFsX3Byb21wdCI6ICIiCiAgfQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fee19de9515cd52fbd72-9da365c196f5548c5e10",
+          "file": "six-review.spec.ts",
+          "line": 81,
+          "column": 1
+        },
+        {
+          "title": "旧任务或缺失新端点时保留未检查状态，结果页不崩溃",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1002,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:16:55.822Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fee19de9515cd52fbd72-6ad4d8c7aa8d91f64813",
+          "file": "six-review.spec.ts",
+          "line": 116,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T14:16:30.989Z",
+    "duration": 26275.222999999998,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

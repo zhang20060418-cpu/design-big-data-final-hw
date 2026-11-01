@@ -1,0 +1,31 @@
+{
+  "version": "4.4C-review-rules-1.0",
+  "rule_id": "D1",
+  "title": "字号不合理",
+  "definition": "关键阅读文字的有效尺寸与角色、页面比例和使用场景不匹配。",
+  "positive_criteria": [
+    "正文或必要数据在整页正常观看时难辨认。",
+    "同角色文字明显异常偏小且影响阅读。"
+  ],
+  "reasonable_exceptions": [
+    "页码、非必要辅助说明和有意装饰微字。"
+  ],
+  "required_evidence": [
+    "文字角色、实际有效字号或像素可读性；缺失字号不得补默认值。"
+  ],
+  "review_questions": [
+    "可观察损害是什么？",
+    "正常设计例外是否成立？"
+  ],
+  "uncertainty_policy": "无法判断输出 uncertain；失败、超时与未执行均不能输出 supported 或 rejected。",
+  "severity": {
+    "high": "主要信息缺失或不可读",
+    "medium": "可读性、分组或表达受到明显影响",
+    "low": "轻微风险，尚可阅读"
+  },
+  "recommendation_principles": [
+    "L1说明要检查的对象或区域。",
+    "L2数值建议必须引用实际测量证据，不能凭经验编造精确参数。",
+    "L3给出PowerPoint可执行的操作路径，不自动修改文稿。"
+  ]
+}

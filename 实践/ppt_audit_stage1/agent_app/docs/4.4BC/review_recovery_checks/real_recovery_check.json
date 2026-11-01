@@ -1,0 +1,92 @@
+{
+  "task_id": "2f30f6fa31f44a28",
+  "parent_task_id": "51467dc86c784a4e",
+  "status": "completed",
+  "recovery": {
+    "parent_task_id": "51467dc86c784a4e",
+    "action": "continue",
+    "reused_stages": [
+      "validate",
+      "parse",
+      "render",
+      "structure"
+    ],
+    "reused_review_calls": 5,
+    "pending_review_calls": 1,
+    "cache_rejections": [],
+    "parent_usage": {
+      "actual_http_calls": 6,
+      "parent_attempt_http_calls": 6,
+      "cumulative_http_calls": 6,
+      "successful_records": 5,
+      "note": "历史调用单独保留；新尝试只计本次新请求，仍受任务和全局预算约束。"
+    },
+    "actual_new_http_calls": 1
+  },
+  "review_summary": [
+    {
+      "slide_index": 3,
+      "status": "ok",
+      "error": null,
+      "error_code": null,
+      "validation_errors": null,
+      "cached_result": true,
+      "reused_from_task_id": "51467dc86c784a4e",
+      "actual_http_calls": 0
+    },
+    {
+      "slide_index": 5,
+      "status": "ok",
+      "error": null,
+      "error_code": null,
+      "validation_errors": null,
+      "cached_result": true,
+      "reused_from_task_id": "51467dc86c784a4e",
+      "actual_http_calls": 0
+    },
+    {
+      "slide_index": 6,
+      "status": "ok",
+      "error": null,
+      "error_code": null,
+      "validation_errors": null,
+      "cached_result": null,
+      "reused_from_task_id": null,
+      "actual_http_calls": 1
+    },
+    {
+      "slide_index": 7,
+      "status": "ok",
+      "error": null,
+      "error_code": null,
+      "validation_errors": null,
+      "cached_result": true,
+      "reused_from_task_id": "51467dc86c784a4e",
+      "actual_http_calls": 0
+    },
+    {
+      "slide_index": 1,
+      "status": "ok",
+      "error": null,
+      "error_code": null,
+      "validation_errors": null,
+      "cached_result": true,
+      "reused_from_task_id": "51467dc86c784a4e",
+      "actual_http_calls": 0
+    },
+    {
+      "slide_index": 2,
+      "status": "ok",
+      "error": null,
+      "error_code": null,
+      "validation_errors": null,
+      "cached_result": true,
+      "reused_from_task_id": "51467dc86c784a4e",
+      "actual_http_calls": 0
+    }
+  ],
+  "parent_preserved": true,
+  "parent_files_checked": 37,
+  "new_http_calls": 1,
+  "reused_successes": 5
+}

@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-31T07:20:45.311Z",
+  "tasks": {
+    "off": "4a40b2a37b184d1b",
+    "on": "4b9f59bfc64c46f2"
+  },
+  "checks": [
+    "Daily application exposes the frozen CLIP plugin as available, default off.",
+    "CLIP toggle is enabled but initially off; opening it requires R2; disabling R2 closes CLIP; LLM is not silently enabled.",
+    "Default-off task has no CLIP probabilities and no inference artifacts.",
+    "Actual CLIP probability/threshold/revision render for exactly four labels; Mock LLM is explicit.",
+    "A task-level completed LLM stage does not claim an unreviewed page was checked.",
+    "Report includes CLIP assistance, outstanding LLM scope and all three valid export formats."
+  ],
+  "page_errors": [],
+  "mutation_requests": [],
+  "actual_external_llm_calls": 0
+}

@@ -1,0 +1,30 @@
+{
+  "version": "4.4C-review-rules-1.0",
+  "rule_id": "A02",
+  "title": "图标滥用",
+  "definition": "图标堆砌不能支持信息区分并干扰表达。",
+  "positive_criteria": [
+    "大量重复的非功能图标抢占内容空间或分组注意力。"
+  ],
+  "reasonable_exceptions": [
+    "项目符号、图例、流程必需符号、固定Logo。"
+  ],
+  "required_evidence": [
+    "图标候选位置、模块对应关系及整页效果；图标数量不能独立确认。"
+  ],
+  "review_questions": [
+    "可观察损害是什么？",
+    "正常设计例外是否成立？"
+  ],
+  "uncertainty_policy": "无法判断输出 uncertain；失败、超时与未执行均不能输出 supported 或 rejected。",
+  "severity": {
+    "high": "主要信息缺失或不可读",
+    "medium": "可读性、分组或表达受到明显影响",
+    "low": "轻微风险，尚可阅读"
+  },
+  "recommendation_principles": [
+    "L1说明要检查的对象或区域。",
+    "L2数值建议必须引用实际测量证据，不能凭经验编造精确参数。",
+    "L3给出PowerPoint可执行的操作路径，不自动修改文稿。"
+  ]
+}

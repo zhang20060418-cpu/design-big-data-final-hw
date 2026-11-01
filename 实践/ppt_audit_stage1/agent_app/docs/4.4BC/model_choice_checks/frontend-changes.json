@@ -1,0 +1,23 @@
+[
+  {
+    "file": "src\\lib\\types.ts",
+    "backup": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\_local_checkpoints\\model_choice_20261031\\frontend\\src\\lib\\types.ts",
+    "before_sha256": "aa32f82e643b8083d253a38039b8bba759337278ef1a5324f6159faaaed713b7",
+    "after_sha256": "3e2ecc490be90d0bab2a79d7c9c551b7a248dd3736b6292b2a2106ad8cad1076",
+    "changed": true
+  },
+  {
+    "file": "src\\pages\\Home.tsx",
+    "backup": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\_local_checkpoints\\model_choice_20261031\\frontend\\src\\pages\\Home.tsx",
+    "before_sha256": "85e7d849ef18aad2874895159211a751583248c1f24059eb3f9246fb09aa5f25",
+    "after_sha256": "0211553c483e40ee52ece2bc03cd814c6a6b2823157cc73fd2cb6f7a2d9391b2",
+    "changed": true
+  },
+  {
+    "file": "src\\pages\\Configure.tsx",
+    "backup": "D:\\Codex_Project\\Homework\\Design_big_data\\Final_Hw_修改\\实践\\ppt_audit_stage1\\_local_checkpoints\\model_choice_20261031\\frontend\\src\\pages\\Configure.tsx",
+    "before_sha256": "32704b693527c99f6fe67fe228ff48225285f05686cf57f1f3bd1921e613af5f",
+    "after_sha256": "64d418a4c099b1bc7793bd0fc95107a32e20379b4aedf937f45c7c3ec7a0723f",
+    "changed": true
+  }
+]

@@ -13,6 +13,9 @@
 *.pem
 *.key
 
+# Local tool runtime output
+slidesentinel-output/
+
 # Python environments and caches
 __pycache__/
 *.py[cod]

@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-31T03:27:54.955Z",
+  "base_url": "http://127.0.0.1:8000",
+  "live_checks": [
+    "Three main cards are R2 six-class screening, native auxiliary rules, and LLM review; no unconfigured historical CLIP card in the main flow.",
+    "Full version six-detector-evidence-routing-r2 and primary screening role remain visible.",
+    "The UI explains that rule count differs from defect class count and R01/R02 both support overflow/cutoff checks.",
+    "All 5 actual capability rules are readable after expanding the rule list: R01 对象越界; R02 文本溢出; R03 字号偏小; R04 密度偏高; R05 遮挡候选.",
+    "Historical CLIP is collapsed by default and accurately states that its interface is retained but not deployed/enabled."
+  ],
+  "synthetic_display_checks": [
+    "loader_error: 加载失败（未启用）; no server state changed.",
+    "unconfirmed_state: 状态未确认; no server state changed.",
+    "Missing capability response remains unconfirmed instead of asserting the component is undeployed."
+  ],
+  "page_errors": [],
+  "mutation_requests": [],
+  "screenshots": [
+    "home.png",
+    "rules-and-optional-components.png"
+  ],
+  "uploads_performed": 0,
+  "llm_calls_performed": 0,
+  "default_options_unchanged": true,
+  "backup_sha256": "0211553c483e40ee52ece2bc03cd814c6a6b2823157cc73fd2cb6f7a2d9391b2",
+  "current_home_sha256": "ffbb2b8e0afe206639c081dbdb7b17c2aa77652ec499db868877f824fbdcf1f8",
+  "status": "passed"
+}

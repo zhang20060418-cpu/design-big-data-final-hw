@@ -1,0 +1,30 @@
+{
+  "status": "missed_window_due_to_qa_assertion",
+  "task_id": "041d32a2503b4e94",
+  "reason": "Initial browser QA incorrectly expected HTTP 200 for upload; actual successful status was 201. Recovery began after the original 5-second deadline, so this task auto-completed Mock review. No skip was requested and no real LLM calls were made.",
+  "gate": {
+    "gate_id": "ef4b7bcf211842308efa119a7ed2b082",
+    "state": "completed",
+    "eligible": true,
+    "created_at": "2026-10-31T08:15:48.684+00:00",
+    "deadline_at": "2026-10-31T08:15:53.684+00:00",
+    "countdown_seconds": 5,
+    "skip_reason": null,
+    "skipped_by_user": false,
+    "execution_started_at": "2026-10-31T08:15:53.688+00:00",
+    "completed_at": "2026-10-31T08:15:53.763+00:00",
+    "outcome": "mock_only",
+    "warning": null,
+    "remaining_ms": 0,
+    "can_skip": false,
+    "duplicate_execution_guard": true
+  },
+  "review_records": 1,
+  "llm_actual_http_calls": 0,
+  "mutation_requests": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8011/api/tasks"
+    }
+  ]
+}

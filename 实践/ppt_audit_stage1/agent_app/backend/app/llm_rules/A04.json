@@ -1,0 +1,30 @@
+{
+  "version": "4.4C-review-rules-1.0",
+  "rule_id": "A04",
+  "title": "视觉风格组合异常",
+  "definition": "单页或同角色页面的风格组合明显冲突并损害一致性。",
+  "positive_criteria": [
+    "多个不协调的字体、素材或配色体系导致层次混乱。"
+  ],
+  "reasonable_exceptions": [
+    "有意章节风格变化、不同内容类型、品牌多色系统。"
+  ],
+  "required_evidence": [
+    "相关页面和实际字体/颜色/素材证据；数量差异不能单独定论。"
+  ],
+  "review_questions": [
+    "可观察损害是什么？",
+    "正常设计例外是否成立？"
+  ],
+  "uncertainty_policy": "无法判断输出 uncertain；失败、超时与未执行均不能输出 supported 或 rejected。",
+  "severity": {
+    "high": "主要信息缺失或不可读",
+    "medium": "可读性、分组或表达受到明显影响",
+    "low": "轻微风险，尚可阅读"
+  },
+  "recommendation_principles": [
+    "L1说明要检查的对象或区域。",
+    "L2数值建议必须引用实际测量证据，不能凭经验编造精确参数。",
+    "L3给出PowerPoint可执行的操作路径，不自动修改文稿。"
+  ]
+}

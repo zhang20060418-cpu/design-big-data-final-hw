@@ -1,0 +1,21 @@
+{
+  "task_id": "8bf29916e0254aa6",
+  "base_url": "http://127.0.0.1:8011",
+  "checked_at": "2026-10-30T14:26:36.538Z",
+  "checks": [
+    "Six filters and per-page six-category scope are visible.",
+    "All 6 scope limitation disclosures start collapsed; status labels remain visible.",
+    "Mock review is explicitly labeled in the result module strip.",
+    "Real cross-page issue navigation works: 12 -> 13.",
+    "Existing mock review history remains readable; no follow-up was submitted.",
+    "Regenerated report displays six-category distribution, scope, planner, explicit Mock banner, and HTML/JSON/PDF links."
+  ],
+  "page_errors": [],
+  "mutation_requests": [],
+  "screenshots": [
+    "final-results.png",
+    "final-review-history.png",
+    "final-report.png"
+  ],
+  "status": "passed"
+}
