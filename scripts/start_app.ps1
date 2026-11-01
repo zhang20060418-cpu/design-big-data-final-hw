@@ -32,6 +32,18 @@ function Get-PortOwner([int]$PortNumber) {
     return 0
 }
 
+function Test-AppHealth {
+    $response = $null
+    try {
+        $request = [System.Net.HttpWebRequest]::Create("http://127.0.0.1:$Port/api/system/health")
+        $request.Proxy = $null
+        $request.Timeout = 2000
+        $response = $request.GetResponse()
+        return ([int]$response.StatusCode -eq 200)
+    } catch { return $false }
+    finally { if ($response) { $response.Close() } }
+}
+
 if ($Stop) {
     $stopped = $false
     if (Test-Path $PidFile) {
@@ -109,8 +121,22 @@ else {
 # ---------------------------------------------------------------- 端口检查
 $owner = Get-PortOwner $Port
 if ($owner -gt 0) {
+    $savedOwner = 0
+    if (Test-Path $PidFile) {
+        [void][int]::TryParse((Get-Content $PidFile -Raw).Trim(), [ref]$savedOwner)
+    }
+    if ($savedOwner -eq $owner) {
+        try {
+            if (Test-AppHealth) {
+                Write-Host "SlideSentinel 已在运行：http://127.0.0.1:$Port/" -ForegroundColor Green
+                if (-not $NoBrowser) { Start-Process "http://127.0.0.1:$Port/" }
+                exit 0
+            }
+        } catch { }
+    }
     Write-Host "端口 $Port 已被进程 $owner 占用。" -ForegroundColor Yellow
     Write-Host "如果这是上一次启动的服务，请先运行： .\scripts\start_app.ps1 -Stop" -ForegroundColor Yellow
+    Write-Host "也可以使用其他端口： .\start_app.cmd -Port 8010" -ForegroundColor Yellow
     exit 1
 }
 
@@ -129,23 +155,22 @@ if ($Foreground) {
     exit 0
 }
 
-$psi = New-Object System.Diagnostics.ProcessStartInfo
-$psi.FileName = $Python
-$psi.Arguments = "-m uvicorn app.main:app --host 127.0.0.1 --port $Port"
-$psi.WorkingDirectory = $Backend
-$psi.UseShellExecute = $false
-$psi.CreateNoWindow = $true
-$proc = [System.Diagnostics.Process]::Start($psi)
-Set-Content -Path $PidFile -Value $proc.Id -Encoding ascii
+# Explicitly close inherited handles so a piped CLI/MCP caller can finish.
+$spawned = & $Python (Join-Path $Root 'scripts\start_server.py') --backend $Backend --port $Port --stdout $OutLog --stderr $ErrLog
+if ($LASTEXITCODE -ne 0) { throw '无法创建后台服务，请查看 .run 目录下的日志。' }
+$spawnedPid = 0
+if (-not [int]::TryParse(($spawned | Select-Object -Last 1).ToString().Trim(), [ref]$spawnedPid)) {
+    throw '后台启动器未返回有效进程编号。'
+}
+Set-Content -Path $PidFile -Value $spawnedPid -Encoding ascii
 
 $healthy = $false
 for ($i = 0; $i -lt 60; $i++) {
     Start-Sleep -Milliseconds 500
     try {
-        $resp = Invoke-WebRequest "http://127.0.0.1:$Port/api/system/health" -UseBasicParsing -TimeoutSec 2
-        if ($resp.StatusCode -eq 200) { $healthy = $true; break }
+        if (Test-AppHealth) { $healthy = $true; break }
     } catch { }
-    if ($proc.HasExited) { break }
+    if (-not (Get-Process -Id $spawnedPid -ErrorAction SilentlyContinue)) { break }
 }
 
 if (-not $healthy) {
@@ -153,6 +178,10 @@ if (-not $healthy) {
     Write-Host "请运行 .\scripts\start_backend.ps1 在前台查看具体错误。" -ForegroundColor Yellow
     exit 1
 }
+
+# Windows venv launchers may spawn a different Python PID that owns the port.
+$servicePid = Get-PortOwner $Port
+if ($servicePid -gt 0) { Set-Content -Path $PidFile -Value $servicePid -Encoding ascii }
 
 $url = "http://127.0.0.1:$Port/"
 Write-Host ""

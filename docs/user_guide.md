@@ -26,8 +26,11 @@
 双击根目录 `stop_app.cmd`。需要换端口或在终端排查时，在根目录执行：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start_app.ps1 -Port 8010 -NoBrowser
+.\start_app.cmd -Port 8010 -NoBrowser
+.\stop_app.cmd -Port 8010 -Quiet
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start_app.ps1 -Foreground
 ```
+
+启动入口每次都会检查后端与六类检测依赖；安装中断后可重新运行补齐。已由当前目录启动的服务会直接复用。若默认端口被其他程序占用，可按上例更换端口。
 
 本地数据默认位于 `backend/data/`。如需另存，在启动前设置 `PPT_AGENT_DATA_DIR`，或复制 `backend/.env.example` 为 `backend/.env` 并填写自己的路径；不要把本地设置或密钥提交到仓库。
