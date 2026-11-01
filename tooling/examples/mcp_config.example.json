@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "slidesentinel": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "C:\\projects\\slide_sentinel\\ppt_audit_mcp.cmd"
+      ],
+      "env": {
+        "SLIDESENTINEL_BASE_URL": "http://127.0.0.1:8000",
+        "SLIDESENTINEL_AUTO_START": "1",
+        "SLIDESENTINEL_OUTPUT_DIR": "C:\\projects\\slide_sentinel\\slidesentinel-output"
+      }
+    }
+  }
+}

@@ -1,10 +1,17 @@
-# Local assistant state and editor settings
-.workbuddy/
+# Private workspace, coursework materials and the previous local layout
 .codex/
+.workbuddy/
 .idea/
 .vscode/
+/01_标准/
+/02_分析/
+/03_规划/
+/04_产品/
+/05_报告/
+/实践/
+/视频/
 
-# Credentials and machine-specific configuration
+# Credentials and local user data
 .env
 .env.*
 !.env.example
@@ -12,42 +19,41 @@
 !.env.template
 *.pem
 *.key
+/backend/data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
 
-# Local tool runtime output
-slidesentinel-output/
-
-# Python environments and caches
-__pycache__/
-*.py[cod]
+# Environments, dependencies and build/test caches
 .venv/
 venv/
+node_modules/
+__pycache__/
+*.py[cod]
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.pytest_tmp*/
 .ipynb_checkpoints/
+.cache/
+.run/
+.local/
+.tools/
+*.egg-info/
+/tooling/build/
+/tooling/dist/
+/frontend/test-results/
+/frontend/test_results/
+/frontend/playwright-report/
+slidesentinel-output/
+slidesentinel_output/
+*.log
+*.exe
+_local_checkpoints/
 
-# Operating-system and Office temporary files
-.DS_Store
-Thumbs.db
-desktop.ini
-__MACOSX/
-~$*
-
-# LaTeX temporary files; keep report sources and final PDF
-*.aux
-*.toc
-*.out
-*.fls
-*.fdb_latexmk
-*.synctex.gz
-/05_报告/*.log
-
-# Nested upstream Git metadata is local; its checked-out data is archived
-**/.git/
-
-# Teacher handoff: coursework documents and media remain on the author's machine.
-/05_报告/
-/视频/
+# Personal documents, recordings, archives and generated data
 *.ppt
 *.pptx
 *.pptm
@@ -64,11 +70,6 @@ __MACOSX/
 *.7z
 *.tar
 *.gz
-*.sqlite
-*.sqlite3
-*.db
-*.db-shm
-*.db-wal
 *.csv
 *.npy
 *.npz
@@ -79,24 +80,21 @@ __MACOSX/
 *.bin
 *.safetensors
 *.joblib
-!/实践/ppt_audit_stage1/ml_stage4/models/fusion_routing_candidate.joblib
-*.log
-node_modules/
-.cache/
-.run/
-.local/
-_local_checkpoints/
-# Only known synthetic PowerPoint fixtures belong in Git.
-!/实践/ppt_audit_stage1/agent_app/fixtures/*.pptx
-!/实践/ppt_audit_stage1/test_samples/*.pptx
-!/实践/ppt_audit_stage1/test_samples/**/*.pptx
-/实践/python-ppt/downloaded_pptx/
-/实践/ppt_audit_stage1/_archive/
-/实践/ppt_audit_stage1/outputs/
-/实践/ppt_audit_stage1/visual_validation/
-/实践/ppt_audit_stage1/素材/
-# Acceptance payloads and screenshots can contain task history and uploaded decks.
-/实践/ppt_audit_stage1/agent_app/docs/4.4BC/*/
-/实践/ppt_audit_stage1/agent_app/docs/screenshots/
-/实践/ppt_audit_stage1/agent_app/SlideSentinel.exe
-/实践/ppt_audit_stage1/agent_app/SlideSentinel.Stop.exe
+!/fixtures/*.pptx
+!/detector_runtime/models/fusion_routing_candidate.joblib
+
+# System and editor temporary files
+.DS_Store
+Thumbs.db
+desktop.ini
+__MACOSX/
+~$*
+*.aux
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+**/.git/
+
+# frontend/dist is deliberately tracked for use without Node.js.
