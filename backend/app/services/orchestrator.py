@@ -313,7 +313,11 @@ def run_task(task_id: str, mode: str) -> None:
             # ------------------------------------------------------------- structure
             if options.get("enable_structure", True):
                 ctx.stage("structure", "running", "运行对象越界、文本溢出、字号与遮挡规则…", 0.3)
-                issues, risks = structure_rules.analyze(detail, document)
+                try:
+                    native_contexts = json.loads((ctx.dir / "renders/native_contexts.json").read_text(encoding="utf-8"))
+                except (OSError, ValueError):
+                    native_contexts = []
+                issues, risks = structure_rules.analyze(detail, document, native_contexts=native_contexts)
                 ctx.stage("structure", "done",
                           f"产生 {len(issues)} 条候选、{len(risks)} 条结构提示。"
                           "所有候选均需人工或 AI 复核确认。", 1.0,

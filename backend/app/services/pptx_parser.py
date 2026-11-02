@@ -306,6 +306,7 @@ def parse_document(path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
             )
             elements.append({
                 "i": len(elements),
+                "shape_id": shape.shape_id,
                 "name": shape.name,
                 "kind": kind,
                 "bbox": {"x": leaf.left, "y": leaf.top, "w": leaf.width, "h": leaf.height},
@@ -321,6 +322,7 @@ def parse_document(path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
             sizes = _run_sizes(shape)
             blocks.append({
                 "element_id": f"s{index:04d}-e{len(blocks)+1:03d}",
+                "shape_id": shape.shape_id,
                 "element_i": len(elements) - 1,
                 "name": shape.name,
                 "shape_type": str(shape.shape_type),

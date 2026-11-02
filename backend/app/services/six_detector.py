@@ -25,7 +25,7 @@ LABELS = {
 TITLES = {"D1": "字号不合理", "D2": "内容遮挡", "D3": "布局拥挤", "D4": "内容溢出或裁切",
           "D5": "过分留白", "D6": "异常设计风险"}
 STATES = {"candidate", "no_candidate_in_available_scope", "unknown", "unsupported", "not_checked"}
-VERSION = "six-detector-evidence-routing-r2"
+VERSION = "six-detector-evidence-routing-r2+rendered-layout-context-v1"
 
 
 def _sha(path: Path) -> str:
@@ -136,7 +136,8 @@ class SixDetectorAdapter:
                 raise RuntimeError("六类推理失败：" + str(raw.get("error", completed.stderr[-800:])))
             if _sha(source_path) != expected_source:
                 raise ValueError("Uploaded source changed during inference")
-            result = self.from_worker(raw, document, document_id)
+            from .layout_context import refine_results
+            result = self.from_worker(refine_results(raw, contexts), document, document_id)
             result["artifacts"] = {"raw_detection": str(raw_path), "raw_detection_sha256": _sha(raw_path),
                 "native_contexts": str(context_path), "native_contexts_sha256": _sha(context_path)}
             result_path = out_dir / "adapter_result.json"

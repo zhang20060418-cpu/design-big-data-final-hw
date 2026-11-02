@@ -63,18 +63,21 @@ def _issue(slide_index: int, rule_id: str, defect_type: str, title: str,
     }
 
 
-def analyze(detail: dict[str, Any], document: dict[str, Any]) -> tuple[list[dict], list[dict]]:
+def analyze(detail: dict[str, Any], document: dict[str, Any],
+            native_contexts: list[dict] | None = None) -> tuple[list[dict], list[dict]]:
     width = float(detail["slide_width_in"])
     height = float(detail["slide_height_in"])
     slide_area = max(1e-6, width * height)
     issues: list[dict] = []
     risks: list[dict] = []
+    native_pages = {int(p["page_index"]): p for p in native_contexts or []}
 
     for slide in detail["slides"]:
         idx = int(slide["index"])
         blocks = slide.get("blocks", [])
         elements = slide.get("elements", [])
         per_slide: list[dict] = []
+        measured = {o["id"]: o for o in native_pages.get(idx, {}).get("objects", [])}
 
         # ---------------------------------------------------------------- R01 bounds
         r01 = 0
@@ -228,6 +231,13 @@ def analyze(detail: dict[str, Any], document: dict[str, Any]) -> tuple[list[dict
             block = block_by_i.get(element["i"])
             if not block:
                 continue
+            target_boxes = [element["bbox"]]
+            if native_contexts is not None:
+                actual = measured.get(f"s{idx:04d}-shapeid{block.get('shape_id')}", {})
+                target_boxes = [{k: float(p["bbox"][k])*(width if k in ("x", "w") else height) for k in ("x", "y", "w", "h")}
+                                for p in actual.get("paragraphs", []) if p.get("text_chars", 0) and p.get("bbox")]
+                if not target_boxes or abs(actual.get("rotation", 0) or 0) > 1e-6:
+                    continue  # Missing actual text layout cannot prove glyph loss.
             best = None
             for cover in elements[element["i"] + 1:]:
                 if not cover["opaque"]:
@@ -236,26 +246,31 @@ def analyze(detail: dict[str, Any], document: dict[str, Any]) -> tuple[list[dict
                     continue
                 if cover["bbox"]["w"] * cover["bbox"]["h"] < slide_area * 0.03:
                     continue
-                ix, iy = _intersection(element["bbox"], cover["bbox"])
-                if ix <= 0 or iy <= 0:
-                    continue
-                ratio = (ix * iy) / max(1e-6, element["bbox"]["w"] * element["bbox"]["h"])
-                if ratio >= 0.45 and (best is None or ratio > best[1]):
-                    best = (cover, ratio, {"x": max(element["bbox"]["x"], cover["bbox"]["x"]),
-                                           "y": max(element["bbox"]["y"], cover["bbox"]["y"]),
-                                           "w": ix, "h": iy})
+                if native_contexts is not None:
+                    upper = measured.get(f"s{idx:04d}-shapeid{cover.get('shape_id')}", {})
+                    opacity = upper.get("opacity") or {}
+                    alpha = opacity.get("alpha", 1. if opacity.get("state") == "fully_opaque" else None)
+                    if alpha is None or alpha < .6: continue
+                    if upper.get("kind") != "image" and upper.get("geometry_type") != "rect": continue
+                for text_box in target_boxes:
+                    ix, iy = _intersection(text_box, cover["bbox"])
+                    if ix <= 0 or iy <= 0: continue
+                    ratio = ix*iy/max(1e-6, text_box["w"]*text_box["h"])
+                    if ratio >= .45 and (best is None or ratio > best[1]):
+                        best = (cover, ratio, {"x": max(text_box["x"], cover["bbox"]["x"]),
+                                              "y": max(text_box["y"], cover["bbox"]["y"]), "w": ix, "h": iy})
             if not best:
                 continue
             cover, ratio, inter = best
             r05 += 1
             per_slide.append(_issue(
-                idx, "R05", "occluded_content", "文本被上层对象覆盖",
-                f"元素「{element['name']}」有 {ratio*100:.0f}% 的面积被上层「{cover['name']}」"
+                idx, "R05", "occluded_content", "文字排版区域与上层对象相交" if native_contexts is not None else "文本框与上层对象相交候选",
+                f"元素「{element['name']}」的{'实测文字排版区域' if native_contexts is not None else '文本框'}有 {ratio*100:.0f}% 的面积与上层「{cover['name']}」"
                 f"（{cover['kind']}）覆盖；覆盖区域约 {inter['w']:.2f}×{inter['h']:.2f} 英寸。",
                 "调整图层顺序或移动覆盖对象；若上层为半透明装饰，请确认文字仍完整可读。",
                 "high" if ratio >= 0.7 else "medium",
                 _clamp(inter, width, height), block["element_id"], "medium",
-                {"covered_by": cover["name"], "covered_ratio": _r(ratio, 2)}, r05,
+                {"covered_by": cover["name"], "covered_ratio": _r(ratio, 2), "actual_paragraph_layout_used": native_contexts is not None}, r05,
             ))
 
         issues.extend(per_slide[:8])
