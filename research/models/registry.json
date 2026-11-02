@@ -1,0 +1,22 @@
+{
+  "models": [
+    {
+      "path": "research/models/clip_lr_4labels.joblib",
+      "sha256": "1c6f5664f0f411f869bf40a27d80c9c7e1a03ae29611e7691146171e7b9d03fb",
+      "role": "Four-label CLIP-only trained baseline",
+      "application_default": false
+    },
+    {
+      "path": "research/models/png_fusion_candidates.joblib",
+      "sha256": "ba6176c0fd9708634acf6a10ebc0d0927f87357c619390d48d13e9836d335130",
+      "role": "Trained A/B/B9/C/C9 representation ablations",
+      "application_default": false
+    },
+    {
+      "path": "detector_runtime/models/fusion_routing_candidate.joblib",
+      "sha256": "53a56f3bb1d776cca5e4a33926b6db57f74d3e982d16cf73ff3a097dc592ff63",
+      "role": "Frozen project classifier bundle; application uses C (CLIP512 + PNG10).",
+      "application_default": "optional CLIP auxiliary"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# Keep additional raw datasets, embeddings, prediction dumps and caches local.
+/outputs/
+/cache/
+/.cache/
+*.npy
+*.npz
+*.pkl
+*.pt
+*.pth
+*.bin

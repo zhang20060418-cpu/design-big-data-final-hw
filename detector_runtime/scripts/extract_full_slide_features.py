@@ -30,7 +30,7 @@ HASHES = {
     "preprocessor_config.json": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd",
     "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
 }
-SNAPSHOT = BASE / "models/huggingface/models--openai--clip-vit-base-patch32/snapshots" / REVISION
+SNAPSHOT = BASE / "models/clip_encoder"
 RECIPE = {
     "model_id": "openai/clip-vit-base-patch32", "revision": REVISION,
     "resize": "aspect-preserving fit; scale=224/max(width,height); round each dimension",
@@ -195,9 +195,9 @@ def feature_row(row, feature_hash, input_hash, device):
 
 def main():
     if not os.path.samefile(sys.executable, BASE / ".venv/Scripts/python.exe"):
-        raise RuntimeError("Use ml_stage4/.venv/Scripts/python.exe")
+        raise RuntimeError("Use detector_runtime/.venv/Scripts/python.exe")
     os.environ.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1",
-                      HF_HOME=str(BASE / "models/huggingface"), TOKENIZERS_PARALLELISM="false")
+                      HF_HOME=str(BASE / ".cache/huggingface"), TOKENIZERS_PARALLELISM="false")
     import numpy as np
     rows = load_rows()
     input_hash = json_digest([{"slide_id": r["slide_id"], "image_sha256": r["image_sha256"]} for r in rows])

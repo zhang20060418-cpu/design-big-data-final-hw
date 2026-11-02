@@ -30,8 +30,7 @@ MODEL_HASHES = {
     "preprocessor_config.json": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd",
     "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
 }
-SNAPSHOT = (BASE / "models/huggingface/models--openai--clip-vit-base-patch32"
-            / "snapshots" / REVISION)
+SNAPSHOT = (BASE / "models/clip_encoder")
 DEFINITION = "unnormalized projected image_embeds"
 FIELDS = ("row_index", "slide_id", "group_id", "split", "image_sha256",
           "model_id", "model_revision", "config_sha256", "preprocessor_sha256",
@@ -134,10 +133,10 @@ def index_row(row, matrix_hash, source_hash, device):
 
 def main():
     if not os.path.samefile(sys.executable, BASE / ".venv/Scripts/python.exe"):
-        raise RuntimeError("Use ml_stage4/.venv/Scripts/python.exe")
+        raise RuntimeError("Use detector_runtime/.venv/Scripts/python.exe")
     os.environ.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1",
                       HF_HUB_DISABLE_TELEMETRY="1", HF_HUB_DISABLE_IMPLICIT_TOKEN="1",
-                      HF_HOME=str(BASE / "models/huggingface"), TOKENIZERS_PARALLELISM="false")
+                      HF_HOME=str(BASE / ".cache/huggingface"), TOKENIZERS_PARALLELISM="false")
     import numpy as np
     rows = inputs()
     if reuse_if_complete(rows, np):

@@ -1,6 +1,6 @@
 """4.3F-2B: five preregistered PNG/CLIP LR controls, train-only grouped CV.
 
-Run with ml_stage4/.venv Python. Test feature values are never materialized:
+Run with detector_runtime/.venv Python. Test feature values are never materialized:
 the original array is read-only mmap, indexed by the selected slide IDs first.
 All selections are frozen before any validation prediction/label loading.
 Existing artifacts are refused, preventing accidental repeat validation runs.
@@ -669,7 +669,7 @@ def generate_report(result):
     for key in ('split_sha256','png_csv_sha256','png_recipe_file_sha256','png_recipe_payload_sha256','image_manifest_sha256','feature_index_sha256','selected_clip_raw_values_sha256','selected_clip_l2_float64_sha256'):
         lines.append(f"| {key} | `{result['inputs'][key]}` |")
     for path,value in result['output_sha256'].items(): lines.append(f'| {path} | `{value}` |')
-    lines += ['', '复现入口：在ml_stage4中运行 `.\\.venv\\Scripts\\python.exe -B scripts\\train_png_fusion_cv.py`。脚本拒绝覆盖现有本轮产物；`--validate-only`只检查输入，不训练、不读取validation标签。正常流程只运行了一次，不提供自动重复validation/调参入口。', '',
+    lines += ['', '复现入口：在detector_runtime中运行 `.\\.venv\\Scripts\\python.exe -B scripts\\train_png_fusion_cv.py`。脚本拒绝覆盖现有本轮产物；`--validate-only`只检查输入，不训练、不读取validation标签。正常流程只运行了一次，不提供自动重复validation/调参入口。', '',
               '## 8. 末尾十项直接回答', '',
               *interpret(result), '',
               '本轮停止，等待验收；没有运行test或系统集成。']

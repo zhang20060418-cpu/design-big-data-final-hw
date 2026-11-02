@@ -10,6 +10,7 @@ param(
     [int]$Port = 8000,
     [switch]$Stop,
     [switch]$NoBrowser,
+    [switch]$WithClip,
     [switch]$Rebuild,
     [switch]$Foreground
 )
@@ -92,7 +93,7 @@ if ($missing) {
 }
 
 # Six-detector runtime is small and independent of optional CLIP weights.
-& (Join-Path $Root 'scripts\setup_ml.ps1') -PythonExe $Python
+& (Join-Path $Root 'scripts\setup_ml.ps1') -PythonExe $Python -Clip:$WithClip
 
 # ---------------------------------------------------------------- 前端构建
 $Dist = Join-Path $Frontend 'dist\index.html'

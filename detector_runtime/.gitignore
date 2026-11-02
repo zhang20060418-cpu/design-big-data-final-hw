@@ -94,6 +94,13 @@
 !/features/png_layout_recipe.json
 !/inspect_slideaudit.py
 !/models/fusion_routing_candidate.joblib
+!/models/clip_encoder/
+/models/clip_encoder/*
+!/models/clip_encoder/config.json
+!/models/clip_encoder/preprocessor_config.json
+!/models/clip_encoder/pytorch_model.bin
+!/models/clip_encoder/license.txt
+!/models/clip_encoder/source.json
 !/requirements-clip.txt
 !/requirements-runtime.txt
 !/scripts/check_png_render_aspect_ratio.py

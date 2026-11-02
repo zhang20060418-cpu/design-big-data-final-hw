@@ -1,6 +1,6 @@
 """PowerPoint COM render checks using synthetic pages, never SlideAudit pages.
 
-Only temporary probes beneath ml_stage4/.cache/png_layout_render are written.
+Only temporary probes beneath detector_runtime/.cache/png_layout_render are written.
 The existing stages 1--3 rendering code is neither imported nor modified.
 No pptx/pywin32 dependency is required: Windows PowerShell provides native COM.
 """
@@ -222,7 +222,7 @@ def main() -> int:
     output = args.output_dir.resolve()
     allowed = (BASE / ".cache" / "png_layout_render").resolve()
     if output != allowed and allowed not in output.parents:
-        raise ValueError("Probe output must remain under ml_stage4/.cache/png_layout_render")
+        raise ValueError("Probe output must remain under detector_runtime/.cache/png_layout_render")
     output.mkdir(parents=True, exist_ok=True)
     helper = output / "render_probe.ps1"
     helper.write_text(POWERSHELL, encoding="utf-8-sig")

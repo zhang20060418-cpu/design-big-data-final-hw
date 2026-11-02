@@ -44,8 +44,7 @@ METADATA_PATH = BASE / "data/slideaudit/data/metadata.csv"
 READINESS_PATH = BASE / "outputs/train_readiness.md"
 REPORT_PATH = BASE / "reports/full_slide_comparison.md"
 PREDICTION_PATH = BASE / "reports/validation_predictions.csv"
-PREPROCESSOR_PATH = (BASE / "models/huggingface/models--openai--clip-vit-base-patch32"
-                     / "snapshots" / REVISION / "preprocessor_config.json")
+PREPROCESSOR_PATH = (BASE / "models/clip_encoder/preprocessor_config.json")
 SUBSETS = ("train", "validation")
 POSITIVES = {"train": (234, 244, 173, 161), "validation": (49, 47, 37, 35)}
 MIXED_GROUPS = (29, 33, 26, 22)
@@ -214,7 +213,7 @@ def load_inputs():
     # defaults. Instantiate the identical local processor to inspect its actual
     # canonical rules rather than assume the raw JSON already has modern keys.
     os.environ.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1",
-                      HF_HUB_DISABLE_TELEMETRY="1", HF_HOME=str(BASE / "models/huggingface"))
+                      HF_HUB_DISABLE_TELEMETRY="1", HF_HOME=str(BASE / ".cache/huggingface"))
     try:
         from transformers import CLIPImageProcessorPil as CLIPImageProcessor
     except ImportError:
@@ -449,7 +448,7 @@ def save_report(baseline, full, provenance, started):
               "validation 同时用于参数/阈值选择与方案比较，指标有选择偏差；82个来源组及每类35–49个正例样本较少，同源增强版本相关，因此页面级结果不等同于独立原始页面级结果。本次不做显著性或泛化断言，也不据此修改已冻结的正式测试结果。", "",
               "仍值得在后续独立阶段研究固定多区域或局部特征：完整页提供布局覆盖，局部区域保留文字尺寸、边缘裁切与遮挡的细节。它是后续假设，不是本次已验证的方案；后续应先冻结设计和验收规则，避免反复使用已有测试集调参。本次未提取多区域特征、未增加模型、未接入智能体。", "",
               "## 6. 复现记录", "",
-              "执行 `ml_stage4/.venv/Scripts/python.exe ml_stage4/scripts/evaluate_full_slide.py`。`--validate-only` 只核对 train/validation；如有意重复同一验证实验，使用 `--overwrite-report` 覆盖本阶段新报告，正式4.3C文件仍不会被改写。", "",
+              "执行 `detector_runtime/.venv/Scripts/python.exe detector_runtime/scripts/evaluate_full_slide.py`。`--validate-only` 只核对 train/validation；如有意重复同一验证实验，使用 `--overwrite-report` 覆盖本阶段新报告，正式4.3C文件仍不会被改写。", "",
               "新特征：`features/clip_embeddings_full_slide_trainval.npy`；新索引：`features/full_slide_feature_index.csv`；补边/中心裁剪对照图保存在本报告旁。两方法的分类器只保留于本次进程内存。", ""]
     for field in ("model_revision", "checkpoint_sha256", "config_sha256", "preprocessor_sha256", "split_sha256",
                   "new_feature_sha256", "new_feature_index_sha256", "input_trainval_manifest_sha256",
@@ -613,7 +612,7 @@ def export_validation_predictions(baseline, full_slide, y, index, masks, provena
     for name, result in restored.items():
         report += f"- {name} 阈值（上述标签顺序）：`{result['thresholds']}`。\n"
     report += "\n从落盘 CSV 重新计算的各标签 P/R/F1/AP、TP/FP/TN/FN、正例数、预测正例数、Macro/Micro 指标、默认0.5对照，以及混合四页组的排序AUC/概率差/分类正确率，均与本报告机读摘要逐字段一致（浮点容差1e-12）。48个候选配置的搜索表记录选择过程，不能由最终选中模型的预测反推。\n\n"
-    report += f"CSV SHA256：`{csv_hash}`。复现补存：`.venv/Scripts/python.exe -B scripts/evaluate_full_slide.py --export-validation-predictions`（工作目录 ml_stage4）；已存在且字节相同的CSV会复核后复用，存在差异则停止。\n"
+    report += f"CSV SHA256：`{csv_hash}`。复现补存：`.venv/Scripts/python.exe -B scripts/evaluate_full_slide.py --export-validation-predictions`（工作目录 detector_runtime）；已存在且字节相同的CSV会复核后复用，存在差异则停止。\n"
     temporary_report = REPORT_PATH.with_suffix(".md.part")
     temporary_report.write_text(report, encoding="utf-8")
     os.replace(temporary_report, REPORT_PATH)

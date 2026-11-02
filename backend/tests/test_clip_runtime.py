@@ -36,6 +36,21 @@ def test_missing_runtime_is_truthful(bridge,monkeypatch,tmp_path):
     assert state['available'] is False and state['state']=='error'
     assert 'missing.exe' in state['reason']
 
+def test_lfs_pointer_requires_weight_download_before_reporting_ready(bridge,monkeypatch,tmp_path):
+    pins=json.loads(bridge.PINS.read_text(encoding='utf8'))
+    for name in pins['assets_sha256']:
+        asset=tmp_path/name;asset.parent.mkdir(parents=True,exist_ok=True);asset.write_bytes(b'placeholder')
+    checkpoint=tmp_path/pins['clip_directory']/'pytorch_model.bin'
+    checkpoint.write_text('version https://git-lfs.github.com/spec/v1\noid sha256:'+'a'*64+'\nsize 605247071\n',encoding='ascii')
+    python=tmp_path/'.venv/Scripts/python.exe';python.parent.mkdir(parents=True);python.write_bytes(b'placeholder')
+    for package in ('torch','transformers','numpy','joblib','sklearn'):
+        init=tmp_path/'.venv/Lib/site-packages'/package/'__init__.py';init.parent.mkdir(parents=True);init.write_text('',encoding='utf8')
+    monkeypatch.setattr(bridge,'ML',tmp_path)
+    monkeypatch.setattr(bridge,'ML_PYTHON',python)
+    state=bridge.check_available()
+    assert state['available'] is False and state['model_loaded'] is False
+    assert 'git lfs pull' in state['reason']
+
 @pytest.mark.parametrize('scenario',['duplicate','outside','workpoint'])
 def test_invalid_inputs_never_launch_worker(bridge,monkeypatch,page,tmp_path,scenario):
     monkeypatch.setattr(bridge,'check_available',lambda:{'available':True})

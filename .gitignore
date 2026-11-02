@@ -82,6 +82,11 @@ _local_checkpoints/
 *.joblib
 !/fixtures/*.pptx
 !/detector_runtime/models/fusion_routing_candidate.joblib
+!/detector_runtime/models/clip_encoder/pytorch_model.bin
+!/research/models/clip_lr_4labels.joblib
+!/research/models/png_fusion_candidates.joblib
+!/research/sample_data/manifest.csv
+/research/outputs/
 
 # System and editor temporary files
 .DS_Store

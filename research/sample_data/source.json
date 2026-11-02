@@ -1,0 +1,31 @@
+{
+  "dataset": "SlideAudit",
+  "authors": "Zhuohao (Jerry) Zhang, Ruiqi Chen, Mingyuan Zhong, Jacob O. Wobbrock",
+  "upstream": "https://github.com/zhuohaouw/SlideAudit",
+  "revision": "642d490b7c1d2e78a50a631bfd359433397f3ecf",
+  "paper_doi": "10.1145/3746059.3747736",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "selection_seed": 20261102,
+  "selection": "40 public Gemini-origin pages: 32 train + 8 validation; original split retained; unique PNG SHA; at most two pages per source group; no test pages.",
+  "changes": "Subset selection and manifest added. Image, annotation and object-description bytes unchanged. Group IDs and split are project-derived, not official original-document IDs.",
+  "counts": {
+    "train": 32,
+    "validation": 8
+  },
+  "positive_counts": {
+    "train": {
+      "improper_font_sizing": 8,
+      "occluded_content": 9,
+      "cluttered_layout": 4,
+      "content_overflow_cutoff": 4
+    },
+    "validation": {
+      "improper_font_sizing": 1,
+      "occluded_content": 3,
+      "cluttered_layout": 1,
+      "content_overflow_cutoff": 1
+    }
+  },
+  "use": "Small inspection and pipeline example subset; not the full training data and not an evaluation benchmark."
+}

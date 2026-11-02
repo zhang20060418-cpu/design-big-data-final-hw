@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """4.3B: download only the accepted formal PNGs, without changing the plan/split.
 
-Run with ml_stage4/.venv/Scripts/python.exe. Existing and downloaded files must
+Run with detector_runtime/.venv/Scripts/python.exe. Existing and downloaded files must
 match the pinned Git blob, exact byte count, PNG decoding and metadata dimensions.
 No package/model downloads, feature extraction, training, or Git lazy fetching.
 """
@@ -53,7 +53,7 @@ def safe_image_path(sid):
     if not re.fullmatch(r"slide_\d{4}", sid):
         raise ValueError("Invalid slide identifier")
     if not IMAGES.resolve().is_relative_to(BASE.resolve()):
-        raise ValueError("Image directory resolves outside ml_stage4")
+        raise ValueError("Image directory resolves outside detector_runtime")
     path = IMAGES / f"{sid}.png"
     if path.resolve() != path.absolute() or path.parent.resolve() != IMAGES.resolve():
         raise ValueError("Image target is redirected or outside the image directory")
@@ -335,7 +335,7 @@ def write_report(items, initial_valid, initial_invalid, results, started, worker
 
 状态：**{state}**。开始：{started}；更新：{datetime.now(TZ).isoformat(timespec="seconds")}。
 
-仅处理已验收清单中的 2,164 个正式目标。以 `ml_stage4/.venv/Scripts/python.exe` 执行，不重新分组、不修改 split 或下载计划、不下载 excluded、不提取特征或训练。
+仅处理已验收清单中的 2,164 个正式目标。以 `detector_runtime/.venv/Scripts/python.exe` 执行，不重新分组、不修改 split 或下载计划、不下载 excluded、不提取特征或训练。
 
 | 项目 | 数量 |
 | --- | ---: |
@@ -388,7 +388,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     expected_python = BASE / ".venv/Scripts/python.exe"
     if not expected_python.is_file() or not os.path.samefile(sys.executable, expected_python):
-        raise SystemExit("Run this downloader only with ml_stage4/.venv/Scripts/python.exe")
+        raise SystemExit("Run this downloader only with detector_runtime/.venv/Scripts/python.exe")
     from PIL import Image  # Verify the project environment, never install implicitly.
     started = datetime.now(TZ).isoformat(timespec="seconds")
     items, plan_sha, metadata_sha, formal, metadata, objects, baseline_valid = load_inputs()

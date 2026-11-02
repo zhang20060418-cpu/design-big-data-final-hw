@@ -27,7 +27,7 @@ if ($LASTEXITCODE -ne 0) {
     if ($LASTEXITCODE -ne 0) { throw 'Detector dependency installation failed. Check network access and retry.' }
 }
 if ($Clip) {
-    Write-Host '[ML] Installing optional CLIP dependencies and downloading pinned public weights...' -ForegroundColor Cyan
+    Write-Host '[ML] Installing CLIP dependencies and verifying the bundled public encoder...' -ForegroundColor Cyan
     & $MlPython -m pip install -r (Join-Path $MlRoot 'requirements-clip.txt')
     if ($LASTEXITCODE -ne 0) { throw 'Optional CLIP dependency installation failed.' }
     & $MlPython (Join-Path $AppRoot 'scripts\download_clip.py')

@@ -404,7 +404,7 @@ def preflight(base=None, output_path=None):
         report['image_modes'] = dict(image_modes)
         report['label_support'] = {k:{'positive':sum(r[k]=='1' for r in samples),
                                       'negative':sum(r[k]=='0' for r in samples)} for k in SLUGS}
-        snapshot = base/f'models/huggingface/models--openai--clip-vit-base-patch32/snapshots/{REVISION}'
+        snapshot = base/'models/clip_encoder'
         for name, expected_sha in CLIP_HASHES.items():
             path = snapshot/name
             actual = sha256(path)

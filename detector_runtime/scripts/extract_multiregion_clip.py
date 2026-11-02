@@ -92,9 +92,9 @@ def validate(values, np):
 
 def main():
     if not os.path.samefile(sys.executable, BASE / ".venv/Scripts/python.exe"):
-        raise RuntimeError("Use ml_stage4/.venv/Scripts/python.exe")
+        raise RuntimeError("Use detector_runtime/.venv/Scripts/python.exe")
     os.environ.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1",
-                      HF_HOME=str(BASE / "models/huggingface"), TOKENIZERS_PARALLELISM="false")
+                      HF_HOME=str(BASE / ".cache/huggingface"), TOKENIZERS_PARALLELISM="false")
     import numpy as np
     from PIL import Image
     rows = source_rows()

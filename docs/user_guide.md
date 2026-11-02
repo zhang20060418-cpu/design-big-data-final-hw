@@ -2,7 +2,7 @@
 
 ## 启动与样例
 
-在仓库根目录双击 `start_app.cmd`，等待首次依赖安装完成。浏览器打开 <http://127.0.0.1:8000/> 后，可以使用首页内置演示查看交互；内置演示有明确标记。要运行真实审查，上传自己的 PPTX 或根目录 `fixtures/demo_deck.pptx`。
+在仓库根目录运行 `start_app.cmd -WithClip`，准备含 CLIP 的完整视觉环境；双击 `start_app.cmd` 可先使用结构与六类检测。等待首次依赖安装完成。浏览器打开 <http://127.0.0.1:8000/> 后，可以使用首页内置演示查看交互；内置演示有明确标记。要运行真实审查，上传自己的 PPTX 或根目录 `fixtures/demo_deck.pptx`。
 
 完整渲染依赖 Windows 桌面版 PowerPoint。没有 PowerPoint 时，部分结构检查仍可运行，依赖实际排版和图片的能力会提示不可用。
 

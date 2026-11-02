@@ -154,7 +154,7 @@ def fixture():
         assert vector[0]==2.0 and vector[1]==0.0
         try:from transformers import CLIPImageProcessorPil as Processor
         except ImportError:from transformers import CLIPImageProcessor as Processor
-        processor=Processor.from_pretrained(str(ML/'models/huggingface/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268'),local_files_only=True)
+        processor=Processor.from_pretrained(str(ML/'models/clip_encoder'),local_files_only=True)
         pixels=processor(images=synthetic,return_tensors='np')['pixel_values']
         assert pixels.shape==(1,3,224,224) and np.isfinite(pixels).all()
         np.testing.assert_allclose(pixels[0,:,112,112],(1-np.array(processor.image_mean))/np.array(processor.image_std),rtol=1e-6)
@@ -268,12 +268,12 @@ def run():
         with (output/'scoring_log.jsonl').open('a',encoding='utf-8') as f:f.write(json.dumps(record,ensure_ascii=False)+'\n')
         print(json.dumps(record,ensure_ascii=False),flush=True)
     try:
-        os.environ.update(HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',HF_HUB_DISABLE_TELEMETRY='1',HF_HUB_DISABLE_IMPLICIT_TOKEN='1',HF_HOME=str(ML/'models/huggingface'),TOKENIZERS_PARALLELISM='false')
+        os.environ.update(HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',HF_HUB_DISABLE_TELEMETRY='1',HF_HUB_DISABLE_IMPLICIT_TOKEN='1',HF_HOME=str(ML/'.cache/huggingface'),TOKENIZERS_PARALLELISM='false')
         from PIL import Image
         from transformers import CLIPVisionModelWithProjection
         try:from transformers import CLIPImageProcessorPil as CLIPImageProcessor
         except ImportError:from transformers import CLIPImageProcessor
-        snapshot=ML/'models/huggingface/models--openai--clip-vit-base-patch32/snapshots'/bundle['clip_revision']
+        snapshot=ML/'models/clip_encoder'
         processor=CLIPImageProcessor.from_pretrained(str(snapshot),local_files_only=True)
         model,loading=CLIPVisionModelWithProjection.from_pretrained(str(snapshot),local_files_only=True,torch_dtype=torch.float32,use_safetensors=False,output_loading_info=True)
         if any(loading.get(k) for k in ['missing_keys','mismatched_keys','error_msgs']):raise ValueError('Incomplete CLIP pretrained load')

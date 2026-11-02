@@ -28,6 +28,11 @@ def check_available() -> dict:
     if missing:
         return {'available':False,'state':'error','reason':'冻结CLIP运行文件缺失：'+'；'.join(missing),
                 'model_loaded':False,'CLIP_forwards':0}
+    checkpoint=ML/pins['clip_directory']/'pytorch_model.bin'
+    if checkpoint.stat().st_size < 1024:
+        return {'available':False,'state':'error',
+                'reason':'CLIP 权重尚未展开；请执行 git lfs pull，或运行 start_app.cmd -WithClip。',
+                'model_loaded':False,'CLIP_forwards':0}
     # Small manifests/source hashes establish the selected version without
     # importing or deserializing models. Full weight SHA is verified on use.
     mismatched=[name for name,expected in pins['assets_sha256'].items() if not name.endswith('.bin')
@@ -74,7 +79,7 @@ def predict_batch(pages: list[dict],config: dict | None=None) -> list[dict]:
         output.unlink(missing_ok=True)
         env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1','PYTHONUTF8':'1','HF_HUB_OFFLINE':'1',
              'TRANSFORMERS_OFFLINE':'1','HF_HUB_DISABLE_TELEMETRY':'1','HF_HUB_DISABLE_IMPLICIT_TOKEN':'1',
-             'HF_HOME':str(ML/'models/huggingface'),'TOKENIZERS_PARALLELISM':'false'}
+             'HF_HOME':str(ML/'.cache/huggingface'),'TOKENIZERS_PARALLELISM':'false'}
         timeout=max(30,min(1800,int(config.get('timeout_s',120+len(rows)*10))))
         try:
             process=subprocess.run([str(ML_PYTHON),'-B',str(WORKER),'--request',str(request),'--output',str(output)],

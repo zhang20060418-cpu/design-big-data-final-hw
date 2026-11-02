@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run only eight frozen-CLIP image feature checks in ml_stage4/.venv.
+"""Run only eight frozen-CLIP image feature checks in detector_runtime/.venv.
 
 The public model revision is resolved once and retained in the JSON result.
 An existing compatible Hugging Face snapshot is reused before any download.
@@ -24,7 +24,7 @@ VENV_PYTHON = BASE / ".venv/Scripts/python.exe"
 SPLIT = BASE / "reports/dataset_split.csv"
 RESULT = BASE / "outputs/clip_smoke_test.json"
 FEATURES = BASE / "features/clip_smoke_features.npy"
-CACHE = BASE / "models/huggingface"
+CACHE = BASE / ".cache/huggingface"
 MODEL_ID = "openai/clip-vit-base-patch32"
 MODEL_REVISION = "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
 CHECKPOINT_SHA256 = "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
@@ -83,6 +83,14 @@ def obtain_snapshot(result, previous, roots, offline):
         raise ValueError("Model revision differs from the frozen experiment revision")
     if revision is not None and re.fullmatch(r"[0-9a-f]{40}", revision) is None:
         raise ValueError("Previous result contains an invalid immutable model revision")
+    packaged = BASE / "models/clip_encoder"
+    packaged_checkpoint = compatible_snapshot(packaged)
+    if packaged_checkpoint:
+        result["model"] = dict(id=MODEL_ID, revision=MODEL_REVISION, snapshot=str(packaged),
+                               checkpoint=packaged_checkpoint, source="bundled_frozen_encoder",
+                               random_initialization=False)
+        write_result(result)
+        return packaged, packaged_checkpoint
     repo_dir = "models--" + MODEL_ID.replace("/", "--")
     snapshots = []
     for root in roots:
@@ -258,7 +266,7 @@ def run(result, previous, offline):
 
 def main():
     if not VENV_PYTHON.is_file() or not os.path.samefile(sys.executable, VENV_PYTHON):
-        raise SystemExit("Run only with ml_stage4/.venv/Scripts/python.exe")
+        raise SystemExit("Run only with detector_runtime/.venv/Scripts/python.exe")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--offline", action="store_true", help="Require an already complete frozen model cache")
     args = parser.parse_args()

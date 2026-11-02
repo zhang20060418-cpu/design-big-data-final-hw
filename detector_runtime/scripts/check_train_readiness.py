@@ -479,7 +479,7 @@ annotations 仅生成真实 y；标签名称、response、缺陷说明、bbox �
 - 运行本脚本的 Python：`{sys.version.split()[0]}`，`{sys.executable}`；目录名不能代替实际版本。Pillow 已在当前环境实际导入并用于完整解码检查。
 - NVIDIA 实测：`{gpu}`（依次为名称、驱动、总显存、空闲显存）；这是硬件/驱动结果。PyTorch 未安装时 `torch.cuda.is_available()` 无法实测，不能把“有 NVIDIA 卡”写成“CUDA PyTorch 就绪”。
 - 默认/环境指定 Hugging Face、CLIP、Torch 缓存及 `models/` 检出的 CLIP 权重文件：**{len(clip_weights)}**；CLIP 提取的软件/缓存前置条件：**{'具备候选条件，尚未做推理实测' if ready else '未具备'}**。
-- 环境结论：{environment_blockers}；**没有实测证据说明 Python 3.13 必然不兼容**。最小隔离方案：若后续仍需准备环境，验收后用已安装的 `{user_py312}` 单独创建 `ml_stage4/.venv`，按官方 Windows 安装选择器安装兼容 PyTorch，加 transformers、scikit-learn 及其必要依赖；不改前三阶段解释器。复查也会检查该 `.venv`。4 GiB 显存宜从小批量推理开始，安装后必须验证 CUDA 可用性；CPU 可作备用。
+- 环境结论：{environment_blockers}；**没有实测证据说明 Python 3.13 必然不兼容**。最小隔离方案：若后续仍需准备环境，验收后用已安装的 `{user_py312}` 单独创建 `detector_runtime/.venv`，按官方 Windows 安装选择器安装兼容 PyTorch，加 transformers、scikit-learn 及其必要依赖；不改前三阶段解释器。复查也会检查该 `.venv`。4 GiB 显存宜从小批量推理开始，安装后必须验证 CUDA 可用性；CPU 可作备用。
 - 磁盘：项目所在 {BASE.anchor} 可用 **{disk.free:,} 字节（{disk.free/GIB:.2f} GiB）**；当前解释器所在 {Path(sys.executable).anchor} 可用 **{c_disk.free/GIB:.2f} GiB**。数据与后续环境/权重缓存优先放 D 盘。
 
 ## 4. 图片下载计划
@@ -490,7 +490,7 @@ annotations 仅生成真实 y；标签名称、response、缺陷说明、bbox �
 
 {size_statement}
 
-大小来源：{' '.join(size_notes)} 本地只读 Git 查询强制 `GIT_NO_LAZY_FETCH=1`，不会为获取 size 自动拉取图片 blob。全部下载 URL 固定到 `{REVISION}`，不依赖 main。CSV 收录全部 2,164 个正式目标，筛选 `needs_download=1` 即得到增量缺失清单；excluded 没有任何行。目标路径相对 `ml_stage4/`，`exists=1` 仍须 `image_valid=1` 才跳过。
+大小来源：{' '.join(size_notes)} 本地只读 Git 查询强制 `GIT_NO_LAZY_FETCH=1`，不会为获取 size 自动拉取图片 blob。全部下载 URL 固定到 `{REVISION}`，不依赖 main。CSV 收录全部 2,164 个正式目标，筛选 `needs_download=1` 即得到增量缺失清单；excluded 没有任何行。目标路径相对 `detector_runtime/`，`exists=1` 仍须 `image_valid=1` 才跳过。
 
 按 PNG 缺失体积再预留 1 GiB 下载/临时空间，并另预留 10 GiB 环境与模型缓存预算，磁盘判定：**{'足够' if enough_disk else '不足或尚不能确认'}**。后两项是保守规划预算，不是已下载体积；预计 512 维 float32 图像特征缓存仅 {feature_bytes:,} 字节（{feature_bytes/1024**2:.2f} MiB），实际维度以冻结模型配置为准。
 

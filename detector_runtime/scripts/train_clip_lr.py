@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """4.3C: frozen CLIP image vectors -> four independent logistic regressions.
 
-Run only with ml_stage4/.venv/Scripts/python.exe. --validate-only checks frozen
+Run only with detector_runtime/.venv/Scripts/python.exe. --validate-only checks frozen
 inputs without fitting or evaluating. A normal run refuses existing experiment
 artifacts: the held-out test set is evaluated only after all choices are saved.
 No downloads, CLIP fitting, split edits, text features, or other classifiers.
@@ -81,7 +81,7 @@ def require(condition, message):
 
 def check_environment():
     require(Path(sys.prefix).resolve() == (BASE / ".venv").resolve(),
-            "Use the isolated ml_stage4/.venv Python; no other environment is accepted")
+            "Use the isolated detector_runtime/.venv Python; no other environment is accepted")
 
 
 def check_readiness_counts():

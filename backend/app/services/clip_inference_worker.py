@@ -100,7 +100,7 @@ def run(request_path: Path,output_path: Path):
     identities=[(str(p['document_id']),int(p['slide_index'])) for p in pages]
     if len(identities)!=len(set(identities)):raise ValueError('重复页面身份')
     os.environ.update(HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',HF_HUB_DISABLE_TELEMETRY='1',
-        HF_HUB_DISABLE_IMPLICIT_TOKEN='1',HF_HOME=str(ML/'models/huggingface'),TOKENIZERS_PARALLELISM='false')
+        HF_HUB_DISABLE_IMPLICIT_TOKEN='1',HF_HOME=str(ML/'.cache/huggingface'),TOKENIZERS_PARALLELISM='false')
     import joblib
     import numpy as np
     import torch
@@ -120,7 +120,7 @@ def run(request_path: Path,output_path: Path):
     recipe=json.loads((ML/'features/png_layout_recipe.json').read_text(encoding='utf8'))
     if recipe['payload_sha256']!=pins['png_recipe_payload_sha256'] or recipe['feature_names']!=list(extractor.FEATURE_NAMES):
         raise ValueError('PNG10特征定义顺序不匹配')
-    snapshot=ML/'models/huggingface/models--openai--clip-vit-base-patch32/snapshots'/pins['clip_revision']
+    snapshot=ML/pins['clip_directory']
     processor=Processor.from_pretrained(str(snapshot),local_files_only=True)
     model,loading=CLIPVisionModelWithProjection.from_pretrained(str(snapshot),local_files_only=True,
         torch_dtype=torch.float32,use_safetensors=False,output_loading_info=True)
